@@ -12,7 +12,11 @@
         환상적인 리뷰의 세계로 들어가 볼까요?
       </div>
       <p class="text-p mt-5">REVIEWD를 실제로 경험해보세요.</p>
-      <SignupEmail @set_valid_email="setValidEmail" />
+      <SignupEmail
+        @set_valid_email="setValidEmail"
+        @set_email="setEmail"
+        v-if="isCheckingEmail"
+      />
     </article>
   </section>
 </template>
@@ -31,6 +35,8 @@ export default {
   data() {
     return {
       email: "",
+      isValidEmail: false,
+      isCheckingEmail: true,
     };
   },
   methods: {
@@ -53,8 +59,11 @@ export default {
       console.log(EMAIL_VALIDATE_MESSAGE["SUCCESS"]);
       return true;
     },
-    setValidEmail(value) {
-      this.email = value;
+    setEmail(email) {
+      this.email = email;
+    },
+    setValidEmail(valid) {
+      this.isValidEmail = valid;
     },
   },
   computed: {},

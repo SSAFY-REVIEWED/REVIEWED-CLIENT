@@ -53,15 +53,21 @@
 
 <script>
 import { EMAIL_VALIDATE_MESSAGE } from "@/utils/const.js";
-import { signup } from "@/api/index.js";
+// import { signup } from "@/api/index.js";
 import _ from "lodash";
 
 export default {
   name: "signupEmail",
+  props: {
+    email: {
+      type: String,
+    },
+    isValidEmail: {
+      type: Boolean,
+    },
+  },
   data() {
-    return {
-      isValidEmail: false,
-    };
+    return {};
   },
   methods: {
     onSubmit() {
@@ -74,26 +80,41 @@ export default {
     onValidateDebounce: _.debounce(function (e) {
       this.onValidate(e);
     }, 500),
-    validateEmail(value) {
-      if (!value) {
+    validateEmail(email) {
+      if (!email) {
         return EMAIL_VALIDATE_MESSAGE["EMPTY_WARNING"];
       }
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-      if (!regex.test(value)) {
+      if (!regex.test(email)) {
         return EMAIL_VALIDATE_MESSAGE["INVALID_EMAIL"];
       }
       this.$toast("꺅 성공해쪄");
+      this.fetchReduplicatedEmailCheck(email);
       return true;
     },
-    async fetchReduplicatedEmailCheck() {
+    async fetchReduplicatedEmailCheck(email) {
       try {
-        const response = await signup();
-        console.log(response);
-        this.isValidEmail = true;
+        // await signup(email);
+        const response = "response";
+        this.setValidEmailAndAlert(response, "성공");
+        this.setEmail(email);
       } catch (err) {
         console.log(err);
-        this.isValidEmail = false;
+        this.setValidEmailAndAlert(
+          err.response,
+          EMAIL_VALIDATE_MESSAGE["REDUPLICATED_EMAIL"]
+        );
       }
+    },
+    setValidEmailAndAlert(valid, message) {
+      if (valid) {
+        this.$emit("set_valid_email", valid);
+        return;
+      }
+      this.$$toast(message);
+    },
+    setEmail(email) {
+      this.$emit("set_email", email);
     },
   },
 };
