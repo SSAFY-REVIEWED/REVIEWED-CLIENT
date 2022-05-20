@@ -1,5 +1,5 @@
 <template>
-  <div>index.html</div>
+  <div class="min-h-screen">Home View</div>
 </template>
 
 <script>
