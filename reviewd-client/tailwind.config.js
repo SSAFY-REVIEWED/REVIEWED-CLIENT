@@ -46,6 +46,7 @@ module.exports = {
       },
       spacing: {
         "3%": "3%",
+        "60px": "60px",
       },
       keyframes: {
         fadeIn: {
