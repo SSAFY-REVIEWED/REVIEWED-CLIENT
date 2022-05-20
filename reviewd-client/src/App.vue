@@ -2,7 +2,7 @@
   <div class="relative">
     <Navigation class="top-0" v-if="!isLoggingIn" />
     <main
-      class="container max-w-container bg-red-400 pt-0 px-9 mt-60px"
+      class="container max-w-container pt-0 px-9 mt-60px"
       :class="{ 'mt-0': isLoggingIn }"
     >
       <router-view />
@@ -44,5 +44,14 @@ export default {
     "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
     "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     sans-serif;
+}
+
+.ally-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
 }
 </style>

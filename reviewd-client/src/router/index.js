@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "@/views/HomeView";
 import SignUpView from "@/views/SignUpView";
+import LoginView from "@/views/LoginView";
 
 Vue.use(VueRouter);
 
@@ -16,10 +17,18 @@ const routes = [
   },
   {
     path: "/signup",
-    name: "signUp",
+    name: "signup",
     component: SignUpView,
     meta: {
-      title: "SingUp",
+      title: "SignUp",
+    },
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginView,
+    meta: {
+      title: "Login",
     },
   },
 ];

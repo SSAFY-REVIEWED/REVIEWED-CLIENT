@@ -125,7 +125,7 @@
 
       <ul class="flex overflow-hidden items-center ml-auto" v-if="true">
         <li>
-          <router-link :to="{ name: 'signUp' }">
+          <router-link :to="{ name: 'signup' }">
             <button
               class="bg-signup-green text-white w-fit p-3 h-11 text-h4 rounded-md font-bold"
             >
@@ -134,7 +134,7 @@
           </router-link>
         </li>
         <li class="ml-6">
-          <router-link :to="{ name: 'home' }">
+          <router-link :to="{ name: 'login' }">
             <button
               class="bg-login-green text-white w-fit p-3 h-11 text-h4 rounded-md font-bold"
             >
