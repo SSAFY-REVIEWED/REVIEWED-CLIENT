@@ -28,11 +28,7 @@ export default {
   computed: {
     ...mapGetters(["isLoggingIn"]),
   },
-  watch: {
-    isLoggingIn() {
-      console.log(this.isLoggingIn);
-    },
-  },
+  watch: {},
   create() {},
   mounted() {},
 };
