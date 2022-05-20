@@ -11,7 +11,6 @@
       <div class="flex justify-between">
         <div class="text-white">
           <div class="mb-5">
-            <router-link></router-link>
             <p>
               <router-link :to="{ name: 'home' }">서비스 이용약관</router-link>
               |

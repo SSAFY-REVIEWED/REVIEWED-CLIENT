@@ -18,6 +18,10 @@ export default {
     Navigation,
     Footer,
   },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 

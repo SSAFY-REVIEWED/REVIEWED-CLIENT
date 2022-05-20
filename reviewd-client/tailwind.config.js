@@ -29,13 +29,37 @@ module.exports = {
         p: ["16px", "16px"],
         small: ["10px", "14px"],
         logo: "40px",
+        xsm: "13px",
       },
       height: {
         15: "60px",
         footer: "440px",
+        profile: "142px",
+      },
+      width: {
+        profile: "162px",
       },
       boxShadow: {
         "inner-input": "inset 0px 2px 4px rgba(0, 0, 0, 0.25);",
+        "3xl":
+          "rgb(0 0 0 / 20%) 0px 4px 20px, rgb(255 255 255 / 20%) 0px 0px 0px 1px inset",
+      },
+      spacing: {
+        "3%": "3%",
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+        fadeOut: {
+          from: { opacity: 1 },
+          to: { opacity: 0 },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 300ms ease-in-out",
+        fadeOut: "fadeOut 300ms ease-in-out",
       },
     },
   },
