@@ -1,12 +1,10 @@
-
+import VueCookies from "vue-cookies";
 
 export default {
   state: {
     isLoggingIn: false,
-    isLoggedIn: JSON.parse(localStorage.getItem("profile")) ? true : false,
-    profile: JSON.parse(localStorage.getItem("profile")) || {},
-    access_token: localStorage.getItem("accessToken") || "",
-    refresh_token: localStorage.getItem("refreshToken") || "",
+    isLoggedIn: VueCookies.get("accessToken") ? true : false,
+    profile: VueCookies.get("profile") || {},
   },
   getters: {
     isLoggingIn: (state) => {
@@ -32,10 +30,7 @@ export default {
         ...state.profile,
         ...profile,
       };
-      localStorage.setItem("profile", JSON.stringify(profile));
-      state.access_token = data.token.access;
-      localStorage.setItem("accessToken", data.token.access);
-      localStorage.setItem("refreshToken", data.token.refresh);
+      VueCookies.set("profile", profile);
     },
   },
   actions: {},

@@ -240,27 +240,15 @@ export default {
       const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,}$/;
       if (!regex.test(e.target.value)) {
         this.isValidName = false;
-        this.$emit("set_name", "");
+        (this.nameValidationMessage = NAME_VALIDATION_MESSAGE["INVALID_NAME"]),
+          this.$emit("set_name", "");
         return;
       }
       this.isValidName = true;
       this.$emit("set_name", e.target.value);
       this.nameValidationMessage = "";
     },
-    activateSignupButton() {
-      console.log(this.$refs.signupButton);
-      if (
-        this.isValidPassword &&
-        this.isMatchedPassword &&
-        this.isValidName &&
-        this.password &&
-        this.name &&
-        this.email
-      ) {
-        this.$refs.signupButton.disabled = false;
-        console.log(this.$refs.signupButton);
-      }
-    },
+
     onSubmit() {
       this.$emit("on_submit");
     },

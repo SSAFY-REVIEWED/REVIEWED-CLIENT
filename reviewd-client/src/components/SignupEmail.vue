@@ -96,7 +96,7 @@ export default {
     async fetchReduplicatedEmailCheck(email) {
       try {
         const response = await postMethod("EMAIL_CHECK", email);
-        console.log(response);
+        console.log(response.data.result);
         this.checkValidEmailAndAlert(true, "성공");
         this.setEmail(email);
       } catch (err) {

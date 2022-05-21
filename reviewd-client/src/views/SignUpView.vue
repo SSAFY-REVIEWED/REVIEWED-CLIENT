@@ -37,10 +37,11 @@
 
 <script>
 import { mapMutations } from "vuex";
-import _ from "lodash";
-import { EMAIL_VALIDATE_MESSAGE } from "../utils/const";
+import VueCookies from "vue-cookies";
 import SignupEmail from "@/components/SignupEmail.vue";
 import SignupPassword from "@/components/SignupPassword.vue";
+import { EMAIL_VALIDATE_MESSAGE } from "@/utils/const";
+import { postMethod, getData } from "@/api/index";
 
 export default {
   name: "singUpView",
@@ -50,23 +51,16 @@ export default {
   },
   data() {
     return {
-      email: "",
+      email: "ney9083@g.com",
       password: "",
       passwordCheck: "",
       name: "",
       isValidEmail: false,
-      isCheckingEmail: true,
+      isCheckingEmail: false,
     };
   },
   methods: {
-    ...mapMutations(["setLoggingIn"]),
-    onSearch(event) {
-      const keyword = event.target.value;
-      this.validateEmail(keyword);
-    },
-    onSearchDebounce: _.debounce(function (e) {
-      this.onSearch(e);
-    }, 500),
+    ...mapMutations(["setLoggingIn", "setUserProfile"]),
     validateEmail(value) {
       if (!value) {
         return EMAIL_VALIDATE_MESSAGE["EMPTY_WARNING"];
@@ -98,14 +92,25 @@ export default {
     setName(name) {
       this.name = name;
     },
-    onSubmit() {
-      console.log(this.email, this.password, this.name);
+    async onSubmit() {
       const body = {
         email: this.email,
         password: this.password,
         name: this.name,
       };
-      console.log(body);
+      try {
+        const response = await postMethod("SIGNUP", body);
+        VueCookies.set("accessToken", response.data.token.access);
+        VueCookies.set("refreshToken", response.data.token.refresh);
+        try {
+          const response = await getData("USER_INFO");
+          this.setUserProfile(response.data);
+        } catch (err) {
+          console.log(err);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   computed: {},

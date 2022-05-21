@@ -27,6 +27,11 @@ const URL = {
   EMAIL_CHECK: "/email/",
 };
 
+export const getData = async (url) => {
+  console.log(URL[url]);
+  const res = await axiosInstance.get(URL[url]);
+  return res;
+};
 
 export const postMethod = async (url, body) => {
   console.log(URL[url]);
