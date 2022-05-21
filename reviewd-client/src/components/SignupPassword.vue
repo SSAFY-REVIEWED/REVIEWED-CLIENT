@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full animate-fadeIn transition-all duration-1000 ease">
+  <article class="w-full animate-fadeIn transition-all duration-1000 ease">
     <div class="w-3/4 mt-3 mx-auto">
       <form class="w-full relative" @submit.prevent="onSubmit">
         <div
@@ -171,7 +171,7 @@
         </button>
       </form>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>

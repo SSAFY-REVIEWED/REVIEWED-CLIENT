@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <article class="w-full">
     <div class="w-3/4 mt-3 mx-auto">
       <form class="w-full relative" @submit.prevent="onSubmit">
         <div
@@ -49,7 +49,7 @@
         <span class="ml-4">Google 계정으로 회원가입 하기</span>
       </button>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>

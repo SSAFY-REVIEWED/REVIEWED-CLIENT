@@ -1,17 +1,19 @@
 <template>
   <section class="min-h-screen max-w-650 mx-auto">
-    <article class="h-screen flex flex-col justify-center items-center">
-      <div
-        class="items-center bg-gradient-to-r from-primary-red to-second-red bg-clip-text transparent text-transparent font-bold text-h1 tracking-tighter"
-      >
-        REVIEWD
-      </div>
-      <div
-        class="mt-10 flex flex-wrap text-center leading-normal text-h3 bg-gradient-to-r from-primary-blue via-second-blue to-third-blue bg-clip-text transparent text-transparent font-bold"
-      >
-        환상적인 리뷰의 세계로 들어가 볼까요?
-      </div>
-      <p class="text-p mt-5">REVIEWD를 실제로 경험해보세요.</p>
+    <section class="h-screen flex flex-col justify-center items-center">
+      <article class="flex flex-col items-center">
+        <div
+          class="items-center bg-gradient-to-r from-primary-red to-second-red bg-clip-text transparent text-transparent font-bold text-h1 tracking-tighter"
+        >
+          REVIEWD
+        </div>
+        <div
+          class="mt-10 flex flex-wrap text-center leading-normal text-h3 bg-gradient-to-r from-primary-blue via-second-blue to-third-blue bg-clip-text transparent text-transparent font-bold"
+        >
+          환상적인 리뷰의 세계로 들어가 볼까요?
+        </div>
+        <p class="text-p mt-5">REVIEWD를 실제로 경험해보세요.</p>
+      </article>
       <SignupEmail
         @check_valid_email="checkValidEmail"
         @set_email="setEmail"
@@ -31,7 +33,7 @@
         @set_name="setName"
         @on_submit="onSubmit"
       />
-    </article>
+    </section>
   </section>
 </template>
 
@@ -52,11 +54,11 @@ export default {
   data() {
     return {
       email: "ney9083@g.com",
-      password: "",
-      passwordCheck: "",
-      name: "",
+      password: "dkssud12",
+      passwordCheck: "dkssud12",
+      name: "남녈",
       isValidEmail: false,
-      isCheckingEmail: false,
+      isCheckingEmail: true,
     };
   },
   methods: {
@@ -98,6 +100,7 @@ export default {
         password: this.password,
         name: this.name,
       };
+      this.$router.push({ name: "survey" });
       try {
         const response = await postMethod("SIGNUP", body);
         VueCookies.set("accessToken", response.data.token.access);
@@ -105,6 +108,7 @@ export default {
         try {
           const response = await getData("USER_INFO");
           this.setUserProfile(response.data);
+          this.$router.push({ name: "survey" });
         } catch (err) {
           console.log(err);
         }

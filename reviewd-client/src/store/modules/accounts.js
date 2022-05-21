@@ -14,11 +14,10 @@ export default {
   mutations: {
     setLoggingIn: (state, $route) => {
       const name = $route?.path;
-      if (name === "/signup" || name === "/login") {
+      if (name === "/signup" || name === "/login" || name === "/survey") {
         state.isLoggingIn = true;
         return;
-      }
-      state.isLoggingIn = false;
+      } else state.isLoggingIn = false;
     },
     setUserProfile: (state, data) => {
       const profile = {

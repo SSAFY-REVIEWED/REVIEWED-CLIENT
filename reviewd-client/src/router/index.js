@@ -1,10 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import VueCookies from "vue-cookies";
 import getNewAccessToken from "@/api/refresh";
 import HomeView from "@/views/HomeView";
 import SignUpView from "@/views/SignUpView";
 import LoginView from "@/views/LoginView";
-import VueCookies from "vue-cookies";
+import SurveyView from "@/views/SurveyView";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,15 @@ const routes = [
     component: LoginView,
     meta: {
       title: "Login",
+      unauthorized: true,
+    },
+  },
+  {
+    path: "/survey",
+    name: "survey",
+    component: SurveyView,
+    meta: {
+      title: "Survey",
       unauthorized: true,
     },
   },

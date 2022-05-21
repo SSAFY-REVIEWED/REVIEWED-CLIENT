@@ -1,13 +1,102 @@
 <template>
-  <div>Survey</div>
+  <section class="min-h-screen mx-auto">
+    <section class="min-h-screen flex flex-col justify-center items-center">
+      <article class="flex flex-col items-center">
+        <div
+          class="items-center bg-gradient-to-r from-primary-red to-second-red bg-clip-text transparent text-transparent font-bold text-h1 tracking-tighter"
+        >
+          REVIEWD
+        </div>
+        <div
+          class="mt-10 flex flex-wrap text-center leading-normal text-h3 md:text-h2 font-bold"
+        >
+          선호하는 컨텐츠의 장르를 선택해주세요.
+        </div>
+      </article>
+      <article
+        class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-4/6 gap-y-8 gap-x-10 place-items-center mt-10 relative grid-container"
+      >
+        <button
+          class="bg-fourth-blue w-28 md:w-32 h-14 text-white text-h5 rounded-lg font-bold shadow-3xl active:top-1 relative transition-all duration-200 ease-in item"
+          v-for="genre in movieCategory"
+          :key="genre"
+          :value="genre"
+          @click="onClick"
+        >
+          {{ genre }}
+        </button>
+      </article>
+      <button
+        class="md:w-96 w-56 bg-gradient-to-r from-primary-blue via-second-blue to-third-blue h-20 mt-10 rounded-lg text-h3 text-white font-bold transition-all duration-200"
+        :class="{
+          'opacity-100': preferenceGenreList.length,
+          'opacity-50': !preferenceGenreList.length,
+        }"
+        :disabled="!preferenceGenreList.length"
+      >
+        분석하기
+      </button>
+    </section>
+  </section>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
-
-}
+  name: "surveyView",
+  data() {
+    return {
+      movieCategory: [
+        "음악",
+        "역사",
+        "코미디",
+        "모험",
+        "판타지",
+        "가족",
+        "공포",
+        "서부",
+        "전쟁",
+        "TV 영화",
+        "애니메이션",
+        "로맨스",
+        "액션",
+        "드라마",
+        "범죄",
+        "스릴러",
+        "SF",
+        "미스터리",
+      ],
+      preferenceGenreList: [],
+    };
+  },
+  methods: {
+    ...mapMutations(["setLoggingIn"]),
+    onClick(e) {
+      e.target.classList.toggle("bg-primary-blue");
+      e.target.classList.toggle("bg-fourth-blue");
+      const idx = this.preferenceGenreList.indexOf(e.target.value);
+      if (idx > -1) {
+        this.preferenceGenreList.splice(idx, 1);
+        return;
+      }
+      this.preferenceGenreList.push(e.target.value);
+    },
+  },
+  created() {
+    this.setLoggingIn(this.$route);
+  },
+};
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.item {
+  &:nth-last-child(2):nth-child(4n + 1) {
+    grid-column-end: 3;
+  }
+  @media (max-width: 1024px) {
+    &:nth-last-child(2):nth-child(4n + 1) {
+      grid-column-end: -2;
+    }
+  }
+}
 </style>
