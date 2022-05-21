@@ -1,6 +1,20 @@
 <template>
   <section class="min-h-screen mx-auto">
-    <section class="min-h-screen flex flex-col justify-center items-center">
+    <article
+      class="min-h-screen flex flex-col justify-center items-center"
+      v-if="isLoading"
+    >
+      <p class="text-h1 font-bold">
+        {{ name }}JAEHO 님의 취향을 분석하고 있습니다.
+      </p>
+      <div
+        class="mt-14 w-20 h-20 border border-8 border-t-transparent animate-spin rounded-full"
+      ></div>
+    </article>
+    <section
+      class="min-h-screen flex flex-col justify-center items-center"
+      v-if="!isLoading"
+    >
       <article class="flex flex-col items-center">
         <div
           class="items-center bg-gradient-to-r from-primary-red to-second-red bg-clip-text transparent text-transparent font-bold text-h1 tracking-tighter"
@@ -26,22 +40,34 @@
           {{ genre }}
         </button>
       </article>
-      <button
-        class="md:w-96 w-56 bg-gradient-to-r from-primary-blue via-second-blue to-third-blue h-20 mt-10 rounded-lg text-h3 text-white font-bold transition-all duration-200"
-        :class="{
-          'opacity-100': preferenceGenreList.length,
-          'opacity-50': !preferenceGenreList.length,
-        }"
-        :disabled="!preferenceGenreList.length"
-      >
-        분석하기
-      </button>
+      <div class="tooltip relative">
+        <button
+          class="md:w-96 w-56 bg-gradient-to-r from-primary-blue via-second-blue to-third-blue h-20 mt-10 rounded-lg text-h3 text-white font-bold transition-all duration-200"
+          :class="{
+            'opacity-100': preferenceGenreList.length,
+            'opacity-50': !preferenceGenreList.length,
+          }"
+          :disabled="!preferenceGenreList.length"
+          @click="onSubmitSurvey"
+        >
+          분석하기
+        </button>
+        <span
+          role="tooltip"
+          class="tooltiptext absolute left-0 right-0 mx-auto -top-4 bg-light-black text-white w-fit p-2 h-fit rounded-md font-bold"
+          v-show="!preferenceGenreList.length"
+          >하나 이상의 장르를 선택해 주세요.</span
+        >
+      </div>
     </section>
   </section>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
+// import { postData } from "vuex";
+import VueCookies from "vue-cookies";
+
 export default {
   name: "surveyView",
   data() {
@@ -67,6 +93,8 @@ export default {
         "미스터리",
       ],
       preferenceGenreList: [],
+      isLoading: false,
+      name: VueCookies.get("name"),
     };
   },
   methods: {
@@ -80,6 +108,21 @@ export default {
         return;
       }
       this.preferenceGenreList.push(e.target.value);
+    },
+    setLoading() {
+      this.isLoading = !this.isLoading;
+    },
+    async onSubmitSurvey() {
+      try {
+        this.setLoading();
+        // const response = await postData("SURVEY", this.preferenceGenreList);
+        // console.log(response);
+        setTimeout(() => {
+          this.$router.push({ name: "main" });
+        }, 2000);
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   created() {
@@ -98,5 +141,16 @@ export default {
       grid-column-end: -2;
     }
   }
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
 }
 </style>

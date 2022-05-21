@@ -25,6 +25,7 @@ const URL = {
   SIGNUP: "/signup/",
   USER_INFO: "/user-info/",
   EMAIL_CHECK: "/email/",
+  SURVEY: "/survey/",
 };
 
 export const getData = async (url) => {
@@ -33,7 +34,7 @@ export const getData = async (url) => {
   return res;
 };
 
-export const postMethod = async (url, body) => {
+export const postData = async (url, body) => {
   console.log(URL[url]);
   const res = await axiosInstance.post(URL[url], body);
   return res;

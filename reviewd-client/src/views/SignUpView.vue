@@ -43,7 +43,7 @@ import VueCookies from "vue-cookies";
 import SignupEmail from "@/components/SignupEmail.vue";
 import SignupPassword from "@/components/SignupPassword.vue";
 import { EMAIL_VALIDATE_MESSAGE } from "@/utils/const";
-import { postMethod, getData } from "@/api/index";
+import { postData, getData } from "@/api/index";
 
 export default {
   name: "singUpView",
@@ -102,7 +102,7 @@ export default {
       };
       this.$router.push({ name: "survey" });
       try {
-        const response = await postMethod("SIGNUP", body);
+        const response = await postData("SIGNUP", body);
         VueCookies.set("accessToken", response.data.token.access);
         VueCookies.set("refreshToken", response.data.token.refresh);
         try {

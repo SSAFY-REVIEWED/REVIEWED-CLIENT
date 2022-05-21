@@ -6,6 +6,7 @@ import HomeView from "@/views/HomeView";
 import SignUpView from "@/views/SignUpView";
 import LoginView from "@/views/LoginView";
 import SurveyView from "@/views/SurveyView";
+import MainView from "@/views/MainView";
 
 Vue.use(VueRouter);
 
@@ -16,7 +17,7 @@ const routes = [
     component: HomeView,
     meta: {
       title: "Home",
-      unauthorized: true,
+      authorized: false,
     },
   },
   {
@@ -25,7 +26,7 @@ const routes = [
     component: SignUpView,
     meta: {
       title: "SignUp",
-      unauthorized: true,
+      authorized: false,
     },
   },
   {
@@ -34,7 +35,7 @@ const routes = [
     component: LoginView,
     meta: {
       title: "Login",
-      unauthorized: true,
+      authorized: false,
     },
   },
   {
@@ -43,7 +44,16 @@ const routes = [
     component: SurveyView,
     meta: {
       title: "Survey",
-      unauthorized: true,
+      authorized: false,
+    },
+  },
+  {
+    path: "/main",
+    name: "main",
+    component: MainView,
+    meta: {
+      title: "Home",
+      authorized: false,
     },
   },
 ];
@@ -63,7 +73,7 @@ router.beforeEach(async (to, from, next) => {
     await getNewAccessToken();
   }
   if (
-    to.matched.some((record) => record.meta.unauthorized) ||
+    to.matched.some((record) => !record.meta.authorized) ||
     VueCookies.get("accessToken")
   ) {
     return next();

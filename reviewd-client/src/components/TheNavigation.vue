@@ -209,19 +209,4 @@ export default {
     left: 52px;
   }
 }
-
-.tooltip {
-  .tooltiptext {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 300ms;
-  }
-  &:hover {
-    .tooltiptext {
-      visibility: visible;
-      opacity: 1;
-      transition: all 300ms;
-    }
-  }
-}
 </style>

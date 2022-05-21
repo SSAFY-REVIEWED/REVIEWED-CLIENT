@@ -55,7 +55,7 @@
 <script>
 import { EMAIL_VALIDATION_MESSAGE } from "@/utils/const.js";
 import _ from "lodash";
-import { postMethod } from "@/api/index";
+import { postData } from "@/api/index";
 
 export default {
   name: "signupEmail",
@@ -95,7 +95,7 @@ export default {
     },
     async fetchReduplicatedEmailCheck(email) {
       try {
-        const response = await postMethod("EMAIL_CHECK", email);
+        const response = await postData("EMAIL_CHECK", email);
         console.log(response.data.result);
         this.checkValidEmailAndAlert(true, "성공");
         this.setEmail(email);
