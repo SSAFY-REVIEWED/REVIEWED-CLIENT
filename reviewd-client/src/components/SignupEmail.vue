@@ -54,8 +54,8 @@
 
 <script>
 import { EMAIL_VALIDATION_MESSAGE } from "@/utils/const.js";
-// import { signup } from "@/api/index.js";
 import _ from "lodash";
+import { postMethod } from "@/api/index";
 
 export default {
   name: "signupEmail",
@@ -87,22 +87,22 @@ export default {
       }
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(email)) {
-        return EMAIL_VALIDATION_MESSAGE["INVALID_EMAIL"];
+        this.$toast(EMAIL_VALIDATION_MESSAGE["INVALID_EMAIL"]);
+        this.$emit("check_valid_email", false);
+        return;
       }
-      this.$toast("꺅 성공해쪄");
       this.fetchReduplicatedEmailCheck(email);
-      return true;
     },
     async fetchReduplicatedEmailCheck(email) {
       try {
-        // await signup(email);
-        const response = "response";
-        this.checkValidEmailAndAlert(response, "성공");
+        const response = await postMethod("EMAIL_CHECK", email);
+        console.log(response);
+        this.checkValidEmailAndAlert(true, "성공");
         this.setEmail(email);
       } catch (err) {
         console.log(err);
         this.checkValidEmailAndAlert(
-          err.response,
+          false,
           EMAIL_VALIDATION_MESSAGE["REDUPLICATED_EMAIL"]
         );
       }
@@ -112,7 +112,7 @@ export default {
         this.$emit("check_valid_email", valid);
         return;
       }
-      this.$$toast(message);
+      this.$toast(message);
     },
     setEmail(email) {
       this.$emit("set_email", email);

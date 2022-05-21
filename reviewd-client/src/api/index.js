@@ -1,13 +1,14 @@
 import axios from "axios";
 import getNewAccessToken from "./refresh.js";
+import VueCookies from "vue-cookies";
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseUrl: "http://localhost:8000/api/v1",
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = JSON.parse(localStorage.getItem("accessToken"));
+    const token = VueCookies.get("accessToken");
 
     if (token) {
       config.headers.Authorization = `Token ${token}`;
@@ -22,10 +23,13 @@ axiosInstance.interceptors.request.use(
 const URL = {
   LOGIN: "/login/",
   SIGNUP: "/signup/",
-  USERINFO: "/user-info/",
+  USER_INFO: "/user-info/",
+  EMAIL_CHECK: "/email/",
 };
 
-export const postMethod = async (body, url) => {
+
+export const postMethod = async (url, body) => {
+  console.log(URL[url]);
   const res = await axiosInstance.post(URL[url], body);
   return res;
 };
