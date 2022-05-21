@@ -20,7 +20,17 @@
         :email="email"
         :isValidEmail="isValidEmail"
       />
-      <SignupPassword v-if="!isCheckingEmail" :email="email" />
+      <SignupPassword
+        v-if="!isCheckingEmail"
+        :email="email"
+        :password="password"
+        :passwordCheck="passwordCheck"
+        :name="name"
+        @set_password="setPassword"
+        @set_password_check="setPasswordCheck"
+        @set_name="setName"
+        @on_submit="onSubmit"
+      />
     </article>
   </section>
 </template>
@@ -40,11 +50,11 @@ export default {
   },
   data() {
     return {
-      email: "ney9083@g.com",
+      email: "",
       password: "",
       passwordCheck: "",
       name: "",
-      isValidEmail: true,
+      isValidEmail: false,
       isCheckingEmail: true,
     };
   },
@@ -78,6 +88,18 @@ export default {
       if (this.isValidEmail) {
         this.isCheckingEmail = false;
       }
+    },
+    setPassword(password) {
+      this.password = password;
+    },
+    setPasswordCheck(passwordCheck) {
+      this.passwordCheck = passwordCheck;
+    },
+    setName(name) {
+      this.name = name;
+    },
+    onSubmit() {
+      console.log(this.email, this.password, this.name);
     },
   },
   computed: {},

@@ -109,6 +109,9 @@
         </div>
         <div
           class="mt-8 bg-white w-full shadow-sign-input h-15 rounded-lg flex px-4 items-center relative"
+          :class="{
+            'border border-2 border-primary-red rounded-lg': !isValidName,
+          }"
         >
           <label for="username"
             ><svg
@@ -131,12 +134,38 @@
             name="username"
             class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText"
             required
+            @input="validateName"
           />
           <span class="floating-label text-primary-gray">이름</span>
+          <p
+            class="absolute text-sm left-0 top-16 text-primary-blue validate-info opacity-0"
+            :class="{ 'text-primary-red': !isValidName }"
+          >
+            {{ nameValidationMessage }}
+          </p>
         </div>
         <button
-          class="mt-5 h-12 w-full bg-gradient-to-r from-primary-blue via-second-blue to-third-blue font-bold text-white rounded-lg opacity-30"
-          disabled
+          class="mt-8 h-12 w-full bg-gradient-to-r from-primary-blue via-second-blue to-third-blue font-bold text-white rounded-lg opacity-30"
+          :disabled="
+            !name ||
+            !password ||
+            !email ||
+            !passwordCheck ||
+            !isValidPassword ||
+            !isMatchedPassword ||
+            !isValidName
+          "
+          :class="{
+            'opacity-100':
+              name &&
+              password &&
+              email &&
+              passwordCheck &&
+              isValidPassword &&
+              isMatchedPassword &&
+              isValidName,
+          }"
+          ref="signupButton"
         >
           REVIEWD 시작하기
         </button>
@@ -146,7 +175,10 @@
 </template>
 
 <script>
-import { PASSWORD_VALIDATION_MESSAGE } from "@/utils/const.js";
+import {
+  PASSWORD_VALIDATION_MESSAGE,
+  NAME_VALIDATION_MESSAGE,
+} from "@/utils/const.js";
 export default {
   name: "signupPassword",
   props: {
@@ -154,20 +186,29 @@ export default {
       type: String,
       required: true,
     },
+    password: {
+      type: String,
+    },
+    passwordCheck: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
   },
   data() {
     return {
       passwordValidationMessage: PASSWORD_VALIDATION_MESSAGE["PASSWORD_RULE"],
       passwordCheckValidationMessage: "",
+      nameValidationMessage: NAME_VALIDATION_MESSAGE["INVALID_NAME"],
       isValidPassword: true,
       isMatchedPassword: true,
-      password: "",
-      passwordCheck: "",
+      isValidName: true,
     };
   },
   methods: {
     validatePassword(e) {
-      const regex = /(?=.*\d)(?=.*[a-z]).{8,}/;
+      const regex = /(?=.*\d)(?=.*[a-z]).{8,32}/;
       if (this.passwordCheck.length) {
         this.isMatchedPassword = false;
         this.passwordCheckValidationMessage =
@@ -182,20 +223,50 @@ export default {
 
       this.passwordValidationMessage = "";
       this.isValidPassword = true;
-      this.password = e.target.value;
+      this.$emit("set_password", e.target.value);
     },
     validatePasswordCheck(e) {
       if (e.target.value === this.password) {
         this.isMatchedPassword = true;
         this.passwordCheckValidationMessage = "";
-        this.passwordCheck = e.target.value;
+        this.$emit("set_password_check", e.target.value);
         return;
       }
       this.isMatchedPassword = false;
       this.passwordCheckValidationMessage =
         PASSWORD_VALIDATION_MESSAGE["NOT_MATCHED_PASSWORD"];
     },
+    validateName(e) {
+      const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,}$/;
+      if (!regex.test(e.target.value)) {
+        this.isValidName = false;
+        this.$emit("set_name", "");
+        return;
+      }
+      this.isValidName = true;
+      this.$emit("set_name", e.target.value);
+      this.nameValidationMessage = "";
+    },
+    activateSignupButton() {
+      console.log(this.$refs.signupButton);
+      if (
+        this.isValidPassword &&
+        this.isMatchedPassword &&
+        this.isValidName &&
+        this.password &&
+        this.name &&
+        this.email
+      ) {
+        this.$refs.signupButton.disabled = false;
+        console.log(this.$refs.signupButton);
+      }
+    },
+    onSubmit() {
+      this.$emit("on_submit");
+    },
   },
+
+  watch: {},
 };
 </script>
 
