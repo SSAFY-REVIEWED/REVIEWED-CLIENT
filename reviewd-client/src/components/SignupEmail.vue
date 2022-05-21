@@ -25,7 +25,7 @@
             type="email"
             id="email"
             name="email"
-            class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText"
+            class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white"
             required
             @input="onValidateDebounce"
           />
@@ -36,6 +36,7 @@
         <button
           class="absolute right-0 top-0 m-1 h-[52px] bg-primary-blue text-white font-bold w-55 rounded-lg"
           v-if="isValidEmail"
+          @click="wasEmailValidated"
         >
           계속
         </button>
@@ -52,7 +53,7 @@
 </template>
 
 <script>
-import { EMAIL_VALIDATE_MESSAGE } from "@/utils/const.js";
+import { EMAIL_VALIDATION_MESSAGE } from "@/utils/const.js";
 // import { signup } from "@/api/index.js";
 import _ from "lodash";
 
@@ -82,11 +83,11 @@ export default {
     }, 500),
     validateEmail(email) {
       if (!email) {
-        return EMAIL_VALIDATE_MESSAGE["EMPTY_WARNING"];
+        return EMAIL_VALIDATION_MESSAGE["EMPTY_WARNING"];
       }
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(email)) {
-        return EMAIL_VALIDATE_MESSAGE["INVALID_EMAIL"];
+        return EMAIL_VALIDATION_MESSAGE["INVALID_EMAIL"];
       }
       this.$toast("꺅 성공해쪄");
       this.fetchReduplicatedEmailCheck(email);
@@ -96,25 +97,28 @@ export default {
       try {
         // await signup(email);
         const response = "response";
-        this.setValidEmailAndAlert(response, "성공");
+        this.checkValidEmailAndAlert(response, "성공");
         this.setEmail(email);
       } catch (err) {
         console.log(err);
-        this.setValidEmailAndAlert(
+        this.checkValidEmailAndAlert(
           err.response,
-          EMAIL_VALIDATE_MESSAGE["REDUPLICATED_EMAIL"]
+          EMAIL_VALIDATION_MESSAGE["REDUPLICATED_EMAIL"]
         );
       }
     },
-    setValidEmailAndAlert(valid, message) {
+    checkValidEmailAndAlert(valid, message) {
       if (valid) {
-        this.$emit("set_valid_email", valid);
+        this.$emit("check_valid_email", valid);
         return;
       }
       this.$$toast(message);
     },
     setEmail(email) {
       this.$emit("set_email", email);
+    },
+    wasEmailValidated() {
+      this.$emit("was_email_validated");
     },
   },
 };

@@ -21,6 +21,7 @@ module.exports = {
         "login-green": "#11C2CD",
         "light-black": "#404040",
         "primary-gray": "#8B8B8B",
+        disabled: "#efefef",
       },
       fontSize: {
         h1: ["60px", "48px"],

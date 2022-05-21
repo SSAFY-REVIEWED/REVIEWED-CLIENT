@@ -13,10 +13,14 @@
       </div>
       <p class="text-p mt-5">REVIEWD를 실제로 경험해보세요.</p>
       <SignupEmail
-        @set_valid_email="setValidEmail"
+        @check_valid_email="checkValidEmail"
         @set_email="setEmail"
+        @was_email_validated="checkCheckingEmail"
         v-if="isCheckingEmail"
+        :email="email"
+        :isValidEmail="isValidEmail"
       />
+      <SignupPassword v-if="!isCheckingEmail" :email="email" />
     </article>
   </section>
 </template>
@@ -26,16 +30,21 @@ import { mapMutations } from "vuex";
 import _ from "lodash";
 import { EMAIL_VALIDATE_MESSAGE } from "../utils/const";
 import SignupEmail from "@/components/SignupEmail.vue";
+import SignupPassword from "@/components/SignupPassword.vue";
 
 export default {
   name: "singUpView",
   components: {
     SignupEmail,
+    SignupPassword,
   },
   data() {
     return {
-      email: "",
-      isValidEmail: false,
+      email: "ney9083@g.com",
+      password: "",
+      passwordCheck: "",
+      name: "",
+      isValidEmail: true,
       isCheckingEmail: true,
     };
   },
@@ -62,8 +71,13 @@ export default {
     setEmail(email) {
       this.email = email;
     },
-    setValidEmail(valid) {
+    checkValidEmail(valid) {
       this.isValidEmail = valid;
+    },
+    checkCheckingEmail() {
+      if (this.isValidEmail) {
+        this.isCheckingEmail = false;
+      }
     },
   },
   computed: {},

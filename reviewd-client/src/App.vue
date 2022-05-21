@@ -2,7 +2,7 @@
   <div class="relative">
     <Navigation class="top-0" v-if="!isLoggingIn" />
     <main
-      class="container max-w-container pt-0 px-9 mt-60px"
+      class="container max-w-container pt-0 px-9 mt-60px mx-auto"
       :class="{ 'mt-0': isLoggingIn }"
     >
       <router-view />
