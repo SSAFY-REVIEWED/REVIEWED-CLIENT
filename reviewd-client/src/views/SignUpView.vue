@@ -41,6 +41,7 @@ import _ from "lodash";
 import { EMAIL_VALIDATE_MESSAGE } from "../utils/const";
 import SignupEmail from "@/components/SignupEmail.vue";
 import SignupPassword from "@/components/SignupPassword.vue";
+import { signup } from "@/api/index.js";
 
 export default {
   name: "singUpView",
@@ -100,6 +101,12 @@ export default {
     },
     onSubmit() {
       console.log(this.email, this.password, this.name);
+      const body = {
+        email: this.email,
+        password: this.password,
+        name: this.name,
+      };
+      signup(body);
     },
   },
   computed: {},

@@ -5,9 +5,11 @@ import store from "./store";
 import "./input.css";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import VueCookies from "vue-cookies";
 
-Vue.use(Toast);
 Vue.config.productionTip = false;
+Vue.use(Toast);
+Vue.use(VueCookies);
 
 new Vue({
   router,
