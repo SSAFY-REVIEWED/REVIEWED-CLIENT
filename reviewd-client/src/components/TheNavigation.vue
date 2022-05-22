@@ -15,13 +15,13 @@
         v-if="isLoggedIn"
       >
         <li class="ml-3% text-xsm font-semibold">
-          <router-link :to="{ name: 'home' }">MOVIE</router-link>
+          <router-link :to="{ name: 'main' }">MOVIE</router-link>
         </li>
         <li class="ml-3% text-xsm font-semibold">
-          <router-link :to="{ name: 'home' }">CHALLENGE</router-link>
+          <router-link :to="{ name: 'challenge' }">CHALLENGE</router-link>
         </li>
         <li class="ml-3% text-xsm font-semibold">
-          <router-link :to="{ name: 'home' }">RANK</router-link>
+          <router-link :to="{ name: 'rank' }">RANK</router-link>
         </li>
 
         <li class="ml-auto">
@@ -66,7 +66,7 @@
 
             <div
               role="tooltip"
-              class="tooltiptext w-profile h-profile absolute right-0 top-12 rounded-md shadow-3xl bg-white p-2 flex flex-col"
+              class="tooltiptext w-profile h-profile absolute right-0 top-12 rounded-md shadow-3xl bg-white p-2 flex flex-col hover:visible hover:opacity-100"
             >
               <button
                 class="flex-1 flex items-center px-3 rounded-md text-slate-800 pointer-events-none"
@@ -76,7 +76,9 @@
                 </div>
               </button>
               <button
-                class="flex-1 flex items-center px-3 rounded-md hover:bg-slate-50 text-slate-400 hover:text-slate-800"
+                v-for="num in 2"
+                :key="num"
+                class="flex-1 flex items-center px-3 rounded-md text-slate-400 hover:bg-slate-50 hover:text-slate-800"
               >
                 <div class="flex items-center">
                   <router-link :to="{ name: 'home' }" class="flex">

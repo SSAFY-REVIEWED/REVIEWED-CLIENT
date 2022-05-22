@@ -7,6 +7,8 @@ import SignUpView from "@/views/SignUpView";
 import LoginView from "@/views/LoginView";
 import SurveyView from "@/views/SurveyView";
 import MainView from "@/views/MainView";
+import ChallengeView from "@/views/ChallengeView";
+import RankView from "@/views/RankView";
 
 Vue.use(VueRouter);
 
@@ -53,6 +55,24 @@ const routes = [
     component: MainView,
     meta: {
       title: "Home",
+      authorized: false,
+    },
+  },
+  {
+    path: "/challenge",
+    name: "challenge",
+    component: ChallengeView,
+    meta: {
+      title: "Challenge",
+      authorized: false,
+    },
+  },
+  {
+    path: "/rank",
+    name: "rank",
+    component: RankView,
+    meta: {
+      title: "Rank",
       authorized: false,
     },
   },

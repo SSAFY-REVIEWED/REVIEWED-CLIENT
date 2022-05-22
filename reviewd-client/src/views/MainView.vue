@@ -1,12 +1,20 @@
 <template>
-  <div class="min-h-screen bg-red-200">Main</div>
+  <section class="min-h-screen bg-red-200">
+    <article>
+      <MainHeader />
+    </article>
+  </section>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
+import MainHeader from "@/components/MainHeader";
 
 export default {
   name: "mainView",
+  components: {
+    MainHeader,
+  },
   methods: {
     ...mapMutations(["setLoggingIn"]),
   },

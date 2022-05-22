@@ -4,9 +4,9 @@
       class="min-h-screen flex flex-col justify-center items-center"
       v-if="isLoading"
     >
-      <p class="text-h1 font-bold">
+      <h1 class="text-h1 font-bold">
         {{ name }}JAEHO 님의 취향을 분석하고 있습니다.
-      </p>
+      </h1>
       <div
         class="mt-14 w-20 h-20 border-8 border-t-transparent animate-spin rounded-full"
       ></div>
