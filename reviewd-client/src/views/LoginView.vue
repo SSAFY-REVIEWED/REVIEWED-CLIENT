@@ -47,7 +47,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setLoggingIn", "setUserProfile", "setLoggedIn"]),
+    ...mapMutations(["setLoggingIn", "getUser"]),
     setSignValue({ value, type }) {
       if (type === "email") {
         this.email = value;
@@ -69,8 +69,12 @@ export default {
         const { message } = response.data;
         this.$toast.success(message);
         this.setToken(response.data);
-        this.setUserProfile();
-        this.$router.push({ name: "main" });
+        try {
+          await this.getUser();
+          this.$router.push({ name: "main" });
+        } catch (err) {
+          console.log(err);
+        }
       } catch (err) {
         const { message } = err.response.data;
         this.$toast.error(message);
