@@ -14,6 +14,7 @@
                 alt="범죄도시2"
                 width="300"
                 height="450"
+                class="w-full h-full"
               />
             </picture>
           </div>
