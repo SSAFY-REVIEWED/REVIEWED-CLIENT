@@ -42,7 +42,7 @@ import { mapMutations } from "vuex";
 import VueCookies from "vue-cookies";
 import SignupEmail from "@/components/SignupEmail.vue";
 import SignupPassword from "@/components/SignupPassword.vue";
-import { EMAIL_VALIDATE_MESSAGE } from "@/utils/const";
+import { EMAIL_VALIDATION_MESSAGE } from "@/utils/const";
 import { postData, getData } from "@/api/index";
 
 export default {
@@ -65,13 +65,13 @@ export default {
     ...mapMutations(["setLoggingIn", "setUserProfile"]),
     validateEmail(value) {
       if (!value) {
-        return EMAIL_VALIDATE_MESSAGE["EMPTY_WARNING"];
+        return EMAIL_VALIDATION_MESSAGE["EMPTY_WARNING"];
       }
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(value)) {
-        return EMAIL_VALIDATE_MESSAGE["INVALID_EMAIL"];
+        return EMAIL_VALIDATION_MESSAGE["INVALID_EMAIL"];
       }
-      console.log(EMAIL_VALIDATE_MESSAGE["SUCCESS"]);
+      console.log(EMAIL_VALIDATION_MESSAGE["SUCCESS"]);
       return true;
     },
     setEmail(email) {
@@ -94,15 +94,9 @@ export default {
     setName(name) {
       this.name = name;
     },
-    async onSubmit() {
-      const body = {
-        email: this.email,
-        password: this.password,
-        name: this.name,
-      };
-      this.$router.push({ name: "survey" });
+    async getUser(url, body) {
       try {
-        const response = await postData("SIGNUP", body);
+        const response = await postData(url, body);
         VueCookies.set("accessToken", response.data.token.access);
         VueCookies.set("refreshToken", response.data.token.refresh);
         try {
@@ -115,6 +109,15 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    async onSubmit() {
+      const body = {
+        email: this.email,
+        password: this.password,
+        name: this.name,
+      };
+      this.$router.push({ name: "survey" });
+      await this.getUser("SIGNUP", body);
     },
   },
   computed: {},

@@ -8,7 +8,7 @@
         {{ name }}JAEHO 님의 취향을 분석하고 있습니다.
       </p>
       <div
-        class="mt-14 w-20 h-20 border border-8 border-t-transparent animate-spin rounded-full"
+        class="mt-14 w-20 h-20  border-8 border-t-transparent animate-spin rounded-full"
       ></div>
     </article>
     <section

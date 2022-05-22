@@ -26,6 +26,8 @@ const URL = {
   USER_INFO: "/user-info/",
   EMAIL_CHECK: "/email/",
   SURVEY: "/survey/",
+  GOOGLE_LOGIN: "/google/callback/",
+  GET_ACCESS:"/access-token/"
 };
 
 export const getData = async (url) => {

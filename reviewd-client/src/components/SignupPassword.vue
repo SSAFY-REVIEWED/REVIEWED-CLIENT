@@ -36,7 +36,7 @@
         <div
           class="mt-8 bg-white w-full shadow-sign-input h-15 rounded-lg flex px-4 items-center relative"
           :class="{
-            'border border-2 border-primary-red rounded-lg': !isValidPassword,
+            'border-2 border-primary-red rounded-lg': !isValidPassword,
           }"
         >
           <label for="password"
@@ -73,7 +73,7 @@
         <div
           class="mt-8 bg-white w-full shadow-sign-input h-15 rounded-lg flex px-4 items-center relative"
           :class="{
-            'border border-2 border-primary-red rounded-lg': !isMatchedPassword,
+            'border-2 border-primary-red rounded-lg': !isMatchedPassword,
           }"
         >
           <label for="password-check"
@@ -110,7 +110,7 @@
         <div
           class="mt-8 bg-white w-full shadow-sign-input h-15 rounded-lg flex px-4 items-center relative"
           :class="{
-            'border border-2 border-primary-red rounded-lg': !isValidName,
+            'border-2 border-primary-red rounded-lg': !isValidName,
           }"
         >
           <label for="username"

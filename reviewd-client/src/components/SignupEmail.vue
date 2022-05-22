@@ -43,6 +43,7 @@
       </form>
 
       <button
+        id="buttonDiv"
         class="bg-white w-full mt-10 shadow-sign-input h-15 rounded-lg flex px-4 items-center relative text-primary-gray hover:bg-slate-50 transition-all duration-200 ease"
       >
         <img src="../assets/images/google.png" width="25" height="25" />
@@ -52,13 +53,17 @@
   </article>
 </template>
 
+<script src="https://accounts.google.com/gsi/client" async></script>
+
 <script>
 import { EMAIL_VALIDATION_MESSAGE } from "@/utils/const.js";
 import _ from "lodash";
-import { postData } from "@/api/index";
+import { postData, getData } from "@/api/index";
+import { mapMutations } from "vuex";
 
 export default {
   name: "signupEmail",
+
   props: {
     email: {
       type: String,
@@ -71,6 +76,23 @@ export default {
     return {};
   },
   methods: {
+    ...mapMutations(["setUserProfile"]),
+    async handleCredentialResponse(response) {
+      console.log(response);
+      console.log("Encoded JWT ID token: " + response.credential);
+      try {
+        const res = await postData("GOOGLE_LOGIN", {
+          credential: response.credential,
+        });
+        console.log(res)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    handleToken(response) {
+      console.log(response.data);
+      console.log(response);
+    },
     onSubmit() {
       return;
     },
@@ -120,6 +142,17 @@ export default {
     wasEmailValidated() {
       this.$emit("was_email_validated");
     },
+  },
+  mounted() {
+    google.accounts.id.initialize({
+      client_id:
+        "132131584079-0kes0ifpft82ms5mthj4g7ihar4emvo1.apps.googleusercontent.com",
+      callback: this.handleCredentialResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById("buttonDiv"), {
+      theme: "outline",
+      size: "large",
+    });
   },
 };
 </script>

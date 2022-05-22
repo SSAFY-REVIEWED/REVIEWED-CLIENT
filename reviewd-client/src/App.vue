@@ -29,7 +29,7 @@ export default {
     ...mapGetters(["isLoggingIn"]),
   },
   watch: {},
-  create() {},
+  created() {},
   mounted() {},
 };
 </script>
