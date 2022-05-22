@@ -1,48 +1,37 @@
 <template>
-  <div>
-    <div class="tip">→ Resize the browser window ←</div>
+  <div class="">
+    <h1 class="text-h4 font-semibold">JAEHO님을 위한 강력 추천 영화</h1>
     <swiper
-      class="swiper"
-      :slides-per-view="1"
-      :space-between="10"
-      :pagination="{ clickable: true }"
-      :breakpoints="{
-        '640': {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        '768': {
-          slidesPerView: 4,
-          spaceBetween: 40,
-        },
-        '1024': {
-          slidesPerView: 10,
-          spaceBetween: 50,
-        },
-      }"
+      class="swiper mt-6 px-16 bg-white shadow-none"
+      :options="swiperOption"
     >
-      <swiper-slide class="slide"><MainPosterCard /></swiper-slide>
-      <swiper-slide class="slide">Slide 2</swiper-slide>
-      <swiper-slide class="slide">Slide 3</swiper-slide>
-      <swiper-slide class="slide">Slide 4</swiper-slide>
-      <swiper-slide class="slide">Slide 5</swiper-slide>
-      <swiper-slide class="slide">Slide 6</swiper-slide>
-      <swiper-slide class="slide">Slide 7</swiper-slide>
-      <swiper-slide class="slide">Slide 8</swiper-slide>
-      <swiper-slide class="slide">Slide 9</swiper-slide>
-      <swiper-slide class="slide">Slide 10</swiper-slide>
+      <swiper-slide v-for="num in 10" :key="num" class="py-1"
+        ><MainPosterCard
+      /></swiper-slide>
+      <div
+        class="swiper-button-prev bg-white shadow-3xl rounded-full h-9 w-9 after:text-xs p-0 left-0 swiper-button"
+        slot="button-prev"
+      >
+        <div
+          class="border-t-2 w-3 h-3 border-l-2 -rotate-45 transition-all duration-200 swiper-button__div"
+        ></div>
+      </div>
+      <div
+        class="swiper-button-next bg-white shadow-3xl rounded-full h-9 w-9 after:text-xs p-0 right-0 swiper-button"
+        slot="button-next"
+      >
+        <div
+          class="border-t-2 w-3 h-3 border-l-2 rotate-[135deg] transition-all duration-200 swiper-button__div"
+        ></div>
+      </div>
     </swiper>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import VueAwesomeSwiper from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
-import MainPosterCard from "./MainPosterCard.vue";
-Vue.use(VueAwesomeSwiper);
-
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import MainPosterCard from "@/components/MainPosterCard";
+import "swiper/css/swiper.css";
 
 export default {
   name: "ListItem",
@@ -58,43 +47,54 @@ export default {
   },
   data() {
     return {
-      swiperOptions: {
-        //loop: true,
-        // autoplay:{
-        //   delay:1000
-        // },
-        pagination: {
-          el: ".swiper-pagination",
+      swiperOption: {
+        autoHeight: true,
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: { el: ".swiper-pagination", clickable: true },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          1200: {
+            slidesPerView: 5,
+            spaceBetween: 40,
+          },
         },
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
+        // autoplay: {
+        //   delay: 4000,
+        //   disableOnInteraction: false,
+        // },
       },
     };
   },
 
-  //참조하고 있는 값이 변경될 때마다 정의된 계산식에 따라 값을 출력
   computed: {
     swiper() {
       return this.$refs.mySwiper.$swiper;
     },
   },
 
-  //el이 새로 생성된 vm.$el로 인스턴스가 마운트 된 직후
-  mounted() {
-    //console.log('Current Swiper instance object', this.swiper)
-    //this.swiper.slideTo(3, 1000, false)
-  },
+  mounted() {},
 };
 </script>
 
 <style lang="scss" scoped>
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-weight: bold;
+.swiper-button:hover .swiper-button__div {
+  border-color: #000000;
 }
 </style>

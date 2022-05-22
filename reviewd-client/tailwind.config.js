@@ -21,6 +21,7 @@ module.exports = {
         "login-green": "#11C2CD",
         "light-black": "#404040",
         "primary-gray": "#8B8B8B",
+        "star-yellow": "#FFD84D",
         disabled: "#efefef",
       },
       fontSize: {
@@ -38,6 +39,7 @@ module.exports = {
         15: "60px",
         footer: "440px",
         profile: "142px",
+        "130%": "130%",
       },
       width: {
         profile: "162px",
@@ -53,6 +55,7 @@ module.exports = {
         "3%": "3%",
         "60px": "60px",
         "150%": "150%",
+        "183%": "183.33%",
       },
       keyframes: {
         fadeIn: {

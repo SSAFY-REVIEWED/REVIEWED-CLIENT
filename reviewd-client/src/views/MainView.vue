@@ -1,6 +1,6 @@
 <template>
-  <section class="min-h-screen bg-red-200">
-    <article>
+  <section class="min-h-screen relative mt-10">
+    <article class="mt-10">
       <MainHeader />
     </article>
   </section>
