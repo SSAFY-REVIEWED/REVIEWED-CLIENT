@@ -1,14 +1,14 @@
 <template>
-  <div class="w-full relative mb-6">
-    <h1 class="text-h4 font-semibold">JAEHO님을 위한 강력 추천 영화</h1>
-    <div class="relative mt-6">
-      <swiper class="swiper px-16 bg-white shadow-none" :options="swiperOption">
+  <div class="w-full relative">
+    <h1 class="text-h4 font-semibold">지금 HOT한 영화 리뷰</h1>
+    <div class="mt-6 relative">
+      <swiper class="swiper bg-white shadow-none px-1" :options="swiperOption">
         <swiper-slide v-for="num in 10" :key="num" class="py-1"
-          ><MainPosterCard
+          ><ReviewCard
         /></swiper-slide>
       </swiper>
       <div
-        class="swiper-button-prev bg-white shadow-3xl rounded-full h-9 w-9 after:text-xs p-0 -left-4 swiper-button absolute top-1/2 header__button--prev"
+        class="swiper-button-prev bg-white shadow-3xl rounded-full h-9 w-9 after:text-xs p-0 -left-4 swiper-button swiper__button--prev absolute top-1/2"
         slot="button-prev"
       >
         <div
@@ -16,7 +16,7 @@
         ></div>
       </div>
       <div
-        class="swiper-button-next bg-white shadow-3xl rounded-full h-9 w-9 after:text-xs p-0 -right-4 swiper-button absolute top-1/2 header__button--next"
+        class="swiper-button-next bg-white shadow-3xl rounded-full h-9 w-9 after:text-xs p-0 -right-4 swiper-button swiper__button--next absolute top-1/2"
         slot="button-next"
       >
         <div
@@ -29,7 +29,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import MainPosterCard from "@/components/MainPosterCard";
+import ReviewCard from "@/components/ReviewCard";
 import "swiper/css/swiper.css";
 
 export default {
@@ -37,7 +37,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    MainPosterCard,
+    ReviewCard,
   },
   methods: {
     slideChangeTransitionStart() {
@@ -53,22 +53,14 @@ export default {
         loop: true,
         pagination: { el: ".swiper-pagination", clickable: true },
         breakpoints: {
-          640: {
+          1028: {
             slidesPerView: 2,
             spaceBetween: 20,
           },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-          1200: {
-            slidesPerView: 5,
-            spaceBetween: 30,
-          },
         },
         navigation: {
-          nextEl: ".header__button--next",
-          prevEl: ".header__button--prev",
+          nextEl: ".swiper__button--next",
+          prevEl: ".swiper__button--prev",
         },
         // autoplay: {
         //   delay: 4000,
@@ -88,8 +80,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.swiper-button:hover .swiper-button__div {
-  border-color: #000000;
-}
-</style>
+<style></style>
