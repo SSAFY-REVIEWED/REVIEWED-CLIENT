@@ -67,6 +67,7 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
   document.title = `${to.meta.title} | REVIEWD`;
   if (
+    to.meta.authorized &&
     VueCookies.get("accessToken") === null &&
     VueCookies.get("refreshToken") !== null
   ) {

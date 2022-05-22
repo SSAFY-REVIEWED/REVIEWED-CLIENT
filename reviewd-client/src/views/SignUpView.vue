@@ -42,7 +42,7 @@ import { mapMutations } from "vuex";
 import VueCookies from "vue-cookies";
 import SignupEmail from "@/components/SignupEmail.vue";
 import SignupPassword from "@/components/SignupPassword.vue";
-import { postData, getData } from "@/api/index";
+import { postData } from "@/api/index";
 
 export default {
   name: "singUpView",
@@ -61,7 +61,12 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setLoggingIn", "setUserProfile"]),
+    ...mapMutations([
+      "setLoggingIn",
+      "setUserProfile",
+      "setLoggedIn",
+      "getUser",
+    ]),
 
     setEmail(email) {
       this.email = email;
@@ -86,33 +91,39 @@ export default {
     async signUp(url, body) {
       try {
         const response = await postData(url, body);
-        console.log(response);
         VueCookies.set("accessToken", response.data.access, "2h");
         VueCookies.set("refreshToken", response.data.refresh, "7d");
-        await this.getUser();
+        try {
+          await this.getUser();
+        } catch (err) {
+          console.log(err);
+        }
       } catch (err) {
         console.log(err);
       }
     },
-    async getUser() {
-      try {
-        const response = await getData("USER_INFO");
-        console.log(response);
-        this.setUserProfile(response.data);
-        this.$router.push({ name: "survey" });
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    // async getUser() {
+    //   try {
+    //     const response = await getData("USER_INFO");
+    //     this.setUserProfile(response.data);
+    //     this.setLoggedIn();
+    //     this.$router.push({ name: "survey" });
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
     async onSubmit() {
       const body = {
         email: this.email,
         password: this.password,
         name: this.name,
       };
-      const response = await this.signUp("SIGNUP", body);
-      console.log(response);
-      this.$router.push({ name: "survey" });
+      try {
+        await this.signUp("SIGNUP", body);
+        this.$router.push({ name: "survey" });
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   computed: {},

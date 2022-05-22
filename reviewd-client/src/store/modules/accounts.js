@@ -1,4 +1,5 @@
 import VueCookies from "vue-cookies";
+import { getData } from "@/api/index";
 
 export default {
   state: {
@@ -30,6 +31,18 @@ export default {
         ...profile,
       };
       VueCookies.set("profile", profile);
+    },
+    setLoggedIn: (state) => {
+      state.isLoggedIn = !state.isLoggedIn;
+    },
+    async getUser() {
+      try {
+        const response = await getData("USER_INFO");
+        this.setUserProfile(response.data);
+        this.setLoggedIn();
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   actions: {},
