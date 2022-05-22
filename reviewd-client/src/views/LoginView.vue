@@ -52,7 +52,6 @@ export default {
       if (type === "email") {
         this.email = value;
       } else this.password = value;
-      console.log(this.password, this.email);
       this.setCompleted(!!(this.email && this.password));
     },
     setCompleted(bool) {
