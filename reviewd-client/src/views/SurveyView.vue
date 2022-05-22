@@ -8,7 +8,7 @@
         {{ name }}JAEHO 님의 취향을 분석하고 있습니다.
       </p>
       <div
-        class="mt-14 w-20 h-20  border-8 border-t-transparent animate-spin rounded-full"
+        class="mt-14 w-20 h-20 border-8 border-t-transparent animate-spin rounded-full"
       ></div>
     </article>
     <section
@@ -65,7 +65,7 @@
 
 <script>
 import { mapMutations } from "vuex";
-// import { postData } from "vuex";
+import { postData } from "@/api/index";
 import VueCookies from "vue-cookies";
 
 export default {
@@ -115,11 +115,8 @@ export default {
     async onSubmitSurvey() {
       try {
         this.setLoading();
-        // const response = await postData("SURVEY", this.preferenceGenreList);
-        // console.log(response);
-        setTimeout(() => {
-          this.$router.push({ name: "main" });
-        }, 2000);
+        const response = await postData("SURVEY", this.preferenceGenreList);
+        console.log(response);
       } catch (err) {
         console.log(err);
       }

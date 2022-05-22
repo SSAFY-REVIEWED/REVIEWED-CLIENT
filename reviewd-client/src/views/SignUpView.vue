@@ -42,7 +42,6 @@ import { mapMutations } from "vuex";
 import VueCookies from "vue-cookies";
 import SignupEmail from "@/components/SignupEmail.vue";
 import SignupPassword from "@/components/SignupPassword.vue";
-import { EMAIL_VALIDATION_MESSAGE } from "@/utils/const";
 import { postData, getData } from "@/api/index";
 
 export default {
@@ -53,27 +52,17 @@ export default {
   },
   data() {
     return {
-      email: "ney9083@g.com",
-      password: "dkssud12",
-      passwordCheck: "dkssud12",
-      name: "남녈",
+      email: "",
+      password: "",
+      passwordCheck: "",
+      name: "",
       isValidEmail: false,
       isCheckingEmail: true,
     };
   },
   methods: {
     ...mapMutations(["setLoggingIn", "setUserProfile"]),
-    validateEmail(value) {
-      if (!value) {
-        return EMAIL_VALIDATION_MESSAGE["EMPTY_WARNING"];
-      }
-      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-      if (!regex.test(value)) {
-        return EMAIL_VALIDATION_MESSAGE["INVALID_EMAIL"];
-      }
-      console.log(EMAIL_VALIDATION_MESSAGE["SUCCESS"]);
-      return true;
-    },
+
     setEmail(email) {
       this.email = email;
     },
@@ -94,18 +83,23 @@ export default {
     setName(name) {
       this.name = name;
     },
-    async getUser(url, body) {
+    async signUp(url, body) {
       try {
         const response = await postData(url, body);
-        VueCookies.set("accessToken", response.data.token.access);
-        VueCookies.set("refreshToken", response.data.token.refresh);
-        try {
-          const response = await getData("USER_INFO");
-          this.setUserProfile(response.data);
-          this.$router.push({ name: "survey" });
-        } catch (err) {
-          console.log(err);
-        }
+        console.log(response);
+        VueCookies.set("accessToken", response.data.access, "2h");
+        VueCookies.set("refreshToken", response.data.refresh, "7d");
+        await this.getUser();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getUser() {
+      try {
+        const response = await getData("USER_INFO");
+        console.log(response);
+        this.setUserProfile(response.data);
+        this.$router.push({ name: "survey" });
       } catch (err) {
         console.log(err);
       }
@@ -116,8 +110,9 @@ export default {
         password: this.password,
         name: this.name,
       };
+      const response = await this.signUp("SIGNUP", body);
+      console.log(response);
       this.$router.push({ name: "survey" });
-      await this.getUser("SIGNUP", body);
     },
   },
   computed: {},

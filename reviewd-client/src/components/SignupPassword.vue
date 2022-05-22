@@ -61,6 +61,7 @@
             class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText"
             @input="validatePassword"
             required
+            autofocus
           />
           <span class="floating-label text-primary-gray">비밀번호</span>
           <p

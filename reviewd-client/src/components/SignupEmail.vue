@@ -1,7 +1,7 @@
 <template>
   <article class="w-full">
     <div class="w-3/4 mt-3 mx-auto">
-      <form class="w-full relative" @submit.prevent="onSubmit">
+      <form class="w-full relative" @submit.prevent="onSubmit" method="post">
         <div
           class="bg-white w-full shadow-sign-input h-15 rounded-lg flex px-4 items-center relative"
           :class="{ 'outline outline-2 outline-primary-blue': isValidEmail }"
@@ -84,7 +84,7 @@ export default {
         const res = await postData("GOOGLE_LOGIN", {
           credential: response.credential,
         });
-        console.log(res)
+        console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -105,11 +105,12 @@ export default {
     }, 500),
     validateEmail(email) {
       if (!email) {
-        return EMAIL_VALIDATION_MESSAGE["EMPTY_WARNING"];
+        this.$toast.error(EMAIL_VALIDATION_MESSAGE["EMPTY_WARNING"]);
+        return;
       }
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(email)) {
-        this.$toast(EMAIL_VALIDATION_MESSAGE["INVALID_EMAIL"]);
+        this.$toast.error(EMAIL_VALIDATION_MESSAGE["INVALID_EMAIL"]);
         this.$emit("check_valid_email", false);
         return;
       }
@@ -117,24 +118,22 @@ export default {
     },
     async fetchReduplicatedEmailCheck(email) {
       try {
-        const response = await postData("EMAIL_CHECK", email);
-        console.log(response.data.result);
-        this.checkValidEmailAndAlert(true, "성공");
+        const response = await postData("EMAIL_CHECK", { email });
+        const { message } = response.data;
+        this.checkValidEmailAndAlert(true, message);
         this.setEmail(email);
       } catch (err) {
-        console.log(err);
-        this.checkValidEmailAndAlert(
-          false,
-          EMAIL_VALIDATION_MESSAGE["REDUPLICATED_EMAIL"]
-        );
+        const message = err.response.data.message;
+        this.checkValidEmailAndAlert(false, message);
       }
     },
     checkValidEmailAndAlert(valid, message) {
+      this.$emit("check_valid_email", valid);
       if (valid) {
-        this.$emit("check_valid_email", valid);
+        this.$toast.success(message);
         return;
       }
-      this.$toast(message);
+      this.$toast.error(message);
     },
     setEmail(email) {
       this.$emit("set_email", email);
@@ -143,16 +142,19 @@ export default {
       this.$emit("was_email_validated");
     },
   },
-  mounted() {
-    google.accounts.id.initialize({
+  async mounted() {
+    await google.accounts.id.initialize({
       client_id:
         "132131584079-0kes0ifpft82ms5mthj4g7ihar4emvo1.apps.googleusercontent.com",
       callback: this.handleCredentialResponse,
     });
-    google.accounts.id.renderButton(document.getElementById("buttonDiv"), {
-      theme: "outline",
-      size: "large",
-    });
+    await google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      {
+        theme: "outline",
+        size: "large",
+      }
+    );
   },
 };
 </script>
