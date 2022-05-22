@@ -1,4 +1,5 @@
 import VueCookies from "vue-cookies";
+import { getData } from "@/api/index";
 
 export default {
   state: {
@@ -10,13 +11,15 @@ export default {
     isLoggingIn: (state) => {
       return state.isLoggingIn;
     },
+    isLoggedIn: (state) => {
+      return state.isLoggedIn;
+    },
   },
   mutations: {
     setLoggingIn: (state, $route) => {
       const name = $route?.path;
       if (name === "/signup" || name === "/login" || name === "/survey") {
         state.isLoggingIn = true;
-        return;
       } else state.isLoggingIn = false;
     },
     setUserProfile: (state, data) => {
@@ -30,6 +33,18 @@ export default {
         ...profile,
       };
       VueCookies.set("profile", profile);
+    },
+    setLoggedIn: (state) => {
+      state.isLoggedIn = true;
+    },
+    async getUser() {
+      try {
+        const response = await getData("USER_INFO");
+        this.setUserProfile(response.data);
+        this.setLoggedIn();
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   actions: {},

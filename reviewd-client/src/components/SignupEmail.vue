@@ -27,6 +27,7 @@
             name="email"
             class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white"
             required
+            placeholder=" "
             @input="onValidateDebounce"
           />
           <span class="floating-label text-primary-gray"
@@ -89,10 +90,6 @@ export default {
         console.log(err);
       }
     },
-    handleToken(response) {
-      console.log(response.data);
-      console.log(response);
-    },
     onSubmit() {
       return;
     },
@@ -123,7 +120,7 @@ export default {
         this.checkValidEmailAndAlert(true, message);
         this.setEmail(email);
       } catch (err) {
-        const {message}  = err.response.data;
+        const { message } = err.response.data;
         this.checkValidEmailAndAlert(false, message);
       }
     },
@@ -159,21 +156,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-input:focus ~ .floating-label,
-input:not(:focus):valid ~ .floating-label {
-  top: 6px;
-  bottom: 10px;
-  left: 60px;
-  font-size: 10px;
-  opacity: 1;
-}
-
-.floating-label {
-  position: absolute;
-  pointer-events: none;
-  left: 60px;
-  top: 20px;
-  transition: 0.2s ease all;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -60,6 +60,7 @@
             name="password"
             class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText"
             @input="validatePassword"
+            placeholder=" "
             required
             autofocus
           />
@@ -99,6 +100,7 @@
             class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText"
             required
             @input="validatePasswordCheck"
+            placeholder=" "
           />
           <span class="floating-label text-primary-gray">비밀번호 확인</span>
           <p
@@ -136,6 +138,7 @@
             class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText"
             required
             @input="validateName"
+            placeholder=" "
           />
           <span class="floating-label text-primary-gray">이름</span>
           <p
@@ -259,27 +262,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-input:focus ~ .floating-label,
-input:not(:focus):valid ~ .floating-label {
-  top: 6px;
-  bottom: 10px;
-  left: 60px;
-  font-size: 10px;
-  opacity: 1;
-}
-
-input:focus ~ .validate-info {
-  display: block;
-  opacity: 1;
-  transition: 1s ease all;
-}
-
-.floating-label {
-  position: absolute;
-  pointer-events: none;
-  left: 60px;
-  top: 20px;
-  transition: 0.2s ease all;
-}
-</style>
+<style lang="scss" scoped></style>

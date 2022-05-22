@@ -65,4 +65,22 @@ export default {
     }
   }
 }
+
+input:focus ~ .floating-label,
+input:not(:focus):valid ~ .floating-label,
+input:not(:focus):not(:placeholder-shown) ~ .floating-label {
+  top: 6px;
+  bottom: 10px;
+  left: 60px;
+  font-size: 10px;
+  opacity: 1;
+}
+
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  left: 60px;
+  top: 20px;
+  transition: 0.2s ease all;
+}
 </style>
