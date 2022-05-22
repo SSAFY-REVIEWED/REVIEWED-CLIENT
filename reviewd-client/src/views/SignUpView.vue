@@ -7,11 +7,11 @@
         >
           REVIEWD
         </div>
-        <div
+        <h1
           class="mt-10 flex flex-wrap text-center leading-normal text-h3 bg-gradient-to-r from-primary-blue via-second-blue to-third-blue bg-clip-text transparent text-transparent font-bold"
         >
           환상적인 리뷰의 세계로 들어가 볼까요?
-        </div>
+        </h1>
         <p class="text-p mt-5">REVIEWD를 실제로 경험해보세요.</p>
       </article>
       <SignupEmail
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 import VueCookies from "vue-cookies";
 import SignupEmail from "@/components/SignupEmail.vue";
 import SignupPassword from "@/components/SignupPassword.vue";
@@ -61,12 +61,8 @@ export default {
     };
   },
   methods: {
-    ...mapMutations([
-      "setLoggingIn",
-      "setUserProfile",
-      "setLoggedIn",
-      "getUser",
-    ]),
+    ...mapMutations(["setLoggingIn"]),
+    ...mapActions(["getUser"]),
 
     setEmail(email) {
       this.email = email;
@@ -102,16 +98,7 @@ export default {
         console.log(err);
       }
     },
-    // async getUser() {
-    //   try {
-    //     const response = await getData("USER_INFO");
-    //     this.setUserProfile(response.data);
-    //     this.setLoggedIn();
-    //     this.$router.push({ name: "survey" });
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+
     async onSubmit() {
       const body = {
         email: this.email,

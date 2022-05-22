@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 import SignInput from "@/components/SignInput.vue";
 import SignButton from "@/components/SignButton.vue";
 import GoogleLogin from "@/components/GoogleLogin.vue";
@@ -47,7 +47,8 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setLoggingIn", "getUser"]),
+    ...mapMutations(["setLoggingIn"]),
+    ...mapActions(["getUser"]),
     setSignValue({ value, type }) {
       if (type === "email") {
         this.email = value;
