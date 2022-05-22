@@ -171,6 +171,10 @@ export default {
   },
   computed: {
     ...mapGetters(["isLoggedIn"]),
+    map() {
+      console.log(this.isLoggedIn);
+      return this.isLoggedIn;
+    },
   },
   watch: {
     isProfileMenuOn() {

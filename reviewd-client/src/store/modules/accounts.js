@@ -17,10 +17,12 @@ export default {
   },
   mutations: {
     setLoggingIn: (state, $route) => {
-      const name = $route?.path;
+      const name = $route.path;
       if (name === "/signup" || name === "/login" || name === "/survey") {
         state.isLoggingIn = true;
-      } else state.isLoggingIn = false;
+        return;
+      }
+      state.isLoggingIn = false;
     },
     setUserProfile: (state, data) => {
       const profile = {
@@ -37,15 +39,16 @@ export default {
     setLoggedIn: (state) => {
       state.isLoggedIn = true;
     },
-    async getUser() {
+  },
+  actions: {
+    async getUser({ commit }) {
+      commit("setLoggedIn");
       try {
         const response = await getData("USER_INFO");
-        this.setUserProfile(response.data);
-        this.setLoggedIn();
+        commit("serUserProfile", response.data);
       } catch (err) {
         console.log(err);
       }
     },
   },
-  actions: {},
 };

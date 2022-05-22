@@ -3,7 +3,6 @@
     <div class="tip">→ Resize the browser window ←</div>
     <swiper
       class="swiper"
-      :modules="modules"
       :slides-per-view="1"
       :space-between="10"
       :pagination="{ clickable: true }"
@@ -17,12 +16,12 @@
           spaceBetween: 40,
         },
         '1024': {
-          slidesPerView: 5,
+          slidesPerView: 10,
           spaceBetween: 50,
         },
       }"
     >
-      <swiper-slide class="slide">Slide 1</swiper-slide>
+      <swiper-slide class="slide"><MainPosterCard /></swiper-slide>
       <swiper-slide class="slide">Slide 2</swiper-slide>
       <swiper-slide class="slide">Slide 3</swiper-slide>
       <swiper-slide class="slide">Slide 4</swiper-slide>
@@ -40,6 +39,7 @@
 import Vue from "vue";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import MainPosterCard from "./MainPosterCard.vue";
 Vue.use(VueAwesomeSwiper);
 
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
@@ -49,6 +49,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
+    MainPosterCard,
   },
   methods: {
     slideChangeTransitionStart() {

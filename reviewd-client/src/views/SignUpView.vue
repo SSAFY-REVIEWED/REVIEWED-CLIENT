@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 import VueCookies from "vue-cookies";
 import SignupEmail from "@/components/SignupEmail.vue";
 import SignupPassword from "@/components/SignupPassword.vue";
@@ -61,12 +61,8 @@ export default {
     };
   },
   methods: {
-    ...mapMutations([
-      "setLoggingIn",
-      "setUserProfile",
-      "setLoggedIn",
-      "getUser",
-    ]),
+    ...mapMutations(["setLoggingIn"]),
+    ...mapActions(["getUser"]),
 
     setEmail(email) {
       this.email = email;
@@ -102,16 +98,7 @@ export default {
         console.log(err);
       }
     },
-    // async getUser() {
-    //   try {
-    //     const response = await getData("USER_INFO");
-    //     this.setUserProfile(response.data);
-    //     this.setLoggedIn();
-    //     this.$router.push({ name: "survey" });
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+
     async onSubmit() {
       const body = {
         email: this.email,
