@@ -123,7 +123,7 @@ export default {
         this.checkValidEmailAndAlert(true, message);
         this.setEmail(email);
       } catch (err) {
-        const message = err.response.data.message;
+        const {message}  = err.response.data;
         this.checkValidEmailAndAlert(false, message);
       }
     },

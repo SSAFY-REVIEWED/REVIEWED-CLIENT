@@ -116,7 +116,10 @@ export default {
       try {
         this.setLoading();
         const response = await postData("SURVEY", this.preferenceGenreList);
-        console.log(response);
+        //TODO: 삭제하기
+        console.log(response)
+        this.$router.push({ name: "main" });
+        // TODO: Error handling
       } catch (err) {
         console.log(err);
       }

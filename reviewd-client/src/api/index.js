@@ -7,6 +7,7 @@ axios.defaults.baseURL = "http://localhost:8000/api/v1";
 axios.interceptors.request.use(
   (config) => {
     const token = VueCookies.get("accessToken");
+    //TODO: 삭제하기
     console.log(token);
 
     if (token) {
@@ -36,7 +37,7 @@ export const getData = async (url) => {
 };
 
 export const postData = async (url, body) => {
-  const res = await axios.post("http://localhost:8000/api/v1" + URL[url], body);
+  const res = await axios.post(URL[url], body);
   return res;
 };
 
@@ -48,6 +49,7 @@ axios.interceptors.response.use(
     const errorAPI = error.config;
     if (error.response.data.status === 401 && errorAPI.retry === undefined) {
       errorAPI.retry = true;
+      //TODO: 삭제하기
       console.log("토큰이 이상한 오류일 경우");
       await getNewAccessToken();
       return await axios(errorAPI);
