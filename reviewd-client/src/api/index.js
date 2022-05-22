@@ -28,11 +28,15 @@ const URL = {
   SURVEY: "/survey/",
   GOOGLE_LOGIN: "/google/callback/",
   GET_ACCESS: "/access-token/",
+  MAIN_MOVIES: "/main/",
 };
 
-export const getData = async (url) => {
-  console.log(URL[url]);
-  const res = await axios.get(URL[url]);
+export const getData = async (url, query) => {
+  if (query) {
+    const res = await axios.get(URL[url]);
+    return res;
+  }
+  const res = await axios.get(`${URL[url]}?page=${query}`);
   return res;
 };
 

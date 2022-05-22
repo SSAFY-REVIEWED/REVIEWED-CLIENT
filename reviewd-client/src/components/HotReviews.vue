@@ -31,6 +31,7 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import ReviewCard from "@/components/ReviewCard";
 import "swiper/css/swiper.css";
+import { getData } from "@/api/index.js";
 
 export default {
   name: "ListItem",
@@ -39,11 +40,7 @@ export default {
     SwiperSlide,
     ReviewCard,
   },
-  methods: {
-    slideChangeTransitionStart() {
-      console.log(this.swiper.activeIndex); //현재 index값 얻기
-    },
-  },
+
   data() {
     return {
       swiperOption: {
@@ -62,21 +59,40 @@ export default {
           nextEl: ".swiper__button--next",
           prevEl: ".swiper__button--prev",
         },
-        // autoplay: {
-        //   delay: 4000,
-        //   disableOnInteraction: false,
-        // },
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
       },
+      moviesList: [],
+      page: 1,
+      hasMoreMovieList: true,
     };
   },
-
+  methods: {
+    async getMovieList() {
+      try {
+        const response = await getData("MAIN_MOVIES", this.page);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    setHasMoreMovieList() {
+      this.hasMoreMovieList = false;
+    },
+    increasePage() {
+      this.page++;
+    },
+  },
   computed: {
     swiper() {
       return this.$refs.mySwiper.$swiper;
     },
   },
-
-  mounted() {},
+  mounted() {
+    this.getMovieList();
+  },
 };
 </script>
 
