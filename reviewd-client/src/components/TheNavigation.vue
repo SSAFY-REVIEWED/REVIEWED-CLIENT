@@ -10,7 +10,10 @@
           </div>
         </router-link>
       </div>
-      <ul class="flex items-center w-full py-2.5 text-light-black" v-if="false">
+      <ul
+        class="flex items-center w-full py-2.5 text-light-black"
+        v-if="isLoggedIn"
+      >
         <li class="ml-3% text-xsm font-semibold">
           <router-link :to="{ name: 'home' }">MOVIE</router-link>
         </li>
@@ -123,7 +126,7 @@
         </li>
       </ul>
 
-      <ul class="flex overflow-hidden items-center ml-auto" v-if="true">
+      <ul class="flex overflow-hidden items-center ml-auto" v-if="!isLoggedIn">
         <li>
           <router-link :to="{ name: 'signup' }">
             <button
@@ -148,6 +151,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "theNavigation",
   data() {
@@ -162,6 +166,9 @@ export default {
     makeProfileMenuOff() {
       this.isProfileMenuOn = false;
     },
+  },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
   },
   watch: {
     isProfileMenuOn() {

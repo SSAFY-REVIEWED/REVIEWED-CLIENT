@@ -11,13 +11,15 @@ export default {
     isLoggingIn: (state) => {
       return state.isLoggingIn;
     },
+    isLoggedIn: (state) => {
+      return state.isLoggedIn;
+    },
   },
   mutations: {
     setLoggingIn: (state, $route) => {
       const name = $route?.path;
       if (name === "/signup" || name === "/login" || name === "/survey") {
         state.isLoggingIn = true;
-        return;
       } else state.isLoggingIn = false;
     },
     setUserProfile: (state, data) => {
@@ -33,7 +35,7 @@ export default {
       VueCookies.set("profile", profile);
     },
     setLoggedIn: (state) => {
-      state.isLoggedIn = !state.isLoggedIn;
+      state.isLoggedIn = true;
     },
     async getUser() {
       try {

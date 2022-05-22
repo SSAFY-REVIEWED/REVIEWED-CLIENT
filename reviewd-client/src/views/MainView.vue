@@ -1,13 +1,19 @@
 <template>
-  <div>Main</div>
+  <div class="min-h-screen bg-red-200">Main</div>
 </template>
 
 <script>
-export default {
+import { mapMutations } from "vuex";
 
-}
+export default {
+  name: "mainView",
+  methods: {
+    ...mapMutations(["setLoggingIn"]),
+  },
+  created() {
+    this.setLoggingIn(this.$route);
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style lang="scss" scoped></style>
