@@ -3,6 +3,8 @@ module.exports = {
   theme: {
     maxWidth: {
       container: "1440px",
+      480: "480px",
+      650: "650px",
     },
     extend: {
       colors: {
@@ -19,11 +21,12 @@ module.exports = {
         "login-green": "#11C2CD",
         "light-black": "#404040",
         "primary-gray": "#8B8B8B",
+        disabled: "#efefef",
       },
       fontSize: {
         h1: ["60px", "48px"],
         h2: ["50px", "34px"],
-        h3: ["38px", "28px"],
+        h3: "38px",
         h4: ["22px", "22px"],
         h5: ["20px", "18px"],
         p: ["16px", "16px"],
@@ -38,14 +41,17 @@ module.exports = {
       },
       width: {
         profile: "162px",
+        55: "55px",
       },
       boxShadow: {
         "inner-input": "inset 0px 2px 4px rgba(0, 0, 0, 0.25);",
         "3xl":
           "rgb(0 0 0 / 20%) 0px 4px 20px, rgb(255 255 255 / 20%) 0px 0px 0px 1px inset",
+        "sign-input": "0px 4px 4px rgba(0, 0, 0, 0.25)",
       },
       spacing: {
         "3%": "3%",
+        "60px": "60px",
       },
       keyframes: {
         fadeIn: {

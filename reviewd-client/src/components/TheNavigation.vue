@@ -10,7 +10,7 @@
           </div>
         </router-link>
       </div>
-      <ul class="flex items-center w-full py-2.5 text-light-black" v-if="true">
+      <ul class="flex items-center w-full py-2.5 text-light-black" v-if="false">
         <li class="ml-3% text-xsm font-semibold">
           <router-link :to="{ name: 'home' }">MOVIE</router-link>
         </li>
@@ -123,9 +123,9 @@
         </li>
       </ul>
 
-      <ul class="flex overflow-hidden items-center ml-auto" v-if="false">
+      <ul class="flex overflow-hidden items-center ml-auto" v-if="true">
         <li>
-          <router-link :to="{ name: '#' }">
+          <router-link :to="{ name: 'signup' }">
             <button
               class="bg-signup-green text-white w-fit p-3 h-11 text-h4 rounded-md font-bold"
             >
@@ -134,7 +134,7 @@
           </router-link>
         </li>
         <li class="ml-6">
-          <router-link :to="{ name: '#' }">
+          <router-link :to="{ name: 'login' }">
             <button
               class="bg-login-green text-white w-fit p-3 h-11 text-h4 rounded-md font-bold"
             >
@@ -207,21 +207,6 @@ export default {
     color: white;
     background: #303030;
     left: 52px;
-  }
-}
-
-.tooltip {
-  .tooltiptext {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 300ms;
-  }
-  &:hover {
-    .tooltiptext {
-      visibility: visible;
-      opacity: 1;
-      transition: all 300ms;
-    }
   }
 }
 </style>
