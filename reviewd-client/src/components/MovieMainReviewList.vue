@@ -10,7 +10,9 @@
       />
     </div>
     <div v-if="reviewCount > 4" class="mx-auto w-full relative flex">
-      <button class="mx-auto relative">모든 리뷰 보러가기 ></button>
+      <button class="mx-auto relative" @click="goReviewPage">
+        모든 리뷰 보러가기 >
+      </button>
     </div>
   </div>
 </template>
@@ -29,9 +31,13 @@ export default {
   },
   methods: {
     goReviewPage() {
-      this.$router.push({name: "reviews", params: {}})
-    }
-  }
+      this.$router.push({
+        name: "reviewList",
+        params: { movieId: 355 },
+        query: { query: "like" },
+      });
+    },
+  },
 };
 </script>
 
