@@ -21,6 +21,7 @@ module.exports = {
         "login-green": "#11C2CD",
         "light-black": "#404040",
         "primary-gray": "#8B8B8B",
+        "light-gray": "#F4F4F4",
         "star-yellow": "#FFD84D",
         disabled: "#efefef",
       },
@@ -66,10 +67,15 @@ module.exports = {
           from: { opacity: 1 },
           to: { opacity: 0 },
         },
+        rotate: {
+          from: { rotate: 0 },
+          to: { rotate: 90 },
+        },
       },
       animation: {
         fadeIn: "fadeIn 300ms ease-in-out",
         fadeOut: "fadeOut 300ms ease-in-out",
+        rotate: "rotate 1000ms linear",
       },
     },
   },
