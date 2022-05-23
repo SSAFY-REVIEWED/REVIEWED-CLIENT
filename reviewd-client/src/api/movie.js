@@ -43,6 +43,10 @@ const MovieAPI = {
   async deleteReviewComment(reviewId, commentId) {
     return axios.delete(MOVIE_URL.REVIEW_COMMENT(reviewId, commentId));
   },
+  async getYoutube(url, params) {
+    console.log(params);
+    return axios.get(url, { params });
+  },
 };
 
 const MOVIE_URL = {

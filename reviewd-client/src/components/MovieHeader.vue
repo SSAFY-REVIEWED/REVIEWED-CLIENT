@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div
-      class="relative w-[1440px] -left-10 m-0 mx-auto h-[850px] overflow-hidden bg-gradient-to-b from-transparent to-black bg-cover bg-center"
+      class="relative w-full -left-10 m-0 mx-auto h-[850px] overflow-hidden bg-gradient-to-b from-transparent to-black bg-cover bg-center"
       :style="{
         backgroundImage: 'url(' + movieData.posterUrl + ')',
       }"
