@@ -66,10 +66,15 @@ module.exports = {
           from: { opacity: 1 },
           to: { opacity: 0 },
         },
+        rotate: {
+          from: { rotate: 0 },
+          to: { rotate: 90 },
+        },
       },
       animation: {
         fadeIn: "fadeIn 300ms ease-in-out",
         fadeOut: "fadeOut 300ms ease-in-out",
+        rotate: "rotate 1000ms linear",
       },
     },
   },

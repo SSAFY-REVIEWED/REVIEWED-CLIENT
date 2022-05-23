@@ -17,7 +17,7 @@ export default {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci odit tempore aut? Quod quas mollitia quaerat facere corrupti eveniet, omnis adipisci inventore iure aut, odit nobis molestiae in ipsam. Sunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore rem, unde, aspernatur blanditiis ab necessitatibus minima, asperiores at eaque maiores saepe ducimus voluptate officia fuga reprehenderit provident. Recusandae, aperiam voluptates. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto minus deserunt dolor autem. Quod magni fugiat facilis repellat inventore perspiciatis illo error itaque! Voluptatum expedita laudantium id repellat, magnam alias!",
       rates: 8.7,
-      rate: 0,
+      rate: 3,
       like: false,
     },
     reviewList: [],
@@ -65,17 +65,17 @@ export default {
         console.log(err);
       }
     },
-    async likeMovie({ commit }, movieId) {
+    async likeMovie({ commit, state }) {
       try {
-        await MovieAPI.likeMovie(movieId);
-        commit("setMovieData", { like: !this.movieData.like });
+        await MovieAPI.likeMovie(state.movieId);
+        commit("setMovieData", { like: !state.movieData.like });
       } catch (err) {
         console.log(err);
       }
     },
-    async rateMovie({ commit }, { movieId, body }) {
+    async rateMovie({ commit, state }, { body }) {
       try {
-        const response = await MovieAPI.rateMovie(movieId, body);
+        const response = await MovieAPI.rateMovie(state.movieId, body);
         const { rates } = response.data;
         commit("setMovieData", { rates, body });
       } catch (err) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-red-200 relative">
+  <div class="min-h-screen relative">
     <MovieHeader :movieData="movieData" />
   </div>
 </template>
