@@ -84,7 +84,7 @@ export default {
       rate: 7.7,
       like: false,
     },
-    
+
     reviewList: [],
     myReview: {
       reviewId: 1,
@@ -93,7 +93,7 @@ export default {
       userProfileImg:
         "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
       rate: 8.7,
-      likes: 77,
+      likes: 76,
       like: true,
       title: "범죄도시2",
       replyCount: "72",
@@ -120,7 +120,16 @@ export default {
     setReviewList(state, reviewList) {
       state.reviewList = [reviewList];
     },
-    changeReviewListLike(state, index) {
+    changeLikesOfReviewList(state, index) {
+      if (index === -1) {
+        state.myReview.like = !state.myReview.like;
+        if (state.myReview.like) {
+          state.myReview.likes++;
+          return;
+        }
+        state.myReview.likes--;
+        return;
+      }
       state.reviewList[index].like = !state.reviewList[index].like;
       if (state.reviewList[index].like) {
         state.reviewList[index].likes++;
@@ -195,10 +204,10 @@ export default {
         console.log(err);
       }
     },
-    async likeReview({ commit }, { reviewId, body, index }) {
+    async likeReview({ commit }, { reviewId, like, index }) {
       try {
-        await MovieAPI.likeReview(reviewId, body);
-        commit("changeReviewListLike", index);
+        await MovieAPI.likeReview(reviewId, { like });
+        commit("changeLikesOfReviewList", index);
       } catch (err) {
         console.log(err);
       }

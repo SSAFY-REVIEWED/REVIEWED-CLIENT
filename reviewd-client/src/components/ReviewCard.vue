@@ -31,7 +31,10 @@
         </div>
       </div>
       <div class="flex relative">
-        <button class="border-r-2 border-light-black px-4">
+        <button
+          class="border-r-2 border-light-black px-4"
+          v-if="profile.userId === review.userId"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5 inline"
@@ -43,7 +46,7 @@
             /></svg
           >수정
         </button>
-        <button class="px-4">
+        <button class="px-4" v-if="profile.userId === review.userId">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 inline"
@@ -59,17 +62,33 @@
             /></svg
           >삭제
         </button>
-        <button class="px-4">
+        <button class="px-4" @click="toggleLikes">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5 inline"
             viewBox="0 0 20 20"
             fill="currentColor"
+            v-if="this.review.like"
           >
             <path
               fill-rule="evenodd"
               d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
               clip-rule="evenodd"
+            />
+          </svg>
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 inline"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
             />
           </svg>
           {{ review.likes }}
@@ -109,7 +128,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "reviewCard",
   props: {
@@ -120,19 +139,44 @@ export default {
   data() {
     return {
       spoiler: null,
+      // likes: null,
+      // like: null,
     };
   },
   methods: {
+    ...mapActions(["likeReview"]),
     setSpoiler() {
       this.spoiler = this.review.spoiler;
     },
+    // setLikes() {
+    //   this.likes = this.review.likes;
+    //   this.like = this.review.like;
+    // },
     toggleSpoiler() {
       this.spoiler = !this.spoiler;
     },
+    async toggleLikes() {
+      // if (this.like) {
+      //   this.like = !this.like;
+      //   this.likes--;
+      // } else {
+      //   this.like = !this.like;
+      //   this.likes++;
+      // }
+
+      await this.likeReview({
+        reviewId: this.review.reviewId,
+        like: !this.review.like,
+        index: -1,
+      });
+    },
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["profile"]),
+  },
   mounted() {
     this.setSpoiler();
+    // this.setLikes();
   },
 };
 </script>
