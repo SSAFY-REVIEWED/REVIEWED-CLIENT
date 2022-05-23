@@ -118,7 +118,7 @@
     </div>
     <div class="mt-5 relative">
       <button
-        class="absolute w-full h-full font-bold z-50"
+        class="absolute w-full h-full font-bold z-40"
         @click="toggleSpoiler"
         v-if="spoiler"
       >

@@ -11,6 +11,7 @@
       :actors="movieData.actors"
       :directors="movieData.directors"
     />
+    <MovieMainReviewList />
   </div>
 </template>
 
@@ -20,6 +21,7 @@ import ReviewCard from "@/components/ReviewCard";
 import MovieDescription from "@/components/MovieDescription";
 import MovieYoutube from "@/components/MovieYoutube";
 import PerformerList from "@/components/PerformerList";
+import MovieMainReviewList from "@/components/MovieMainReviewList";
 
 export default {
   name: "movieMain",
@@ -28,6 +30,7 @@ export default {
     MovieDescription,
     MovieYoutube,
     PerformerList,
+    MovieMainReviewList,
   },
   methods: {
     ...mapActions([]),

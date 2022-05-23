@@ -10,6 +10,7 @@ import MainView from "@/views/MainView";
 import ChallengeView from "@/views/ChallengeView";
 import RankView from "@/views/RankView";
 import MovieView from "@/views/MovieView";
+import MovieReviewListView from "@/views/MovieReviewListView";
 
 Vue.use(VueRouter);
 
@@ -78,11 +79,20 @@ const routes = [
     },
   },
   {
-    path: "/movie/:movieId",
+    path: "/movies/:movieId",
     name: "movie",
     component: MovieView,
     meta: {
       title: "Movie",
+      authorized: false,
+    },
+  },
+  {
+    path: "/movies/:movieId/reviews",
+    name: "reviewList",
+    component: MovieReviewListView,
+    meta: {
+      title: "Reviews",
       authorized: false,
     },
   },

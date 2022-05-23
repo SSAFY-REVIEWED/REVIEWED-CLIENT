@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "movieReviewsView",
+  name: "movieReviewListView",
 };
 </script>
 
