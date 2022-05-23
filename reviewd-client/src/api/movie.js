@@ -10,13 +10,13 @@ const MovieAPI = {
   async rateMovie(movieId, body) {
     return axios.post(MOVIE_URL.MOVIE_RATE(movieId), body);
   },
-  async getMovieReviews(movieId) {
-    return axios.get(MOVIE_URL.MOVIE_REVIEWS(movieId));
+  async getMovieReviewList(movieId) {
+    return axios.get(MOVIE_URL.MOVIE_REVIEW_LIST(movieId));
   },
-  async createMovieReviews(movieId, body) {
-    return axios.post(MOVIE_URL.MOVIE_REVIEWS(movieId), body);
+  async createMovieReview(movieId, body) {
+    return axios.post(MOVIE_URL.MOVIE_REVIEW_LIST(movieId), body);
   },
-  async getMovieAllReviews(movieId, query, page) {
+  async getMovieAllReviewList(movieId, query, page) {
     return axios.get(MOVIE_URL.REVIEW_LIST(movieId, query, page));
   },
   async getReview(reviewId) {
