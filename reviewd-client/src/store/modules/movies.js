@@ -116,6 +116,7 @@ export default {
     },
     setMyReview(state, review) {
       state.myReview = review;
+      console.log(Object.keys(state.myReview));
     },
     setReviewList(state, reviewList) {
       state.reviewList = [reviewList];

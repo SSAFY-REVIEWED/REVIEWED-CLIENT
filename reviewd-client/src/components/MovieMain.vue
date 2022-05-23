@@ -1,6 +1,10 @@
 <template>
   <div class="w-full bg-red-400">
-    <ReviewCard v-if="Object.keys(myReview)" :review="myReview" :index="-1" />
+    <ReviewCard
+      v-if="Object.keys(myReview).length"
+      :review="myReview"
+      :index="-1"
+    />
   </div>
 </template>
 
@@ -17,6 +21,11 @@ export default {
   },
   computed: {
     ...mapGetters(["myReview", "reviewList"]),
+  },
+  watch: {
+    myReview() {
+      console.log(Object.keys(this.myReview));
+    },
   },
 };
 </script>

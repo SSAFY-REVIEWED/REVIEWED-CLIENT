@@ -82,20 +82,25 @@ export default {
       title: "",
       content: "",
       spoiler: false,
+      reviewId: null,
     };
   },
   methods: {
-    ...mapActions(["createMovieReview", "editReview", "getMovieReviewList"]),
+    ...mapActions([
+      "createMovieReview",
+      "editReview",
+      "getMovieReviewList",
+    ]),
     async updateMovieReview() {
       const body = {
         title: this.title,
         content: this.content,
         spoiler: this.spoiler,
-        reviewId: this.review.reviewId,
+        reviewId: this.reviewId,
       };
       if (Object.keys(this.review).length) {
         try {
-          await this.editReview({ reviewId: this.review.reviewId, body });
+          await this.editReview({ reviewId: this.reviewId, body });
           await this.getMovieReviewList(this.$route.params.movieId);
           this.$emit("close-modal");
         } catch (err) {
@@ -123,7 +128,7 @@ export default {
     },
   },
   mounted() {
-    this.setReviewData();
+    this.setReviewData(this.reviewId);
   },
 };
 </script>

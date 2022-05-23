@@ -47,7 +47,11 @@
             /></svg
           >수정
         </button>
-        <button class="px-4" v-if="profile.userId === review.userId">
+        <button
+          class="px-4"
+          v-if="profile.userId === review.userId"
+          @click="deleteMyReview"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 inline"
@@ -157,7 +161,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["likeReview"]),
+    ...mapActions(["likeReview", "deleteReview"]),
     setSpoiler() {
       this.spoiler = this.review.spoiler;
     },
@@ -170,6 +174,11 @@ export default {
         like: !this.review.like,
         index: this.index,
       });
+    },
+    async deleteMyReview() {
+      if (confirm("정말로 삭제하실건가요?")) {
+        await this.deleteReview(this.review.reviewId);
+      }
     },
   },
   computed: {
