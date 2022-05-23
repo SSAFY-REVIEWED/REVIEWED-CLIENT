@@ -3,7 +3,7 @@ import MovieAPI from "@/api/movie";
 export default {
   state: {
     dataReady: false,
-    movieId: "",
+    movieId: "1",
     movieData: {
       title: "범죄도시2",
       date: "2022-05-03",
@@ -21,7 +21,18 @@ export default {
       like: false,
     },
     reviewList: [],
-    myReview: {},
+    myReview: {
+      reviewId: 1,
+      userId: 1,
+      likes: 77,
+      like: true,
+      title: "범죄도시2",
+      replyCount: "72",
+      created_at: "2020-01-05",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.",
+      spoiler: true,
+    },
   },
   getters: {
     movieData: (state) => state.movieData,
@@ -66,9 +77,9 @@ export default {
       }
     },
     async likeMovie({ commit, state }) {
+      commit("setMovieData", { like: !state.movieData.like });
       try {
         await MovieAPI.likeMovie(state.movieId);
-        commit("setMovieData", { like: !state.movieData.like });
       } catch (err) {
         console.log(err);
       }
@@ -97,9 +108,9 @@ export default {
         console.log(err);
       }
     },
-    async createMovieReview({ commit }, { movieId, body }) {
+    async createMovieReview({ commit, state }, { body }) {
       try {
-        const response = await MovieAPI.createMovieReview(movieId, body);
+        const response = await MovieAPI.createMovieReview(state.movieId, body);
         const { review } = response.data;
         commit("setMyReview", review);
       } catch (err) {

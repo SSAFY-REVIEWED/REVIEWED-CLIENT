@@ -53,11 +53,11 @@ const MOVIE_URL = {
   MOVIE_REVIEW_LIST: (movieId) => `/movies/${movieId}/reviews/`,
   REVIEW_LIST: (movieId, query, page) =>
     `/movies/${movieId}/reviews?query=${query}&page=${page}/`,
-  REVIEW: (reviewId) => `/reviews/${reviewId}`,
+  REVIEW: (reviewId) => `/reviews/${reviewId}/`,
   REVIEW_LIKE: (reviewId) => `/reviews/${reviewId}/likes/`,
   REVIEW_COMMENT_LIST: (reviewId) => `/reviews/${reviewId}/comments/`,
   REVIEW_COMMENT: (reviewId, commentId) =>
-    `/reviews/${reviewId}/comments/${commentId}`,
+    `/reviews/${reviewId}/comments/${commentId}/`,
 };
 
 export default MovieAPI;
