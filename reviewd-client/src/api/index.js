@@ -20,7 +20,7 @@ axios.interceptors.request.use(
   }
 );
 
-const URL = {
+const ACCOUNTS_URL = {
   LOGIN: "/login/",
   SIGNUP: "/signup/",
   USER_INFO: "/user-info/",
@@ -28,20 +28,19 @@ const URL = {
   SURVEY: "/survey/",
   GOOGLE_LOGIN: "/google/callback/",
   GET_ACCESS: "/access-token/",
-  MAIN_MOVIES: "/main/",
 };
 
 export const getData = async (url, query) => {
-  if (query) {
-    const res = await axios.get(URL[url]);
+  if (!query) {
+    const res = await axios.get(ACCOUNTS_URL[url]);
     return res;
   }
-  const res = await axios.get(`${URL[url]}?page=${query}`);
+  const res = await axios.get(`${ACCOUNTS_URL[url]}?page=${query}`);
   return res;
 };
 
 export const postData = async (url, body) => {
-  const res = await axios.post(URL[url], body);
+  const res = await axios.post(ACCOUNTS_URL[url], body);
   return res;
 };
 
