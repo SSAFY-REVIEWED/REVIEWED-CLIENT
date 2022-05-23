@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <router-link :to="{ name: 'movie', params: { movieId: 1 } }">
+    <router-link :to="{ name: 'movie', params: { movieId: 335787 } }">
       <div
         class="bg-white relative w-full h-0 overflow-hidden pb-183% rounded-lg shadow-md"
       >

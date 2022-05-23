@@ -4,7 +4,7 @@
     <div class="mt-6 relative">
       <swiper class="swiper bg-white shadow-none px-1" :options="swiperOption">
         <swiper-slide v-for="num in 10" :key="num" class="py-1"
-          ><ReviewCard
+          ><PosterReviewCard
         /></swiper-slide>
       </swiper>
       <div
@@ -29,7 +29,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import ReviewCard from "@/components/ReviewCard";
+import PosterReviewCard from "@/components/PosterReviewCard";
 import "swiper/css/swiper.css";
 import { getData } from "@/api/index.js";
 
@@ -38,7 +38,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    ReviewCard,
+    PosterReviewCard,
   },
 
   data() {

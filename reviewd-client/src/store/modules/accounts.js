@@ -5,7 +5,12 @@ export default {
   state: {
     isLoggingIn: false,
     isLoggedIn: VueCookies.get("accessToken") ? true : false,
-    profile: VueCookies.get("profile") || {},
+    profile: VueCookies.get("profile") || {
+      userId: 1,
+      name: "JAEHO",
+      profileImg:
+        "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
+    },
   },
   getters: {
     isLoggingIn: (state) => {
@@ -14,6 +19,7 @@ export default {
     isLoggedIn: (state) => {
       return state.isLoggedIn;
     },
+    profile: (state) => state.profile,
   },
   mutations: {
     setLoggingIn: (state, $route) => {
@@ -28,7 +34,7 @@ export default {
       const profile = {
         name: data.name,
         profileImg: data.profile_img,
-        user_id: data.user_id,
+        userId: data.user_id,
       };
       state.profile = {
         ...state.profile,

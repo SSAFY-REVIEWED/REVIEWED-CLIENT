@@ -1,11 +1,13 @@
 <template>
   <div class="min-h-screen relative">
-    <MovieHeader :movieData="movieData" />
+    <MovieHeader />
+    <MovieMain />
   </div>
 </template>
 
 <script>
 import MovieHeader from "@/components/MovieHeader";
+import MovieMain from "@/components/MovieMain";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
@@ -15,19 +17,14 @@ export default {
   },
   components: {
     MovieHeader,
+    MovieMain,
   },
   methods: {
     ...mapActions(["getMovieDetail"]),
     ...mapMutations(["setMovieId", "isDataReady"]),
   },
   computed: {
-    ...mapGetters([
-      "movieData",
-      "reviewList",
-      "myReview",
-      "movieId",
-      "dataReady",
-    ]),
+    ...mapGetters(["reviewList", "myReview", "movieId", "dataReady"]),
   },
   created() {
     this.setMovieId(this.$route.params);
