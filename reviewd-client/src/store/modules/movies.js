@@ -95,7 +95,7 @@ export default {
       rate: 8.7,
       likes: 76,
       like: true,
-      title: "범죄도시2",
+      title: "마더테레사",
       replyCount: "72",
       created_at: "2020-01-05",
       content:

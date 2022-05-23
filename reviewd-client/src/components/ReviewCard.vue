@@ -34,6 +34,7 @@
         <button
           class="border-r-2 border-light-black px-4"
           v-if="profile.userId === review.userId"
+          @click="isModalViewed = true"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -124,23 +125,35 @@
         {{ review.content }}
       </p>
     </div>
+    <ModalView
+      v-if="isModalViewed"
+      @close-modal="isModalViewed = false"
+      :review="review"
+    >
+    </ModalView>
   </article>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import ModalView from "@/components/ModalView";
 export default {
   name: "reviewCard",
+  components: {
+    ModalView,
+  },
   props: {
     review: {
       type: Object,
+    },
+    index: {
+      type: Number,
     },
   },
   data() {
     return {
       spoiler: null,
-      // likes: null,
-      // like: null,
+      isModalViewed: false,
     };
   },
   methods: {
@@ -148,26 +161,14 @@ export default {
     setSpoiler() {
       this.spoiler = this.review.spoiler;
     },
-    // setLikes() {
-    //   this.likes = this.review.likes;
-    //   this.like = this.review.like;
-    // },
     toggleSpoiler() {
       this.spoiler = !this.spoiler;
     },
     async toggleLikes() {
-      // if (this.like) {
-      //   this.like = !this.like;
-      //   this.likes--;
-      // } else {
-      //   this.like = !this.like;
-      //   this.likes++;
-      // }
-
       await this.likeReview({
         reviewId: this.review.reviewId,
         like: !this.review.like,
-        index: -1,
+        index: this.index,
       });
     },
   },
@@ -176,7 +177,6 @@ export default {
   },
   mounted() {
     this.setSpoiler();
-    // this.setLikes();
   },
 };
 </script>

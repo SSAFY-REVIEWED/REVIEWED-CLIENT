@@ -69,11 +69,13 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "modalView",
-  computed: {
-    ...mapGetters(["myReview", "movieData", "movieId"]),
+  props: {
+    review: {
+      type: Object,
+    },
   },
   data() {
     return {
@@ -89,13 +91,12 @@ export default {
         title: this.title,
         content: this.content,
         spoiler: this.spoiler,
-        reviewId: null,
+        reviewId: this.review.reviewId,
       };
-      if (Object.keys(this.myReview).length) {
-        console.log(this.reviewId);
+      if (Object.keys(this.review).length) {
         try {
-          await this.editReview({ reviewId: this.reviewId, body });
-          await this.getMovieReviewList(this.movieId);
+          await this.editReview({ reviewId: this.review.reviewId, body });
+          await this.getMovieReviewList(this.$route.params.movieId);
           this.$emit("close-modal");
         } catch (err) {
           console.log(err);
@@ -112,15 +113,14 @@ export default {
       this.spoiler = !this.spoiler;
     },
     setReviewData() {
-      if (Object.keys(this.myReview).length) {
-        this.title = this.myReview.title;
-        this.content = this.myReview.content;
-        this.spoiler = this.myReview.spoiler;
-        this.reviewId = this.myReview.reviewId;
+      if (Object.keys(this.review).length) {
+        this.title = this.review.title;
+        this.content = this.review.content;
+        this.spoiler = this.review.spoiler;
+        this.reviewId = this.review.reviewId;
         return;
       }
     },
-    closeModel() {},
   },
   mounted() {
     this.setReviewData();

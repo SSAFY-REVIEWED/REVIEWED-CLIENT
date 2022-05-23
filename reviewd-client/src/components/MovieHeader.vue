@@ -79,7 +79,11 @@
         </svg>
         <span>리뷰 작성</span>
       </button>
-      <ModalView v-if="isModalViewed" @close-modal="isModalViewed = false">
+      <ModalView
+        v-if="isModalViewed"
+        @close-modal="isModalViewed = false"
+        :review="myReview"
+      >
       </ModalView>
     </div>
   </div>
@@ -113,7 +117,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["movieData"]),
+    ...mapGetters(["movieData", "myReview"]),
   },
 };
 </script>
