@@ -21,9 +21,7 @@ export default {
     Navigation,
     Footer,
   },
-  data() {
-    return {};
-  },
+  
   methods: {},
   computed: {
     ...mapGetters(["isLoggingIn"]),

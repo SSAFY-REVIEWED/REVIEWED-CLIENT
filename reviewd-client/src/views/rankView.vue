@@ -1,10 +1,10 @@
 <template>
-  <div>Rank View</div>
+  <div>Rank View </div>
 </template>
 
 <script>
 export default {
-  name: "rankView",
+  name: "RankView",
 };
 </script>
 
