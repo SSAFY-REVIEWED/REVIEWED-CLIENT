@@ -173,7 +173,6 @@ export default {
   computed: {
     ...mapGetters(["isLoggedIn", "profile"]),
     userId() {
-      console.log(this.profile.userId);
       return this.profile.userId;
     },
   },

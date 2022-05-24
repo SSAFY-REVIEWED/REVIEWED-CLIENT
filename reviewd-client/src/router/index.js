@@ -122,9 +122,9 @@ const routes = [
     },
     children: [
       {
-        path: "",
+        path: "history",
         name: "history",
-        alias: ["history"],
+        alias: [""],
         component: ProfileHistoryView,
       },
       {

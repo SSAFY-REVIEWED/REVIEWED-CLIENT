@@ -12,9 +12,6 @@
 <script>
 export default {
   name: "profileHistoryView",
-  created() {
-    console.log(this.$route);
-  },
 };
 </script>
 
