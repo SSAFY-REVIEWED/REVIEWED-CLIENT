@@ -89,8 +89,28 @@
             }"
           ></div>
         </transition>
-        <!-- <div class="w-full bg-red-100 absolute top-0 left-0 h-10 slide"></div> -->
       </div>
+    </div>
+    <div class="absolute bottom-0">
+      <nav class="flex gap-x-8">
+        <router-link :to="{ name: 'history', params: { userId } }"
+          ><span v-if="profile.userId === userId">My </span> History</router-link
+        >
+        <router-link :to="{ name: 'movies', params: { userId } }"
+          ><span v-if="profile.userId === userId">My </span>Movies</router-link
+        >
+        <router-link :to="{ name: 'reviews', params: { userId } }"
+          ><span v-if="profile.userId === userId">My </span>Reviews</router-link
+        >
+        <router-link :to="{ name: 'likes', params: { userId } }"
+          ><span v-if="profile.userId === userId">My </span>Likes</router-link
+        >
+        <router-link
+          :to="{ name: 'settings', params: { userId } }"
+          v-if="profile.userId === userId"
+          >Settings</router-link
+        >
+      </nav>
     </div>
   </article>
 </template>

@@ -7,20 +7,7 @@
         @toggle-follow="toggleUserFollow"
       />
     </div>
-    <nav>
-      <router-link :to="{ name: 'history', params: { userId } }"
-        >history</router-link
-      >
-      <router-link :to="{ name: 'likes', params: { userId } }"
-        >likes</router-link
-      >
-      <router-link :to="{ name: 'movies', params: { userId } }"
-        >movies</router-link
-      >
-      <router-link :to="{ name: 'settings', params: { userId } }"
-        >settings</router-link
-      >
-    </nav>
+    
     <router-view></router-view>
   </div>
 </template>
