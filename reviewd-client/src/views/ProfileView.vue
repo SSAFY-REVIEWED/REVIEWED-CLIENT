@@ -1,11 +1,15 @@
 <template>
   <div>
-    <div class="w-full bg-slate-200">ProfileView black</div>
+    <div class="w-full bg-slate-200">
+      <ProfileHeader />
+    </div>
     <nav>
       <router-link :to="{ name: 'history', params: { userId } }"
         >history</router-link
       >
-      <router-link :to="{ name: 'likes', params: { userId } }">likes</router-link>
+      <router-link :to="{ name: 'likes', params: { userId } }"
+        >likes</router-link
+      >
       <router-link :to="{ name: 'movies', params: { userId } }"
         >movies</router-link
       >
@@ -18,9 +22,14 @@
 </template>
 
 <script>
+import ProfileHeader from "@/components/ProfileHeader";
 import { mapGetters } from "vuex";
 export default {
   name: "profileView",
+  components: {
+    ProfileHeader,
+  },
+
   computed: {
     ...mapGetters(["profile"]),
     userId() {
