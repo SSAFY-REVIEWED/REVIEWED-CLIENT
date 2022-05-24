@@ -5,12 +5,7 @@ export default {
   state: {
     isLoggingIn: false,
     isLoggedIn: VueCookies.get("accessToken") ? true : false,
-    profile: VueCookies.get("profile") || {
-      userId: 1,
-      name: "JAEHO",
-      profileImg:
-        "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-    },
+    profile: VueCookies.get("profile") || {},
   },
   getters: {
     isLoggingIn: (state) => {
@@ -31,16 +26,20 @@ export default {
       state.isLoggingIn = false;
     },
     setProfile: (state, data) => {
+      console.log(data)
       const profile = {
         name: data.name,
-        profileImg: data.profile_img,
-        userId: data.user_id,
+        profileImg: data.profileImg,
+        userId: data.userId,
+        survey: data.survey
       };
       state.profile = {
         ...state.profile,
         ...profile,
       };
+      console.log(state.profile, "profile'")
       VueCookies.set("profile", profile);
+      console.log(VueCookies.get("profile"), "뷰 쿠키 확인")
     },
     setLoggedIn: (state) => {
       state.isLoggedIn = true;
@@ -51,6 +50,7 @@ export default {
       commit("setLoggedIn");
       try {
         const response = await getData("USER_INFO");
+        console.log(response.data);
         commit("setProfile", response.data);
       } catch (err) {
         console.log(err);

@@ -8,13 +8,20 @@ const ProfileAPI = {
     return axios.get(PROFILE_URL.HISTORY(userId));
   },
   async getMovieList(userId, page) {
-    return axios.get(PROFILE_URL.MOVIE_LIST(userId,page));
+    return axios.get(PROFILE_URL.MOVIE_LIST(userId, page));
   },
   async getReviewList(userId, page) {
     return axios.get(PROFILE_URL.REVIEW_LIST(userId, page));
   },
-  async updateProfile(userId) {
-    return axios.patch(PROFILE_URL.PROFILE(userId));
+  async updateProfile(userId, body) {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    console.log(config);
+
+    return axios.patch(PROFILE_URL.PROFILE(userId), body);
   },
   async getFollowings(userId) {
     return axios.get(PROFILE_URL.FOLLOWINGS(userId));

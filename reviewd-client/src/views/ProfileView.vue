@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="w-full bg-slate-200">
-      <ProfileHeader :userId="userId" />
+      <ProfileHeader :userId="targetUserId" />
     </div>
     <router-view></router-view>
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 import ProfileHeader from "@/components/ProfileHeader";
-
+import { mapActions } from "vuex";
 export default {
   name: "profileView",
   components: {
@@ -17,17 +17,20 @@ export default {
   },
   data() {
     return {
-      userId: null,
+      targetUserId: null,
     };
   },
   methods: {
+    ...mapActions(["getUserProfile"]),
     getParams() {
       const params = this.$route.params.userId;
-      this.userId = +params;
+      this.targetUserId = +params;
     },
   },
+  computed: {},
   created() {
     this.getParams();
+    this.getUserProfile(this.targetUserId);
   },
 };
 </script>

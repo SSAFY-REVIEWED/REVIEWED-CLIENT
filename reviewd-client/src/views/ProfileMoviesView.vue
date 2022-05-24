@@ -8,6 +8,10 @@
         :movie="movie"
       />
     </article>
+    <Trigger
+      :hasMore="hasMore"
+      @triggerIntersected="getTargetUserRatedMovieList"
+    />
   </section>
 </template>
 
@@ -15,11 +19,13 @@
 import MainPosterCard from "@/components/MainPosterCard";
 import { mapGetters } from "vuex";
 import ProfileAPI from "@/api/profile";
+import Trigger from "@/components/TheTrigger";
 
 export default {
   name: "profileMoviesView",
   components: {
     MainPosterCard,
+    Trigger,
   },
   data() {
     return {
@@ -63,20 +69,26 @@ export default {
           rate: 7.7,
         },
       ],
+      hasMore: true,
+      page: 1,
     };
   },
   methods: {
     setTargetUserId() {
       this.targetUserId = this.$route.params.userId;
     },
-    setMovieList(movieList) {
-      this.movieList = movieList;
+    setMovieList(response) {
+      this.movieList = response.data.movies;
+      this.page++;
+      this.hasMore = response.data.hasMore;
     },
-    async getTargetUserMovieList() {
+    async getTargetUserRatedMovieList() {
       try {
-        const response = await ProfileAPI.getMovieList(this.targetUserId);
-        const { movies } = response.data;
-        this.setMovieList(movies);
+        const response = await ProfileAPI.getMovieList(
+          this.targetUserId,
+          this.page
+        );
+        this.setMovieList(response);
       } catch (err) {
         console.log(err);
       }

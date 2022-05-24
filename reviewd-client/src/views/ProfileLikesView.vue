@@ -8,7 +8,7 @@
         :movie="movie"
       />
     </article>
-    <Trigger :hasMore="hasMore" @triggerIntersected="getTargetUserMovieList" />
+    <Trigger :hasMore="hasMore" @triggerIntersected="getTargetUserLikedMovieList" />
   </section>
 </template>
 
@@ -79,7 +79,7 @@ export default {
       this.page++;
       this.hasMore = response.data.hasMore;
     },
-    async getTargetUserMovieList() {
+    async getTargetUserLikedMovieList() {
       if (!this.hasMore) return;
       try {
         const response = await ProfileAPI.getMovieList(

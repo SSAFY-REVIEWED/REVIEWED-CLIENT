@@ -62,7 +62,9 @@
         </li>
         <li class="ml-3% relative">
           <div class="h-14 flex items-center cursor-pointer tooltip">
-            <div class="h-11 w-11 bg-slate-500 rounded-full"></div>
+            <div class="h-11 w-11 bg-slate-500 rounded-full overflow-hidden">
+              <img :src="profile.profileImg" :alt="`${profile.name}이미지`" />
+            </div>
 
             <div
               role="tooltip"
@@ -72,7 +74,7 @@
                 class="flex-1 w-full flex items-center px-3 rounded-md text-slate-800 pointer-events-none"
               >
                 <div class="flex items-center">
-                  <p class="text-xsm">JAEHO 님</p>
+                  <p class="text-xsm">{{ profile.name }} 님</p>
                 </div>
               </button>
               <button
