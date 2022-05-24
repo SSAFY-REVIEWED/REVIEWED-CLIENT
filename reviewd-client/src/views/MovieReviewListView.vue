@@ -88,6 +88,9 @@ export default {
       );
       console.log(response);
     },
+    increasePageNumber() {
+      this.page += 1;
+    },
     fetchData() {
       this.isFetching = true;
       setTimeout(() => {

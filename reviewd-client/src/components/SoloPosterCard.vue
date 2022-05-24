@@ -1,7 +1,7 @@
 <template>
-  <div class="w-48 absolute">
-    <div class="bg-blue-300 relative w-full h-0 pb-150% rounded-lg shadow-md">
-      <picture class="absolute top-0 left-0 w-full h-full">
+  <div class="w-full" :class="{ absolute: absolute }">
+    <div class="bg-blue-300 relative w-full h-0 pb-150% rounded-md shadow-md overflow-hidden">
+      <picture class="absolute top-0 left-0 w-full h-full overflow-hidden">
         <img
           draggable="false"
           :src="posterUrl"
@@ -21,6 +21,9 @@ export default {
   props: {
     posterUrl: {
       type: String,
+    },
+    absolute: {
+      type: Boolean,
     },
   },
 };

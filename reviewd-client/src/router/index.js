@@ -11,6 +11,7 @@ import ChallengeView from "@/views/ChallengeView";
 import RankerView from "@/views/RankerView";
 import MovieView from "@/views/MovieView";
 import MovieReviewListView from "@/views/MovieReviewListView";
+import ReviewView from '@/views/ReviewView'
 
 Vue.use(VueRouter);
 
@@ -93,6 +94,15 @@ const routes = [
     component: MovieReviewListView,
     meta: {
       title: "Reviews",
+      authorized: false,
+    },
+  },
+  {
+    path: "/reviews/:reviewId",
+    name: "review",
+    component: ReviewView,
+    meta: {
+      title: "Review",
       authorized: false,
     },
   },
