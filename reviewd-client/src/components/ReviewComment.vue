@@ -7,6 +7,7 @@
       :index="index"
       :comment="comment"
       @edit-comment="editComment"
+      @delete-comment="deleteComment"
     />
   </section>
 </template>
@@ -32,6 +33,9 @@ export default {
     },
     async editComment(body) {
       await this.$emit("edit-comment", body);
+    },
+    async deleteComment(id) {
+      await this.$emit("delete-comment", id);
     },
   },
 };

@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     async deleteComment() {
-      await this.$emit("delete-comment");
+      await this.$emit("delete-comment", this.comment.commentId);
     },
     toggleEditing() {
       this.isEditing = !this.isEditing;

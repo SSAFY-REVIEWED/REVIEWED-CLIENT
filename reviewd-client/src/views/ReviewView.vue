@@ -7,9 +7,10 @@
       @delete-review="deleteUserReview"
     />
     <ReviewComment
-      @create-comment="createComment"
       :commentList="commentList"
+      @create-comment="createComment"
       @edit-comment="editComment"
+      @delete-comment="deleteComment"
     />
   </div>
 </template>
@@ -183,6 +184,19 @@ export default {
           { content }
         );
         this.setCommentList(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async deleteComment(id) {
+      try {
+        if (confirm("댓글을 삭제하시겠어요?")) {
+          const response = await MovieAPI.deleteReviewComment(
+            this.review.reviewId,
+            { commentId: id }
+          );
+          this.setCommentList(response.data);
+        }
       } catch (err) {
         console.log(err);
       }
