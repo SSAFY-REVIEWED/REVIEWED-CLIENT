@@ -7,6 +7,9 @@ const ProfileAPI = {
   async getHistory(userId) {
     return axios.get(PROFILE_URL.HISTORY(userId));
   },
+  async getMovieList(userId) {
+    return axios.get(PROFILE_URL.MOVIE_LIST(userId));
+  },
   async getReviewList(userId, page) {
     return axios.get(PROFILE_URL.REVIEW_LIST(userId, page));
   },
@@ -30,6 +33,7 @@ const ProfileAPI = {
 export const PROFILE_URL = {
   PROFILE: (userId) => `/profile/${userId}/`,
   HISTORY: (userId) => `/profile/${userId}/history/`,
+  MOVIE_LIST: (userId) => `/profile/${userId}/movies/`,
   REVIEW_LIST: (userId, page) => `/profile/${userId}/reviews?page=${page}/`,
   FOLLOWINGS: (userId) => `/profile/${userId}/following/`,
   FOLLOWERS: (userId) => `/profile/${userId}/followed/`,

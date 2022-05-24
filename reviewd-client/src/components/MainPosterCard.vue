@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <router-link :to="{ name: 'movie', params: { movieId: 335787 } }">
+    <router-link :to="{ name: 'movie', params: { movieId: movie.movieId } }">
       <div
         class="bg-white relative w-full h-0 overflow-hidden pb-183% rounded-lg shadow-md"
       >
@@ -9,7 +9,7 @@
             <img
               loading="lazy"
               src="../assets/images/posters/닥터스트레인지.jpeg"
-              alt="닥터스트레인지"
+              :alt="`${movie.movieTitle} 포스터`"
               width="300"
               height="450"
               class="w-full"
@@ -22,7 +22,7 @@
               <p
                 class="text-ellipsis overflow-hidden whitespace-nowrap text-left w-full"
               >
-                닥터스트레인지: 대혼돈의 멀티버스
+                {{ movie.movieTitle }}
               </p>
               <p>2022</p>
               <div class="flex w-full justify-between justify-self-end">
@@ -37,7 +37,9 @@
                       d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                     />
                   </svg>
-                  <span>7.7</span>
+                  <span>{{
+                    movie.voteAverage ? movie.voteAverage : movie.rate
+                  }}</span>
                 </p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
