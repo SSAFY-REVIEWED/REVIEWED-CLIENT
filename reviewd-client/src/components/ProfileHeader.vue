@@ -18,7 +18,7 @@
         <h1>{{ userProfile.name }}</h1>
         <button
           @click="toggleFollow"
-          v-if="profile.userId !== userId"
+          v-if="profile.userId === userId"
           class="p-4"
           :class="{
             'bg-red-900': userProfile.follow,
@@ -117,16 +117,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "profileHeader",
   props: {
     userId: {
       type: Number,
-    },
-    userProfile: {
-      type: Object,
     },
   },
   data() {
@@ -136,19 +133,23 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["toggleUserFollow"]),
     toggleShow() {
       this.show = true;
     },
     async toggleFollow() {
-      await this.$emit("toggle-follow");
+      await this.toggleUserFollow({
+        myUserId: this.profile.userId,
+        targetUserId: this.userId,
+      });
     },
   },
   computed: {
-    ...mapGetters(["profile"]),
+    ...mapGetters(["profile", "userProfile"]),
     color() {
       switch (this.userProfile.level) {
         case "Iron":
-          return "#939393"
+          return "#939393";
         case "Bronze":
           return "#BF805C";
         case "Silver":

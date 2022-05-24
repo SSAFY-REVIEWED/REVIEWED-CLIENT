@@ -28,14 +28,14 @@ const ProfileAPI = {
 };
 
 export const PROFILE_URL = {
-  PROFILE: (userId) => `/profile/${userId}`,
-  HISTORY: (userId) => `/profile/${userId}/history`,
-  REVIEW_LIST: (userId, page) => `/profile/${userId}/reviews?page=${page}`,
-  FOLLOWINGS: (userId) => `/profile/${userId}/following`,
-  FOLLOWERS: (userId) => `/profile/${userId}/followed`,
+  PROFILE: (userId) => `/profile/${userId}/`,
+  HISTORY: (userId) => `/profile/${userId}/history/`,
+  REVIEW_LIST: (userId, page) => `/profile/${userId}/reviews?page=${page}/`,
+  FOLLOWINGS: (userId) => `/profile/${userId}/following/`,
+  FOLLOWERS: (userId) => `/profile/${userId}/followed/`,
   DELETE_FOLLOWER: (userId, targetId) =>
-    `/profile/${userId}/followed/${targetId}`,
-  FOLLOW: (userId, targetId) => `profile/${userId}/following/${targetId}`,
+    `/profile/${userId}/followed/${targetId}/`,
+  FOLLOW: (userId, targetId) => `profile/${userId}/following/${targetId}/`,
 };
 
 export default ProfileAPI;

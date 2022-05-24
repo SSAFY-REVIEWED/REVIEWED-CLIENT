@@ -30,7 +30,7 @@ export default {
       }
       state.isLoggingIn = false;
     },
-    setUserProfile: (state, data) => {
+    setProfile: (state, data) => {
       const profile = {
         name: data.name,
         profileImg: data.profile_img,
@@ -51,7 +51,7 @@ export default {
       commit("setLoggedIn");
       try {
         const response = await getData("USER_INFO");
-        commit("serUserProfile", response.data);
+        commit("setProfile", response.data);
       } catch (err) {
         console.log(err);
       }
