@@ -22,7 +22,7 @@ const options = {
     },
   },
 };
-
+Vue.prototype.$scrollToTop = () => window.scrollTo(0, 0);
 Vue.use(Toast, options);
 Vue.use(VueCookies);
 

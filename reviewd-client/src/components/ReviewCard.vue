@@ -14,7 +14,7 @@
           />
         </div>
         <div>
-          <p>{{ review.name }}</p>
+          <p>{{ review.userName }}</p>
           <p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@
             /></svg
           >{{ review.replyCount }}
         </div>
-        <p class="pl-4">{{ review.created_at }}</p>
+        <p class="pl-4">{{ review.createdAt }}</p>
       </div>
     </div>
     <div class="mt-5 relative">

@@ -6,14 +6,15 @@
           <div class="flex">
             <div class="overflow-hidden w-11 h-11 rounded-full">
               <img
+                loading="lazy"
                 :src="review.userProfileImg"
-                :alt="`${review.name}프로필`"
+                :alt="`${review.userName}프로필`"
                 width="40"
                 height="40"
               />
             </div>
             <div>
-              <p>{{ review.name }}</p>
+              <p>{{ review.userName }}</p>
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +36,7 @@
           </div>
         </div>
       </div>
-      <h1>{{ review.title }}</h1>
+      <h1>{{ review.movieTitle }} 리뷰</h1>
       <div>
         {{ review.viewCount }} 읽음
         <UpdateButton
@@ -130,8 +131,8 @@ export default {
       this.spoiler = !this.spoiler;
     },
     toggleLikes() {
-      this.$emit("toggle-likes")
-    }
+      this.$emit("toggle-likes");
+    },
   },
   computed: {},
   mounted() {

@@ -10,6 +10,7 @@
           >
             <picture class="absolute top-0 left-0 w-full h-full">
               <img
+                loading="lazy"
                 src="../assets/images/posters/범죄도시2.jpeg"
                 alt="범죄도시2"
                 width="300"

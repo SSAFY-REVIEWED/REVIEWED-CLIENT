@@ -79,6 +79,8 @@ export default {
         params: { movieId: this.params },
         query: { query: value },
       });
+      this.dataList = [];
+      this.setQuery();
     },
     async getMovieAllReviewListByQuery() {
       const response = await MovieAPI.getMovieAllReviewList(
