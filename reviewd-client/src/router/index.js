@@ -12,6 +12,12 @@ import RankerView from "@/views/RankerView";
 import MovieView from "@/views/MovieView";
 import MovieReviewListView from "@/views/MovieReviewListView";
 import ReviewView from "@/views/ReviewView";
+import ProfileView from "@/views/ProfileView";
+import ProfileHistoryView from "@/views/ProfileHistoryView";
+import ProfileLikesView from "@/views/ProfileLikesView";
+import ProfileMoviesView from "@/views/ProfileMoviesView";
+import ProfileReviewsView from "@/views/ProfileReviewsView";
+import ProfileSettingsView from "@/views/ProfileSettingsView";
 
 Vue.use(VueRouter);
 
@@ -105,6 +111,43 @@ const routes = [
       title: "Review",
       authorized: false,
     },
+  },
+  {
+    path: "/profile/:userId",
+    name: "profile",
+    component: ProfileView,
+    meta: {
+      title: "Profile",
+      authorized: false,
+    },
+    children: [
+      {
+        path: "likes",
+        name: "likes",
+        component: ProfileLikesView,
+      },
+      {
+        path: "movies",
+        name: "movies",
+        component: ProfileMoviesView,
+      },
+      {
+        path: "reviews",
+        name: "reviews",
+        component: ProfileReviewsView,
+      },
+      {
+        path: "settings",
+        name: "settings",
+        component: ProfileSettingsView,
+      },
+      {
+        path: "/",
+        name: "history",
+        alias: ["history"],
+        component: ProfileHistoryView,
+      },
+    ],
   },
 ];
 

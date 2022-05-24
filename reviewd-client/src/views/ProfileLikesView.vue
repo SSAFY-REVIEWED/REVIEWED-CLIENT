@@ -4,10 +4,11 @@
 
 <script>
 export default {
-name:"profileLikesView"
-}
+  name: "profileLikesView",
+  created() {
+    console.log(this.$route);
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

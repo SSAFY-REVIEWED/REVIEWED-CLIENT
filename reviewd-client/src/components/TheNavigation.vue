@@ -76,12 +76,13 @@
                 </div>
               </button>
               <button
-                v-for="num in 2"
-                :key="num"
                 class="flex-1 flex items-center px-3 rounded-md text-slate-400 hover:bg-slate-50 hover:text-slate-800"
               >
                 <div class="flex items-center">
-                  <router-link :to="{ name: 'home' }" class="flex">
+                  <router-link
+                    :to="{ name: 'profile', params: { userId: userId } }"
+                    class="flex"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-4 w-4 self-center mr-1"
@@ -170,10 +171,9 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["isLoggedIn"]),
-    map() {
-      console.log(this.isLoggedIn);
-      return this.isLoggedIn;
+    ...mapGetters(["isLoggedIn", "profile"]),
+    userId() {
+      return this.profile.userId;
     },
   },
   watch: {
