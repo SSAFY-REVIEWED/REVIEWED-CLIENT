@@ -69,20 +69,20 @@
               class="tooltiptext w-profile h-profile absolute right-0 top-12 rounded-md shadow-3xl bg-white p-2 flex flex-col hover:visible hover:opacity-100"
             >
               <button
-                class="flex-1 flex items-center px-3 rounded-md text-slate-800 pointer-events-none"
+                class="flex-1 w-full flex items-center px-3 rounded-md text-slate-800 pointer-events-none"
               >
                 <div class="flex items-center">
                   <p class="text-xsm">JAEHO 님</p>
                 </div>
               </button>
               <button
-                class="flex-1 flex items-center px-3 rounded-md text-slate-400 hover:bg-slate-50 hover:text-slate-800"
+                class="flex-1 w-full flex items-center px-3 rounded-md text-slate-400 hover:bg-slate-50 hover:text-slate-800"
               >
-                <div class="flex items-center">
-                  <router-link
-                    :to="{ name: 'profile', params: { userId: userId } }"
-                    class="flex"
-                  >
+                <router-link
+                  :to="{ name: 'history', params: { userId } }"
+                  class="w-full"
+                >
+                  <div class="flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-4 w-4 self-center mr-1"
@@ -98,14 +98,14 @@
                       />
                     </svg>
                     <p class="text-xsm leading-6">프로필</p>
-                  </router-link>
-                </div>
+                  </div>
+                </router-link>
               </button>
               <button
-                class="flex-1 flex items-center px-3 rounded-md hover:bg-slate-50 text-slate-400 hover:text-slate-800"
+                class="flex-1 w-full flex items-center px-3 rounded-md hover:bg-slate-50 text-slate-400 hover:text-slate-800"
               >
-                <div class="flex-1 flex items-center">
-                  <router-link :to="{ name: 'home' }" class="flex">
+                <router-link :to="{ name: 'home' }" class="w-full">
+                  <div class="flex-1 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-4 w-4 self-center mr-1"
@@ -121,8 +121,8 @@
                       />
                     </svg>
                     <p class="text-xsm leading-6">로그아웃</p>
-                  </router-link>
-                </div>
+                  </div>
+                </router-link>
               </button>
             </div>
           </div>
@@ -173,6 +173,7 @@ export default {
   computed: {
     ...mapGetters(["isLoggedIn", "profile"]),
     userId() {
+      console.log(this.profile.userId);
       return this.profile.userId;
     },
   },

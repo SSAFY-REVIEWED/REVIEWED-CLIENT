@@ -122,6 +122,12 @@ const routes = [
     },
     children: [
       {
+        path: "",
+        name: "history",
+        alias: ["history"],
+        component: ProfileHistoryView,
+      },
+      {
         path: "likes",
         name: "likes",
         component: ProfileLikesView,
@@ -140,12 +146,6 @@ const routes = [
         path: "settings",
         name: "settings",
         component: ProfileSettingsView,
-      },
-      {
-        path: "/",
-        name: "history",
-        alias: ["history"],
-        component: ProfileHistoryView,
       },
     ],
   },
