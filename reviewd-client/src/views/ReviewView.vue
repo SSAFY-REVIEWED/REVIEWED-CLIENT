@@ -4,8 +4,13 @@
       :review="review"
       @edit-user-review="editUserReview"
       @toggle-likes="toggleLikes"
+      @delete-review="deleteUserReview"
     />
-    <ReviewComment @create-comment="createComment" />
+    <ReviewComment
+      @create-comment="createComment"
+      :commentList="commentList"
+      @edit-comment="editComment"
+    />
   </div>
 </template>
 
@@ -142,10 +147,42 @@ export default {
         console.log(err);
       }
     },
+    setCommentList(data) {
+      this.commentList = data.comments;
+      this.review.replyCount = data.replyCount;
+    },
     async createComment(content) {
       console.log(content);
       try {
-        await MovieAPI.createReviewComment(this.reviewId, { content });
+        const response = await MovieAPI.createReviewComment(this.reviewId, {
+          content,
+        });
+        this.setCommentList(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async deleteUserReview(reviewId) {
+      console.log(reviewId);
+      await this.$emit("delete-content", reviewId);
+      if (confirm("리뷰를 정말로 삭제하실건가요?")) {
+        console.log(reviewId);
+        try {
+          await MovieAPI.deleteReview(reviewId);
+          this.$router.go(-1);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    },
+    async editComment({ commentId, content }) {
+      try {
+        const response = await MovieAPI.editReviewComment(
+          this.review.reviewId,
+          commentId,
+          { content }
+        );
+        this.setCommentList(response.data);
       } catch (err) {
         console.log(err);
       }

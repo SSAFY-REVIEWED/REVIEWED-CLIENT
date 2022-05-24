@@ -19,7 +19,7 @@
     <button
       class="px-4"
       v-if="profile.userId === userId"
-      @click="deleteUserReview"
+      @click="deleteContent"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -40,13 +40,12 @@
 </template>
 
 <script>
-import MovieAPI from "@/api/movie";
 import { mapGetters } from "vuex";
 
 export default {
   name: "updateButton",
   props: {
-    reviewId: {
+    id: {
       type: Number,
       required: true,
     },
@@ -56,17 +55,9 @@ export default {
     },
   },
   methods: {
-    async deleteUserReview() {
+    async deleteContent() {
       if (this.profile.userId !== this.userId) return;
-      if (confirm("리뷰를 정말로 삭제하실건가요?")) {
-        console.log(this.reviewId);
-        try {
-          await MovieAPI.deleteReview(this.reviewId);
-          this.$router.go(-1);
-        } catch (err) {
-          console.log(err);
-        }
-      }
+      await this.$emit("delete-content", this.id);
     },
     toggleEditing() {
       this.$emit("toggle-editing");

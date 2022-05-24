@@ -41,8 +41,9 @@
         {{ review.viewCount }} 읽음
         <UpdateButton
           :userId="review.userId"
-          :reviewId="review.reviewId"
+          :id="review.reviewId"
           @toggle-editing="toggleEditing"
+          @delete-content="deleteReview"
           v-if="!isEditing"
         />
       </div>
@@ -130,8 +131,12 @@ export default {
     toggleSpoiler() {
       this.spoiler = !this.spoiler;
     },
-    toggleLikes() {
-      this.$emit("toggle-likes");
+    async toggleLikes() {
+      await this.$emit("toggle-likes");
+    },
+    async deleteReview(id) {
+      console.log(id);
+      await this.$emit("delete-review", id);
     },
   },
   computed: {},
