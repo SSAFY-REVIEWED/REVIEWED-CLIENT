@@ -5,17 +5,23 @@
       :reviewGenreCountList="reviewGenreCountList"
       :movieGenreList="movieGenreList"
     />
+    <CompletedChallenge :challengeList="challengeList" />
+    <HistoryQuestion />
   </div>
 </template>
 
 <script>
 import ProfileChartList from "@/components/ProfileChartList";
 import ProfileAPI from "@/api/profile";
+import CompletedChallenge from "@/components/CompletedChallenge";
+import HistoryQuestion from "@/components/HistoryQuestion";
 
 export default {
   name: "profileHistoryView",
   components: {
     ProfileChartList,
+    CompletedChallenge,
+    HistoryQuestion
   },
   data() {
     return {
@@ -80,7 +86,18 @@ export default {
         "SF",
         "미스터리",
       ],
-      challengeList: [],
+      challengeList: [
+        "#골든 글러브 2022 당선작 10선",
+        "#바보 영화 완독",
+        "#마블 모조리 씹어먹어쌈",
+        "#마블 모조리 씹어먹어쌈",
+        "#마블 모조리 씹어먹어쌈",
+        "#마블 모조리 씹어먹어쌈",
+        "#마블 모조리 씹어먹어쌈",
+        "#마블 모조리 씹어먹어쌈",
+        "#마블 모조리 씹어먹어쌈",
+        "#마블 모조리 씹어먹어쌈",
+      ],
     };
   },
   methods: {
