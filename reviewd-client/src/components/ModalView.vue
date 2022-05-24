@@ -16,7 +16,7 @@
             <h1 class="h-5 w-3/4">{{ title }}</h1>
             <form class="mt-5" @submit.prevent="updateMovieReview">
               <textarea
-                class="w-full h-full rounded-xl shadow-inner-input p-5 focus:outline-none resize-none"
+                class="w-full rounded-xl shadow-inner-input p-5 focus:outline-none resize-none"
                 name="review"
                 id=""
                 cols="30"

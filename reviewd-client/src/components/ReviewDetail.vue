@@ -70,6 +70,9 @@
         <button class="bg-red-500" @click="cancelEdit">수정취소</button>
       </form>
     </article>
+    <article></article>
+    <LikeAndCommentButton :review="review" @toggle-likes="toggleLikes" />
+    <hr />
   </section>
 </template>
 
@@ -77,6 +80,7 @@
 import UpdateButton from "@/components/UpdateButton";
 import SoloPosterCard from "@/components/SoloPosterCard";
 import SpoilerTooltipButton from "@/components/SpoilerTooltipButton";
+import LikeAndCommentButton from "@/components/LikeAndCommentButton";
 
 export default {
   props: {
@@ -88,6 +92,7 @@ export default {
     UpdateButton,
     SoloPosterCard,
     SpoilerTooltipButton,
+    LikeAndCommentButton,
   },
   data() {
     return {
@@ -124,6 +129,9 @@ export default {
     toggleSpoiler() {
       this.spoiler = !this.spoiler;
     },
+    toggleLikes() {
+      this.$emit("toggle-likes")
+    }
   },
   computed: {},
   mounted() {

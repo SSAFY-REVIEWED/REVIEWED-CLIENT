@@ -1,17 +1,24 @@
 <template>
   <div class="w-full bg-red-300 min-h-screen py-3">
-    <ReviewDetail :review="review" @edit-user-review="editUserReview" />
+    <ReviewDetail
+      :review="review"
+      @edit-user-review="editUserReview"
+      @toggle-likes="toggleLikes"
+    />
+    <ReviewComment @create-comment="createComment" />
   </div>
 </template>
 
 <script>
 import MovieAPI from "@/api/movie";
 import ReviewDetail from "@/components/ReviewDetail";
+import ReviewComment from '@/components/ReviewComment'
 
 export default {
   name: "reviewView",
   components: {
     ReviewDetail,
+    ReviewComment
   },
   data() {
     return {
@@ -54,10 +61,30 @@ export default {
     async editUserReview(body) {
       try {
         const response = await MovieAPI.editReview(this.review.reviewId, body);
-        console.log(response)
+        this.review = response.data.review;
       } catch (err) {
         console.log(err);
       }
+    },
+    async toggleLikes() {
+      try {
+        await MovieAPI.likeReview(this.review.reviewId, {
+          like: !this.review.like,
+        });
+        if (this.review.like) {
+          this.review.likes++;
+          return;
+        }
+        this.review.likes--;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async createComment(content) {
+      console.log(content)
+      try {
+        await MovieAPI.createReviewComment(this.reviewId, {content})
+      } catch(err) {console.log(err)}
     }
   },
   created() {
