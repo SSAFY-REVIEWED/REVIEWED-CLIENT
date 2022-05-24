@@ -7,6 +7,7 @@
         <div class="absolute top-0 left-0 w-full h-full pb-150%">
           <picture class="relative w-full h-0 overflow-hidden">
             <img
+              loading="lazy"
               src="../assets/images/posters/닥터스트레인지.jpeg"
               alt="닥터스트레인지"
               width="300"

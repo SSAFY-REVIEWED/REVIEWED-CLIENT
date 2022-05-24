@@ -40,8 +40,9 @@ const MovieAPI = {
   async editReviewComment(reviewId, commentId, body) {
     return axios.patch(MOVIE_URL.REVIEW_COMMENT(reviewId, commentId), body);
   },
-  async deleteReviewComment(reviewId, commentId) {
-    return axios.delete(MOVIE_URL.REVIEW_COMMENT(reviewId, commentId));
+  async deleteReviewComment(reviewId, body) {
+    console.log(body);
+    return axios.delete(MOVIE_URL.REVIEW_COMMENT(reviewId, body));
   },
   async getYoutube(url, params) {
     console.log(params);

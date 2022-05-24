@@ -5,6 +5,7 @@
       <div v-for="director in directors" :key="director.name">
         <div class="overflow-hidden rounded-full w-15 h-15">
           <img
+            loading="lazy"
             :src="tmdbAPI + director.profile_path"
             alt=""
             width="200"
@@ -17,6 +18,7 @@
       <div v-for="actor in actors" :key="actor.name">
         <div class="overflow-hidden rounded-full w-15 h-15">
           <img
+            loading="lazy"
             :src="tmdbAPI + actor.profile_path"
             alt=""
             width="200"

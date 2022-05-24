@@ -11,6 +11,7 @@ import ChallengeView from "@/views/ChallengeView";
 import RankerView from "@/views/RankerView";
 import MovieView from "@/views/MovieView";
 import MovieReviewListView from "@/views/MovieReviewListView";
+import ReviewView from "@/views/ReviewView";
 
 Vue.use(VueRouter);
 
@@ -96,12 +97,28 @@ const routes = [
       authorized: false,
     },
   },
+  {
+    path: "/reviews/:reviewId",
+    name: "review",
+    component: ReviewView,
+    meta: {
+      title: "Review",
+      authorized: false,
+    },
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
 });
 
 router.beforeEach(async (to, from, next) => {

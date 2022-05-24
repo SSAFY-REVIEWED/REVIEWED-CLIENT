@@ -14,7 +14,7 @@
           />
         </div>
         <div>
-          <p>{{ review.name }}</p>
+          <p>{{ review.userName }}</p>
           <p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@
             /></svg
           >{{ review.replyCount }}
         </div>
-        <p class="pl-4">{{ review.created_at }}</p>
+        <p class="pl-4">{{ review.createdAt }}</p>
       </div>
     </div>
     <div class="mt-5 relative">
@@ -125,9 +125,16 @@
         <p>스포일러가 포함된 리뷰입니다.</p>
         <p>리뷰 보기</p>
       </button>
+
       <p :class="{ 'blur-sm': spoiler }" class="ellipsis-3">
         {{ review.content }}
       </p>
+      <router-link
+        class="ml-auto w-full"
+        :to="{ name: 'review', params: { reviewId: review.reviewId } }"
+      >
+        <button class="float-right">... 더보기</button>
+      </router-link>
     </div>
     <ModalView
       v-if="isModalViewed"
