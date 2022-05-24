@@ -1,37 +1,28 @@
 <template>
-  <div class="w-full h-96">
-    <calendar-heatmap
-      :values="value"
-      :end-date="today"
-      :range-color="[
-        '#ebedf0',
-        '#dae2ef',
-        '#c0ddf9',
-        '#73b3f3',
-        '#3886e1',
-        '#17459e',
-      ]"
-      :max="10"
-      tooltip-unit="stars"
+  <div class="w-full h-fit">
+    <ProfileChartList
+      :reviewDateCountList="reviewDateCountList"
+      :reviewGenreCountList="reviewGenreCountList"
+      :movieGenreList="movieGenreList"
     />
   </div>
 </template>
 
 <script>
-import "vue-calendar-heatmap/dist/vue-calendar-heatmap.css";
-import { CalendarHeatmap } from "vue-calendar-heatmap";
-import Vue from "vue";
-Vue.component("calendarHeatmap", CalendarHeatmap);
+import ProfileChartList from "@/components/ProfileChartList";
+import ProfileAPI from "@/api/profile";
 
 export default {
   name: "profileHistoryView",
   components: {
-    CalendarHeatmap,
+    ProfileChartList,
   },
   data() {
     return {
       endDate: null,
-      value: [
+      userId: null,
+      // TODO: 데이터 지우기 필수
+      reviewDateCountList: [
         { date: "2021-9-24", count: 1 },
         { date: "2021-9-25", count: 2 },
         { date: "2021-9-26", count: 3 },
@@ -49,16 +40,68 @@ export default {
         { date: "2022-05-24", count: 100 },
         { date: "2022-05-25", count: 40 },
       ],
+      reviewGenreCountList: [
+        { 음악: 10 },
+        { 역사: 20 },
+        { 코미디: 4 },
+        { 모험: 1 },
+        { 판타지: 12 },
+        { 가족: 0 },
+        { 공포: 0 },
+        { 서부: 1 },
+        { 전쟁: 2 },
+        { "TV 영화": 0 },
+        { 애니메이션: 0 },
+        { 로맨스: 0 },
+        { 액션: 22 },
+        { 드라마: 9 },
+        { 범죄: 23 },
+        { 스릴러: 0 },
+        { SF: 1 },
+        { 미스터리: 12 },
+      ],
+      movieGenreList: [
+        "음악",
+        "역사",
+        "코미디",
+        "모험",
+        "판타지",
+        "가족",
+        "공포",
+        "서부",
+        "전쟁",
+        "TV 영화",
+        "애니메이션",
+        "로맨스",
+        "액션",
+        "드라마",
+        "범죄",
+        "스릴러",
+        "SF",
+        "미스터리",
+      ],
+      challengeList: [],
     };
   },
-  computed: {
-    today() {
-      const day = new Date();
-      const date = day.toLocaleDateString();
-      return date;
+  methods: {
+    setUserId() {
+      this.userId = this.$route.params.userId;
+    },
+    async getUserHistory() {
+      try {
+        const response = await ProfileAPI.getHistory();
+        this.reviewDateCountList = response.data.reviewDateCountList;
+        this.reviewGenreCountList = response.data.reviewGenreCountList;
+        this.challengeList = response.data.challengeList;
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
-  created() {},
+  computed: {},
+  created() {
+    this.setUserId();
+  },
 };
 </script>
 

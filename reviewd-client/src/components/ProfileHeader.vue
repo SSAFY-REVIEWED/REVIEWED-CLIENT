@@ -94,7 +94,8 @@
     <div class="absolute bottom-0">
       <nav class="flex gap-x-8">
         <router-link :to="{ name: 'history', params: { userId } }"
-          ><span v-if="profile.userId === userId">My </span> History</router-link
+          ><span v-if="profile.userId === userId">My </span>
+          History</router-link
         >
         <router-link :to="{ name: 'movies', params: { userId } }"
           ><span v-if="profile.userId === userId">My </span>Movies</router-link
@@ -146,24 +147,26 @@ export default {
     ...mapGetters(["profile"]),
     color() {
       switch (this.userProfile.level) {
+        case "Iron":
+          return "#939393"
+        case "Bronze":
+          return "#BF805C";
+        case "Silver":
+          return "#DBDBDB";
+        case "Gold":
+          return "#F4BC2D";
+        case "Platinum":
+          return "#08D2DF";
+        case "Diamond":
+          return "#39B8FF";
+        case "Master":
+          return "#C54AFF";
+        case "Grandmaster":
+          return "#FF1A0C";
+        case "Challenger":
+          return "#A90000";
         default:
           return "#939393";
-        case "아이언":
-          return "#BF805C";
-        case "실버":
-          return "#DBDBDB";
-        case "골드":
-          return "#F4BC2D";
-        case "플래티넘":
-          return "08D2DF";
-        case "다이아몬트":
-          return "#39B8FF";
-        case "마스터":
-          return "#C54AFF";
-        case "그랜드 마스터":
-          return "#FF1A0C";
-        case "챌린저":
-          return "#A90000";
       }
     },
   },

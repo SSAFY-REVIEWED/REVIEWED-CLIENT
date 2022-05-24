@@ -32,7 +32,7 @@ export default {
         followingCount: 10,
         followedCount: 12,
         bio: "뿌슝빠슝뿌야뿡아뺭빵",
-        level: "골드",
+        level: "Gold",
         experience: 1768,
         follow: false,
         levelPercentage: 56,
