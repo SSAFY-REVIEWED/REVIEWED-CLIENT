@@ -8,7 +8,7 @@ import LoginView from "@/views/LoginView";
 import SurveyView from "@/views/SurveyView";
 import MainView from "@/views/MainView";
 import ChallengeView from "@/views/ChallengeView";
-import RankView from "@/views/RankView";
+import RankerView from "@/views/RankerView";
 import MovieView from "@/views/MovieView";
 import MovieReviewListView from "@/views/MovieReviewListView";
 
@@ -72,7 +72,7 @@ const routes = [
   {
     path: "/rank",
     name: "rank",
-    component: RankView,
+    component: RankerView,
     meta: {
       title: "Rank",
       authorized: false,
