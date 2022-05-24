@@ -16,7 +16,7 @@
         :review="review"
       />
     </div>
-    <Trigger @triggerIntersected="fetchData" :hasMoreData="hasMoreData" />
+    <Trigger @triggerIntersected="fetchData" :hasMore="hasMore" />
     <div v-show="isFetching">
       <div
         class="animate-pulse bg-gradient-to-r from-violet-100 to-violet-300 flex mb-2 rounded-md p-2"
@@ -50,7 +50,7 @@ export default {
       query: "like",
       params: null,
       page: 1,
-      hasMoreData: true,
+      hasMore: true,
       dataList: [],
       isFetching: true,
     };

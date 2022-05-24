@@ -6,7 +6,7 @@
 export default {
   name: "TheTrigger",
   props: {
-    hasMoreData: {
+    hasMore: {
       type: Boolean,
     },
   },
@@ -23,7 +23,7 @@ export default {
     this.observer = new IntersectionObserver((entries) => {
       this.handleIntersect(entries[0]);
     }, options);
-    if (!this.hasMoreData) {
+    if (!this.hasMore) {
       this.observer.unobserve();
       return;
     }
