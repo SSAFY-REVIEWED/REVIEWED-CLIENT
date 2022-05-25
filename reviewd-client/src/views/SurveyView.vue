@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen mx-auto">
+  <section class="min-h-screen mx-auto max-w-container pt-0 px-9 mt-20">
     <article
       class="min-h-screen flex flex-col justify-center items-center"
       v-if="isLoading"

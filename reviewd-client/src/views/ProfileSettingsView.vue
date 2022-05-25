@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-full h-full relative min-h-[50vh] flex flex-col items-center justify-center"
+    class="max-w-container mx-auto pt-0 px-9 h-full relative min-h-[50vh] flex flex-col items-center justify-center"
   >
     <form @submit.prevent="onSubmitFormData">
       <div>

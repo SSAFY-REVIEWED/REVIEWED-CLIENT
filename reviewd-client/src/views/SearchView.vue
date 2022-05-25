@@ -1,66 +1,70 @@
 <template>
-  <section class="min-h-screen">
-    <div class="w-full h-12 align-middle flex items-center">
-      <!-- <div class="h-12 bg-inherit w-full absolute z-1 left-0"></div> -->
-      <div class="w-[100vw] text-h5 bg-transparent bg-slate-300">
-        "{{ searchKeyword }}"의 검색 결과
+  <section class="min-h-screen w-full">
+    <div
+      class="w-full h-12 align-middle flex items-center bg-slate-300 overflow-visible"
+    >
+      <div class="text-h5 max-w-container mx-auto w-full px-9">
+        <div class="w-full">"{{ searchKeyword }}"의 검색 결과</div>
       </div>
     </div>
-    <div class="w-full border-b-2">
-      <button
-        class="px-4"
-        :class="{ 'border-b-2 border-black': type === 'movies' }"
-      >
-        <router-link :to="{ name: 'search', query: { query, type: 'movies' } }"
-          >콘텐츠</router-link
+    <div class="max-w-container mx-auto pt-0 px-9">
+      <div class="w-full border-b-2">
+        <button
+          class="px-4 h-14"
+          :class="{ 'border-b-2 border-black': type === 'movies' }"
         >
-      </button>
-      <button
-        class="px-4"
-        :class="{ 'border-b-2 border-black': type === 'users' }"
-      >
-        <router-link :to="{ name: 'search', query: { query, type: 'users' } }"
-          >유저</router-link
+          <router-link
+            :to="{ name: 'search', query: { query, type: 'movies' } }"
+            >콘텐츠</router-link
+          >
+        </button>
+        <button
+          class="px-4"
+          :class="{ 'border-b-2 border-black': type === 'users' }"
         >
-      </button>
-    </div>
-    <article
-      v-if="type === 'movies'"
-      class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-10"
-    >
-      <MainPosterCard v-for="num in 6" :key="num" />
-    </article>
-    <article
-      v-if="type === 'users'"
-      class="grid grid-cols-1 md:grid-cols-2 w-full gap-5 mt-10"
-    >
-      <SearchUserCard v-for="num in 6" :key="num" class="w-full" />
-    </article>
-    <article class="flex flex-col h-[80vh] justify-center items-center">
-      <LoadingSpinner v-if="isLoading" />
-      <div
-        v-if="searchData.length === 0 && !isLoading"
-        class="flex flex-col justify-center items-center"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-20 w-20"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-          />
-        </svg>
-        <p class="text-h5 mt-5">
-          검색 결과가 없어요. 다른 검색어를 입력해주세요.
-        </p>
+          <router-link :to="{ name: 'search', query: { query, type: 'users' } }"
+            >유저</router-link
+          >
+        </button>
       </div>
-    </article>
+      <article
+        v-if="type === 'movies'"
+        class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-10"
+      >
+        <MainPosterCard v-for="num in 6" :key="num" />
+      </article>
+      <article
+        v-if="type === 'users'"
+        class="grid grid-cols-1 md:grid-cols-2 w-full gap-5 mt-10"
+      >
+        <SearchUserCard v-for="num in 6" :key="num" class="w-full" />
+      </article>
+      <article class="flex flex-col h-[80vh] justify-center items-center">
+        <LoadingSpinner v-if="isLoading" />
+        <div
+          v-if="searchData.length === 0 && !isLoading"
+          class="flex flex-col justify-center items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-20 w-20"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+            />
+          </svg>
+          <p class="text-h5 mt-5">
+            검색 결과가 없어요. 다른 검색어를 입력해주세요.
+          </p>
+        </div>
+      </article>
+    </div>
   </section>
 </template>
 

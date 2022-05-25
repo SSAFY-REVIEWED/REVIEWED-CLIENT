@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full bg-slate-200">
+    <div class="max-w-container mx-auto pt-0 px-9 ">
       <ProfileHeader :userId="targetUserId" />
     </div>
     <router-view></router-view>
@@ -33,7 +33,7 @@ export default {
   },
   async mounted() {
     await this.getUserProfile(this.targetUserId);
-  }
+  },
 };
 </script>
 

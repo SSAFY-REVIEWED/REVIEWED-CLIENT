@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen relative mt-10">
+  <section class="max-w-container mx-auto pt-0 px-9 min-h-screen relative mt-10">
     <article class="mt-10">
       <MainHeader />
       <HotReviews />

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-fit">
+  <div class="w-full h-fit max-w-container mx-auto pt-0 px-9">
     <ProfileChartList
       :reviewDateCountList="reviewDateCountList"
       :reviewGenreCountList="reviewGenreCountList"

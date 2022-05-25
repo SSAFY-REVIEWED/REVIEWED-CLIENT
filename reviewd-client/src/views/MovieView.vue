@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen relative">
+  <div class="min-h-screen relative max-w-container mx-auto pt-0 px-9">
     <MovieHeader />
     <MovieMain />
   </div>

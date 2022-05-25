@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full min-h-[50vh]">
+  <section class="max-w-container mx-auto pt-0 px-9 min-h-[50vh]">
     <h1>{{userProfile.name}}님이 작성한 리뷰 목록</h1>
     <article v-if="reviewList.length">
       <ReviewCard

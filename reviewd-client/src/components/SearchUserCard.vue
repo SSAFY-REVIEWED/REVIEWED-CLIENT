@@ -20,7 +20,7 @@
           <p class="text-h5 text-light-black">리뷰 100</p>
         </div>
         <div class="flex items-center">
-          <button>Follow</button>
+          <FollowButton />
         </div>
       </div>
     </div>
@@ -28,7 +28,14 @@
 </template>
 
 <script>
-export default {};
+import FollowButton from '@/components/FollowButton'
+
+export default {
+  name: "searchUserCard",
+  components: {
+    FollowButton
+  }
+};
 </script>
 
 <style></style>
