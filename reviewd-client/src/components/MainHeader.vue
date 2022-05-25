@@ -1,7 +1,7 @@
 <template>
   <div class="w-full relative mb-6">
     <h1 class="text-h3 font-semibold">MOVIE</h1>
-    <h2 class="text-h4">JAEHO님을 위한 강력 추천 영화</h2>
+    <h2 class="text-h4 text-light-black">JAEHO님을 위한 강력 추천 영화</h2>
     <div class="relative mt-6">
       <swiper class="swiper px-16 bg-white shadow-none" :options="swiperOption">
         <swiper-slide v-for="num in 10" :key="num" class="py-1"

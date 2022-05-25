@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <section>
     <div class="max-w-container mx-auto pt-0 px-9 ">
       <ProfileHeader :userId="targetUserId" />
     </div>
     <router-view></router-view>
-  </div>
+  </section>
 </template>
 
 <script>

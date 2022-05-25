@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen mx-auto max-w-container pt-0 px-9 mt-20">
+  <section class="min-h-screen mx-auto max-w-container pt-0 px-9">
     <article
       class="min-h-screen flex flex-col justify-center items-center"
       v-if="isLoading"
@@ -64,13 +64,13 @@
 <script>
 import { mapMutations } from "vuex";
 import { postData } from "@/api/index";
-import {LoadingSpinner} from '@/components/LoadingSpinner'
+import LoadingSpinner from "@/components/LoadingSpinner";
 import VueCookies from "vue-cookies";
 
 export default {
   name: "surveyView",
   components: {
-    LoadingSpinner
+    LoadingSpinner,
   },
   data() {
     return {
@@ -119,7 +119,7 @@ export default {
         this.setLoading();
         const response = await postData("SURVEY", this.preferenceGenreList);
         //TODO: 삭제하기
-        console.log(response)
+        console.log(response);
         this.$router.push({ name: "main" });
         // TODO: Error handling
       } catch (err) {
