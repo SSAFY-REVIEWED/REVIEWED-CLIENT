@@ -1,7 +1,9 @@
 <template>
-  <div class="min-h-screen relative max-w-container mx-auto pt-0 px-9 mt-36">
+  <div class="max-w-container mx-auto">
     <MovieHeader />
-    <MovieMain />
+    <div class="min-h-screen relative max-w-container mx-auto pt-0 px-9">
+      <MovieMain />
+    </div>
   </div>
 </template>
 
@@ -29,7 +31,7 @@ export default {
   created() {
     this.setMovieId(this.$route.params);
   },
-  //TODO: api 동기화 시 해제
+  // TODO: api 동기화 시 해제
   // async mounted() {
   //   await this.getMovieDetail(this.movieId);
   //   this.isDataReady();

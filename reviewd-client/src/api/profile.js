@@ -40,8 +40,8 @@ const ProfileAPI = {
 export const PROFILE_URL = {
   PROFILE: (userId) => `/profile/${userId}/`,
   HISTORY: (userId) => `/profile/${userId}/history/`,
-  MOVIE_LIST: (userId, page) => `/profile/${userId}/movies?page=${page}/`,
-  REVIEW_LIST: (userId, page) => `/profile/${userId}/reviews?page=${page}/`,
+  MOVIE_LIST: (userId, page) => `/profile/${userId}/movies?page=${page}`,
+  REVIEW_LIST: (userId, page) => `/profile/${userId}/reviews?page=${page}`,
   FOLLOWINGS: (userId) => `/profile/${userId}/following/`,
   FOLLOWERS: (userId) => `/profile/${userId}/followed/`,
   DELETE_FOLLOWER: (userId, targetId) =>

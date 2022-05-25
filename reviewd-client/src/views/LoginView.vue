@@ -15,7 +15,7 @@
           :value="password"
           @set-sign-value="setSignValue"
         />
-        <SignButton :progress="isCompleted" />
+        <SignButton :progress="isCompleted" :state="state"/>
         <GoogleLogin />
       </form>
     </div>
@@ -44,6 +44,7 @@ export default {
       email: "",
       password: "",
       isCompleted: false,
+      state: "login"
     };
   },
   methods: {

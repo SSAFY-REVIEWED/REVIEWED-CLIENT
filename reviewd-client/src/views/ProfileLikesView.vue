@@ -1,6 +1,33 @@
 <template>
-  <section class="max-w-container mx-auto pt-0 px-9 relative">
-    <h1>{{ userProfile.name }}님이 보고싶어하는 영화 목록</h1>
+  <section class="max-w-container mx-auto pt-0 px-9 relative min-h-[30vh]">
+    <h1 class="text-h4 font-bold my-5 relative">
+      {{ userProfile.name }}님이 보고싶어하는 영화 목록
+    </h1>
+    <article
+      v-if="!movieList.length && !hasMore"
+      class="w-full h-[20vh] flex flex-col justify-center items-center relative"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-10 w-10"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <p class="text-h5">아직 보고싶은 영화가 없어요.</p>
+    </article>
+    <article v-if="movieList.length">
+      <ReviewCard
+        v-for="movie in movieList"
+        :key="movie.movieId"
+        :movie="movie"
+      />
+    </article>
     <article v-if="movieList.length" class="grid grid-cols-4 gap-4">
       <MainPosterCard
         v-for="movie in movieList"
@@ -8,7 +35,16 @@
         :movie="movie"
       />
     </article>
-    <Trigger :hasMore="hasMore" @triggerIntersected="getTargetUserLikedMovieList" />
+    <div
+      v-if="isLoading"
+      class="w-full h-full flex justify-center items-center"
+    >
+      <LoadingSpinner />
+    </div>
+    <Trigger
+      :hasMore="hasMore"
+      @triggerIntersected="getTargetUserLikedMovieList"
+    />
   </section>
 </template>
 
@@ -17,57 +53,60 @@ import MainPosterCard from "@/components/MainPosterCard";
 import { mapGetters } from "vuex";
 import ProfileAPI from "@/api/profile";
 import Trigger from "@/components/TheTrigger";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default {
   name: "profileLikesView",
   components: {
     MainPosterCard,
     Trigger,
+    LoadingSpinner,
   },
   data() {
     return {
       targetUserId: null,
-      // TODO: 데이터 실제 데이터로 대체
-      movieList: [
-        {
-          movieId: 2,
-          movieTitle: "혼돈",
-          posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-          rate: 7.7,
-        },
-        {
-          movieId: 3,
-          movieTitle: "혼돈",
-          posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-          rate: 7.7,
-        },
-        {
-          movieId: 4,
-          movieTitle: "혼돈",
-          posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-          rate: 7.7,
-        },
-        {
-          movieId: 5,
-          movieTitle: "혼돈",
-          posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-          rate: 7.7,
-        },
-        {
-          movieId: 6,
-          movieTitle: "혼돈",
-          posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-          rate: 7.7,
-        },
-        {
-          movieId: 7,
-          movieTitle: "혼돈",
-          posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-          rate: 7.7,
-        },
-      ],
+      // movieList: [
+      //   {
+      //     movieId: 2,
+      //     movieTitle: "혼돈",
+      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
+      //     rate: 7.7,
+      //   },
+      //   {
+      //     movieId: 3,
+      //     movieTitle: "혼돈",
+      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
+      //     rate: 7.7,
+      //   },
+      //   {
+      //     movieId: 4,
+      //     movieTitle: "혼돈",
+      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
+      //     rate: 7.7,
+      //   },
+      //   {
+      //     movieId: 5,
+      //     movieTitle: "혼돈",
+      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
+      //     rate: 7.7,
+      //   },
+      //   {
+      //     movieId: 6,
+      //     movieTitle: "혼돈",
+      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
+      //     rate: 7.7,
+      //   },
+      //   {
+      //     movieId: 7,
+      //     movieTitle: "혼돈",
+      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
+      //     rate: 7.7,
+      //   },
+      // ],
+      movieList: [],
       hasMore: true,
       page: 1,
+      isLoading: false,
     };
   },
   methods: {
@@ -75,7 +114,7 @@ export default {
       this.targetUserId = this.$route.params.userId;
     },
     setMovieList(response) {
-      this.movieList = response.data.movies;
+      this.likesList = response.data.movies;
       this.page++;
       this.hasMore = response.data.hasMore;
     },
@@ -95,7 +134,7 @@ export default {
   computed: { ...mapGetters(["userProfile"]) },
   created() {
     this.setTargetUserId();
-    // this.getTargetUserMovieList()
+    this.getTargetUserLikedMovieList();
   },
 };
 </script>

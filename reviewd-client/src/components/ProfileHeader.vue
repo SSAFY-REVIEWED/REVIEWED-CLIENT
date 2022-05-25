@@ -47,14 +47,15 @@
               color: color,
             }"
           >
-            {{ userProfile.level }}
+            {{ userProfile.level }} &nbsp;
           </p>
-          <div>
+          <div class="w-10 h-10 rounded-full overflow-hidden">
             <img
               :src="userProfile.levelImg"
               :alt="`${userProfile.level} 레벨 이미지`"
               width="50"
               height="50"
+              class="w-full h-full bg-transparent"
             />
           </div>
         </div>
@@ -165,7 +166,6 @@ export default {
     },
     getPageNum() {
       this.pageName = this.$route.name;
-
     },
   },
   computed: {
