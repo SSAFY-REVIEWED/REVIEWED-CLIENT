@@ -1,18 +1,41 @@
 <template>
   <section class="min-h-screen">
-    <h1>"{{ searchKeyword }}"의 검색 결과</h1>
-    <div class="w-full border-b-4">
-      <button class="px-3">
+    <div class="w-full h-12 align-middle flex items-center">
+      <!-- <div class="h-12 bg-inherit w-full absolute z-1 left-0"></div> -->
+      <div class="w-[100vw] text-h5 bg-transparent bg-slate-300">
+        "{{ searchKeyword }}"의 검색 결과
+      </div>
+    </div>
+    <div class="w-full border-b-2">
+      <button
+        class="px-4"
+        :class="{ 'border-b-2 border-black': type === 'movies' }"
+      >
         <router-link :to="{ name: 'search', query: { query, type: 'movies' } }"
           >콘텐츠</router-link
         >
       </button>
-      <button class="px-3">
+      <button
+        class="px-4"
+        :class="{ 'border-b-2 border-black': type === 'users' }"
+      >
         <router-link :to="{ name: 'search', query: { query, type: 'users' } }"
           >유저</router-link
         >
       </button>
     </div>
+    <article
+      v-if="type === 'movies'"
+      class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-10"
+    >
+      <MainPosterCard v-for="num in 6" :key="num" />
+    </article>
+    <article
+      v-if="type === 'users'"
+      class="grid grid-cols-1 md:grid-cols-2 w-full gap-5 mt-10"
+    >
+      <SearchUserCard v-for="num in 6" :key="num" class="w-full" />
+    </article>
     <article class="flex flex-col h-[80vh] justify-center items-center">
       <LoadingSpinner v-if="isLoading" />
       <div
@@ -45,10 +68,14 @@
 import { mapGetters, mapMutations } from "vuex";
 import SearchAPI from "@/api/search";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import MainPosterCard from "@/components/MainPosterCard";
+import SearchUserCard from "@/components/SearchUserCard";
 export default {
   name: "searchView",
   components: {
     LoadingSpinner,
+    MainPosterCard,
+    SearchUserCard,
   },
   data() {
     return {
