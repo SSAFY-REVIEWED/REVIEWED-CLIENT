@@ -35,7 +35,7 @@ export default {
     async getUserProfile({ commit }, userId) {
       try {
         const response = await ProfileAPI.getProfile(userId);
-        console.log(response.data, '유저 데이터')
+        console.log(response.data, "유저 데이터");
         commit("setUserProfile", response.data);
       } catch (err) {
         console.log(err);

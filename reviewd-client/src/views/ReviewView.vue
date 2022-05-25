@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-red-300 min-h-screen py-3">
+  <div class="max-w-container pt-0 px-9 mt-20 bg-red-300 min-h-screen py-3">
     <ReviewDetail
       :review="review"
       @edit-user-review="editUserReview"

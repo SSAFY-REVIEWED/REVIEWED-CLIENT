@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full bg-slate-200">
+    <div class="max-w-container mx-auto pt-0 px-9 ">
       <ProfileHeader :userId="targetUserId" />
     </div>
     <router-view></router-view>
@@ -22,15 +22,17 @@ export default {
   },
   methods: {
     ...mapActions(["getUserProfile"]),
-    getParams() {
+    getTargetUserId() {
       const params = this.$route.params.userId;
       this.targetUserId = +params;
     },
   },
   computed: {},
   created() {
-    this.getParams();
-    this.getUserProfile(this.targetUserId);
+    this.getTargetUserId();
+  },
+  async mounted() {
+    await this.getUserProfile(this.targetUserId);
   },
 };
 </script>

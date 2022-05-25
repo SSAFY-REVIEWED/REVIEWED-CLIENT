@@ -26,7 +26,8 @@
 
         <li class="ml-auto">
           <form
-            class="border-solid w-96 h-12 rounded-2xl shadow-inner-input flex items-center px-3"
+            class="border-solid w-96 h-12 rounded-2xl shadow-inner-input flex items-center px-3 relative"
+            @submit.prevent="search"
           >
             <label for="search-input"
               ><svg
@@ -47,10 +48,19 @@
             <input
               type="text"
               id="search-input"
-              name="search-input "
-              class="w-full p-0 ml-3 overflow-hidden text-ellipsis tracking-tight text-p font-normal h-8 focus:outline-none"
+              name="query"
+              class="w-full p-0 pr-10 ml-3 overflow-hidden text-ellipsis tracking-tight text-p font-normal h-8 focus:outline-none"
               placeholder="콘텐츠, 유저를 검색해 보세요."
+              autocomplete="off"
+              v-model="keyword"
             />
+            <button
+              class="absolute right-0 top-0 m-1 h-10 bg-primary-blue text-white font-bold w-55 rounded-xl transition-all duration-300"
+              v-if="isMoreOneLetter"
+              type="submit"
+            >
+              검색
+            </button>
           </form>
         </li>
         <li class="ml-3% pt-1">
@@ -105,6 +115,7 @@
               </button>
               <button
                 class="flex-1 w-full flex items-center px-3 rounded-md hover:bg-slate-50 text-slate-400 hover:text-slate-800"
+                @click="setLogout"
               >
                 <router-link :to="{ name: 'home' }" class="w-full">
                   <div class="flex-1 flex items-center">
@@ -156,31 +167,65 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "theNavigation",
   data() {
     return {
       isProfileMenuOn: false,
+      keyword: "",
+      routerName: "",
+      isMoreOneLetter: false,
     };
   },
   methods: {
+    ...mapMutations(["setKeyword", "logout"]),
     makeProfileMenuOn() {
       this.isProfileMenuOn = true;
     },
     makeProfileMenuOff() {
       this.isProfileMenuOn = false;
     },
+    setLogout() {
+      this.$toast(`${this.profile.name}님 다음에 또 만나요 🙂`);
+      this.logout();
+      this.$router.push({ name: "home" });
+    },
+    search() {
+      this.validateMoreOneLetter();
+      if (!this.isMoreOneLetter) return;
+      this.$router.push({
+        name: "search",
+        query: { query: this.keyword, type: "movies" },
+      });
+    },
+    setRouterName() {
+      this.routerName = this.$router.name;
+    },
+    validateMoreOneLetter() {
+      this.keyword = this.keyword.trim();
+      if (this.keyword.length > 0) {
+        this.isMoreOneLetter = true;
+      } else this.isMoreOneLetter = false;
+    },
   },
   computed: {
-    ...mapGetters(["isLoggedIn", "profile"]),
+    ...mapGetters(["isLoggedIn", "profile", "searchKeyword"]),
     userId() {
       return this.profile.userId;
     },
   },
   watch: {
-    isProfileMenuOn() {
-      console.log(this.isProfileMenuOn);
+    searchKeyword() {
+      this.keyword = this.searchKeyword;
+    },
+    $route() {
+      if (this.$route.name === "search") return;
+      this.setKeyword("");
+      this.keyword = "";
+    },
+    keyword() {
+      this.validateMoreOneLetter();
     },
   },
 };

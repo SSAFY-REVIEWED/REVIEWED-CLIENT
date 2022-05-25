@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full relative">
+  <section class="max-w-container mx-auto pt-0 px-9 relative">
     <h1>{{ userProfile.name }}님이 평가한 영화 목록</h1>
     <article v-if="movieList.length" class="grid grid-cols-4 gap-4">
       <MainPosterCard

@@ -1,5 +1,8 @@
 <template>
-  <article class="w-full h-96 bg-red-400 relative flex p-10 mt-10">
+  <article
+    class="w-full h-96 bg-red-400 relative flex p-10 mt-10"
+    v-if="userProfile"
+  >
     <div class="w-1/3 flex justify-center items-center">
       <div class="w-44 h-44 overflow-hidden rounded-full shadow-3xl">
         <img

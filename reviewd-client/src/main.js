@@ -14,7 +14,7 @@ const options = {
   position: POSITION.TOP_CENTER,
   toastDefaults: {
     [TYPE.ERROR]: {
-      timeout: 5000,
+      timeout: 3000,
     },
     [TYPE.SUCCESS]: {
       timeout: 3000,

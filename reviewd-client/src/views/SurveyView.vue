@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen mx-auto">
+  <section class="min-h-screen mx-auto max-w-container pt-0 px-9 mt-20">
     <article
       class="min-h-screen flex flex-col justify-center items-center"
       v-if="isLoading"
@@ -7,9 +7,7 @@
       <h1 class="text-h1 font-bold">
         {{ name }}JAEHO 님의 취향을 분석하고 있습니다.
       </h1>
-      <div
-        class="mt-14 w-20 h-20 border-8 border-t-transparent animate-spin rounded-full"
-      ></div>
+      <LoadingSpinner />
     </article>
     <section
       class="min-h-screen flex flex-col justify-center items-center"
@@ -66,10 +64,14 @@
 <script>
 import { mapMutations } from "vuex";
 import { postData } from "@/api/index";
+import {LoadingSpinner} from '@/components/LoadingSpinner'
 import VueCookies from "vue-cookies";
 
 export default {
   name: "surveyView",
+  components: {
+    LoadingSpinner
+  },
   data() {
     return {
       movieCategory: [

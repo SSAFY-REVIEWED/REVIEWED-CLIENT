@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapMutations, mapActions, mapGetters } from "vuex";
 import SignInput from "@/components/SignInput.vue";
 import SignButton from "@/components/SignButton.vue";
 import GoogleLogin from "@/components/GoogleLogin.vue";
@@ -66,11 +66,10 @@ export default {
       };
       try {
         const response = await postData("LOGIN", body);
-        const { message } = response.data;
-        this.$toast.success(message);
         this.setToken(response.data);
         try {
           await this.getUser();
+          this.$toast.success(`리뷰쓰기 좋은 날 이에요 ${this.profile.name}님😀`);
           this.$router.push({ name: "main" });
         } catch (err) {
           console.log(err);
@@ -85,6 +84,9 @@ export default {
       VueCookies.set("accessToken", token.access, "2h");
       VueCookies.set("refreshToken", token.refresh, "7d");
     },
+  },
+  computed:{
+    ...mapGetters(['profile'])
   },
   created() {
     this.setLoggingIn(this.$route);
