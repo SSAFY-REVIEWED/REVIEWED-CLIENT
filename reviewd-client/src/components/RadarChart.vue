@@ -38,7 +38,10 @@ export default {
     Radar,
   },
   props: {
-    movieGenreList: {
+    genreList: {
+      type: Array,
+    },
+    reviewCountList: {
       type: Array,
     },
     reviewGenreCountList: {
@@ -76,7 +79,7 @@ export default {
   data() {
     return {
       chartData: {
-        labels: this.movieGenreList,
+        labels: this.genreList,
         datasets: [
           {
             label: "Genre",
@@ -86,10 +89,7 @@ export default {
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(179,181,198,1)",
-            data: [
-              65, 59, 90, 81, 56, 55, 40, 65, 59, 90, 81, 56, 55, 40, 65, 59,
-              90, 81, 56, 55, 40,
-            ],
+            data: this.reviewCountList,
           },
         ],
       },

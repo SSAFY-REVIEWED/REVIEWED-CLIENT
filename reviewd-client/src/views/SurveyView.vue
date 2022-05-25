@@ -4,8 +4,8 @@
       class="min-h-screen flex flex-col justify-center items-center"
       v-if="isLoading"
     >
-      <h1 class="text-h1 font-bold">
-        {{ name }}JAEHO 님의 취향을 분석하고 있습니다.
+      <h1 class="text-h3 md:text-h2 lg:text-h1 font-bold text-center leading-1">
+        {{ name }} 님의 취향을 분석하고 있습니다.
       </h1>
       <LoadingSpinner />
     </article>
@@ -96,7 +96,7 @@ export default {
       ],
       preferenceGenreList: [],
       isLoading: false,
-      name: VueCookies.get("name"),
+      name: VueCookies.get("profile").name,
     };
   },
   methods: {

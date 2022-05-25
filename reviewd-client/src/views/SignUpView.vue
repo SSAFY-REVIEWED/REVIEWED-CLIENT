@@ -52,12 +52,12 @@ export default {
   },
   data() {
     return {
-      email: "asd@g.com",
+      email: "",
       password: "",
       passwordCheck: "",
       name: "",
       isValidEmail: false,
-      isCheckingEmail: false,
+      isCheckingEmail: true,
     };
   },
   methods: {
