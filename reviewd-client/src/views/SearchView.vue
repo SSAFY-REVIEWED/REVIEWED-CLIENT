@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen w-full">
+  <section class="min-h-screen w-full mt-60px">
     <div
       class="w-full h-12 align-middle flex items-center bg-slate-300 overflow-visible"
     >

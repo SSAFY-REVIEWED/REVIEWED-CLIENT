@@ -1,6 +1,6 @@
 <template>
   <section
-    class="max-w-container mx-auto pt-0 px-9 min-h-screen mt-20 relative"
+    class="max-w-container mx-auto pt-0 px-9 min-h-screen relative mt-20"
   >
     <div>
       <h1 class="text-h3 font-semibold">RANK</h1>

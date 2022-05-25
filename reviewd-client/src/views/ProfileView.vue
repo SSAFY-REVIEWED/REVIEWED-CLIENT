@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <div class="max-w-container mx-auto pt-0 px-9 ">
+  <section class="max-w-container mx-auto pt-0 px-9 mt-36">
+    <div>
       <ProfileHeader :userId="targetUserId" />
     </div>
     <router-view></router-view>
