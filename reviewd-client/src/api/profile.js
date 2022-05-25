@@ -21,7 +21,7 @@ const ProfileAPI = {
     };
     console.log(config);
 
-    return axios.patch(PROFILE_URL.PROFILE(userId), body);
+    return axios.post(PROFILE_URL.PROFILE(userId), body);
   },
   async getFollowings(userId) {
     return axios.get(PROFILE_URL.FOLLOWINGS(userId));
