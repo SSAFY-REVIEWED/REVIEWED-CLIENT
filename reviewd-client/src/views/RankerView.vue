@@ -1,5 +1,5 @@
 <template>
-  <div>Rank View </div>
+  <div class="w-full min-h-screen"></div>
 </template>
 
 <script>

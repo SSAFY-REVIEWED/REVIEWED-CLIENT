@@ -22,16 +22,18 @@ export default {
   },
   methods: {
     ...mapActions(["getUserProfile"]),
-    getParams() {
+    getTargetUserId() {
       const params = this.$route.params.userId;
       this.targetUserId = +params;
     },
   },
   computed: {},
   created() {
-    this.getParams();
-    this.getUserProfile(this.targetUserId);
+    this.getTargetUserId();
   },
+  async mounted() {
+    await this.getUserProfile(this.targetUserId);
+  }
 };
 </script>
 

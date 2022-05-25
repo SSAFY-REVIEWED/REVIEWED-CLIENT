@@ -18,6 +18,7 @@ import ProfileLikesView from "@/views/ProfileLikesView";
 import ProfileMoviesView from "@/views/ProfileMoviesView";
 import ProfileReviewsView from "@/views/ProfileReviewsView";
 import ProfileSettingsView from "@/views/ProfileSettingsView";
+import SearchView from "@/views/SearchView";
 
 Vue.use(VueRouter);
 
@@ -148,6 +149,15 @@ const routes = [
         component: ProfileSettingsView,
       },
     ],
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: SearchView,
+    meta: {
+      title: "Search",
+      authorized: false,
+    },
   },
 ];
 

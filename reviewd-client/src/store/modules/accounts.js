@@ -26,23 +26,32 @@ export default {
       state.isLoggingIn = false;
     },
     setProfile: (state, data) => {
-      console.log(data)
+      console.log(data);
       const profile = {
         name: data.name,
         profileImg: data.profileImg,
         userId: data.userId,
-        survey: data.survey
+        survey: data.survey,
       };
       state.profile = {
         ...state.profile,
         ...profile,
       };
-      console.log(state.profile, "profile'")
+      console.log(state.profile, "profile'");
       VueCookies.set("profile", profile);
-      console.log(VueCookies.get("profile"), "뷰 쿠키 확인")
+      console.log(VueCookies.get("profile"), "뷰 쿠키 확인");
     },
     setLoggedIn: (state) => {
       state.isLoggedIn = true;
+    },
+    initializeProfile: (state) => {
+      state.profile = {};
+    },
+    logout: (state) => {
+      state.isLoggedIn = false;
+      VueCookies.remove("profile");
+      VueCookies.remove("accessToken");
+      VueCookies.remove("refreshToken");
     },
   },
   actions: {
