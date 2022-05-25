@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <div v-if="profile.userId === userId">
     <button
       class="border-r-2 border-light-black px-4"
-      v-if="profile.userId === userId"
       @click="toggleEditing"
     >
       <svg
@@ -18,7 +17,6 @@
     </button>
     <button
       class="px-4"
-      v-if="profile.userId === userId"
       @click="deleteContent"
     >
       <svg
