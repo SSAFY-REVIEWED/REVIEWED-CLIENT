@@ -1,7 +1,7 @@
 <template>
-  <router-link :to="{ name: 'profile', params: { userId: ranker.userId } }">
+  <router-link :to="{ name: 'history', params: { userId: ranker.userId } }">
     <article
-      class="w-64 h-64 bg-second-blue flex flex-col justify-center rounded-lg shadow-3xl gap-y-4 relative text-white font-bold"
+      class="w-64 h-64 bg-second-blue flex flex-col justify-center rounded-lg shadow-3xl gap-y-4 relative text-white font-bold hover:scale-105 transition-all duration-300"
     >
       <p class="absolute top-0 left-0 ml-5 my-5">{{ index }}</p>
       <div class="mx-auto flex items-center">

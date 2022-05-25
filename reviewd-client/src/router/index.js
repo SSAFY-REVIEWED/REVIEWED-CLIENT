@@ -127,26 +127,46 @@ const routes = [
         name: "history",
         alias: [""],
         component: ProfileHistoryView,
+        meta: {
+          title: "History",
+          authorized: false,
+        },
       },
       {
         path: "likes",
         name: "likes",
         component: ProfileLikesView,
+        meta: {
+          title: "Likes",
+          authorized: false,
+        },
       },
       {
         path: "movies",
         name: "movies",
         component: ProfileMoviesView,
+        meta: {
+          title: "Movies",
+          authorized: false,
+        },
       },
       {
         path: "reviews",
         name: "reviews",
         component: ProfileReviewsView,
+        meta: {
+          title: "Reviews",
+          authorized: false,
+        },
       },
       {
         path: "settings",
         name: "settings",
         component: ProfileSettingsView,
+        meta: {
+          title: "Settings",
+          authorized: false,
+        },
       },
     ],
   },

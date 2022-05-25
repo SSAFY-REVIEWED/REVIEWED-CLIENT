@@ -26,20 +26,66 @@
         />
       </div>
     </article>
-    <article>
-      <div class="w-full h-fit" v-if="tenRankerList.length">
-        <table>
-          <th>랭킹</th>
-          <th>이름</th>
-          <th>레벨</th>
-          <th>경험치</th>
-          <tr v-for="(ranker, index) in tenRankerList" :key="ranker.id">
-            <td>{{index + 6}}</td>
-            <td>{{ranker.name}}</td>
-            <td>{{ranker}}</td>
-            <td></td>
-            <td></td>
-          </tr>
+    <article class="px-10 mb-10">
+      <div
+        class="w-full h-fit rounded-lg border-[1px] border-slate-100 shadow-2xl"
+        v-if="tenRankerList.length"
+      >
+        <table class="w-full rounded-lg">
+          <thead class="h-20 border-b-2 border-primary-blue">
+            <th>랭킹</th>
+            <th>이름</th>
+            <th>레벨</th>
+            <th>경험치</th>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(ranker, index) in tenRankerList"
+              :key="ranker.id"
+              class="h-12 hover:scale-[1.02] transition-all duration-300"
+            >
+              <td class="text-center">{{ index + 6 }}</td>
+              <td class="">
+                <router-link
+                  :to="{ name: 'history', params: { userId: ranker.userId } }"
+                >
+                  <div
+                    class="flex justify-between items-center gap-x-6 w-36 mx-auto"
+                  >
+                    <img
+                      :src="ranker.profileImg"
+                      :alt="`${ranker.name} 프로필 이미지`"
+                      width="30"
+                      height="30"
+                      loading="lazy"
+                      class="rounded-full"
+                    />
+                    <div class="mr-auto">
+                      <p>{{ ranker.name }}</p>
+                    </div>
+                  </div>
+                </router-link>
+              </td>
+              <td class="">
+                <div
+                  class="flex justify-between items-center gap-x-6 w-20 mx-auto"
+                >
+                  <img
+                    :src="ranker.levelImg"
+                    alt="level Image"
+                    width="30"
+                    height="30"
+                    loading="lazy"
+                    class="rounded-full"
+                  />
+                  <div>
+                    {{ ranker.level }}
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">{{ ranker.exp }}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </article>
@@ -49,6 +95,7 @@
 <script>
 import RankerUserCard from "@/components/RankerUserCard";
 import SearchAPI from "@/api/search";
+import { getLevel } from "@/utils/utils.js";
 
 export default {
   name: "RankView",
@@ -68,8 +115,18 @@ export default {
       this.rankerList = rankerList;
       this.topRanker = rankerList[0];
       this.FourRankerList = rankerList.slice(1, 5);
-      this.tenRankerList = rankerList.slice(5, 15);
-      console.log(this.FourRankerList, this.tenRankerList);
+      const arr = rankerList.slice(5, 15);
+      if (arr.length) {
+        this.setTenRankerList(arr);
+      }
+    },
+    setTenRankerList(RankerList) {
+      const arr = [];
+      for (let ranker of RankerList) {
+        ranker.level = getLevel(ranker);
+        arr.push(ranker);
+      }
+      this.tenRankerList = arr;
     },
     async getRankerList() {
       try {
