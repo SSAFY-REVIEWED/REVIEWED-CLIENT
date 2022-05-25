@@ -26,9 +26,9 @@
           </div>
         </div>
         <label for="text"></label>
-        <input type="text" :value="inputData.bio" class="bg-blue-400" />
+        <input type="text" v-model="inputData.bio" class="bg-blue-400" />
         <br />
-        <input type="text" class="bg-blue-400" :value="inputData.name" />
+        <input type="text" class="bg-blue-400" v-model="inputData.name" />
         <button type="submit">제출하기</button>
       </form>
     </div>
@@ -56,7 +56,6 @@ export default {
     },
     handleFiles() {
       const image = this.$refs.image.files[0];
-      console.log(image);
       if (image.size > 2097152) {
         this.$toast.error("2mb 이하의 크기의 사진을 넣어주세요.");
         return;
@@ -65,9 +64,9 @@ export default {
       this.$refs.imageLoader.onload = () => {
         window.URL.revokeObjectURL(this.src);
       };
-      this.inputData.profileImg = this.$refs.image.files[0];
+      this.inputData.profileImg = image;
     },
-    setInputData() {
+    async setInputData() {
       this.inputData.bio = this.userProfile.bio;
       this.inputData.name = this.userProfile.name;
     },
@@ -85,15 +84,19 @@ export default {
     },
     setTargetUserId() {
       this.targetUserId = this.$route.params.userId;
-      console.log(this.targetUserId);
     },
   },
   computed: {
     ...mapGetters(["userProfile"]),
   },
-  created() {
+  watch: {
+    userProfile() {
+      this.setInputData();
+    },
+  },
+  async created() {
     this.setTargetUserId();
-    this.setInputData();
+    await this.setInputData();
   },
 };
 </script>

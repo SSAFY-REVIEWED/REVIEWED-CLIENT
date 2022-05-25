@@ -18,7 +18,7 @@
         <h1>{{ userProfile.name }}</h1>
         <button
           @click="toggleFollow"
-          v-if="profile.userId === userId"
+          v-if="profile.userId !== userId"
           class="p-4"
           :class="{
             'bg-red-900': userProfile.follow,
@@ -70,7 +70,7 @@
       <div class="flex">
         <h2>{{ userProfile.level }}</h2>
         <img
-          src="../assets/images/levels/webp/gold.webp"
+          :src="userProfile.levelImg"
           :alt="`${userProfile.level} 레벨 이미지`"
           width="40"
           height="40"

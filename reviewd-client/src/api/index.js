@@ -11,7 +11,8 @@ axios.interceptors.request.use(
     console.log(token);
 
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = `Bearer ${token}`;
+      config.headers["Content-Type"] = "multipart/form-data";
     }
     console.log(config);
     return config;
