@@ -49,7 +49,7 @@
               type="text"
               id="search-input"
               name="query"
-              class="w-full p-0 ml-3 overflow-hidden text-ellipsis tracking-tight text-p font-normal h-8 focus:outline-none"
+              class="w-full p-0 pr-10 ml-3 overflow-hidden text-ellipsis tracking-tight text-p font-normal h-8 focus:outline-none"
               placeholder="콘텐츠, 유저를 검색해 보세요."
               autocomplete="off"
               v-model="keyword"
