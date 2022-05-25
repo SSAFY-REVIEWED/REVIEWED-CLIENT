@@ -1,12 +1,12 @@
 module.exports = {
   content: ["./public/**/*.html", "./src/**/*.{html,js,vue}"],
   theme: {
-    maxWidth: {
-      container: "1440px",
-      480: "480px",
-      650: "650px",
-    },
     extend: {
+      maxWidth: {
+        container: "1440px",
+        480: "480px",
+        650: "650px",
+      },
       colors: {
         "primary-red": "#F96A19",
         "second-red": "#FB60BD",
@@ -72,10 +72,15 @@ module.exports = {
           to: { rotate: 90 },
         },
       },
+
       animation: {
         fadeIn: "fadeIn 300ms ease-in-out",
         fadeOut: "fadeOut 300ms ease-in-out",
         rotate: "rotate 1000ms linear",
+      },
+      
+      screens: {
+        phone: "390px",
       },
     },
   },

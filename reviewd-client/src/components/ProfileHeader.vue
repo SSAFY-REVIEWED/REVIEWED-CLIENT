@@ -171,11 +171,7 @@ export default {
       }
     },
   },
-  watch: {
-    color() {
-      console.log(this.color);
-    },
-  },
+
   mounted() {
     this.toggleShow();
   },

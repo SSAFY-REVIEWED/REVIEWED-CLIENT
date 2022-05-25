@@ -1,37 +1,37 @@
 <template>
-  <section class="w-full relative min-h-[50vh]">
-    <div class="flex flex-col items-center justify-center">
-      <form @submit.prevent="onSubmitFormData">
-        <div>
-          <div class="w-44 h-44 overflow-hidden rounded-full shadow-3xl">
-            <img
-              :src="userProfile.profileImg"
-              loading="lazy"
-              :alt="`${userProfile.name}이미지`"
-              width="250"
-              height="250"
-              class="hover:scale-110 transition-all duration-500 bg-slate-400 cursor-pointer object-cover"
-              @click="changeProfileImg"
-              ref="imageLoader"
-            />
-            <input
-              type="file"
-              accept="image/png, image/jpeg, image/jpg"
-              ref="image"
-              id="image"
-              name="image"
-              class="hidden bg-black"
-              @change="handleFiles()"
-            />
-          </div>
+  <section
+    class="w-full h-full relative min-h-[50vh] flex flex-col items-center justify-center"
+  >
+    <form @submit.prevent="onSubmitFormData">
+      <div>
+        <div class="w-44 h-44 overflow-hidden rounded-full shadow-3xl">
+          <img
+            :src="userProfile.profileImg"
+            loading="lazy"
+            :alt="`${userProfile.name}이미지`"
+            width="250"
+            height="250"
+            class="hover:scale-110 transition-all duration-500 bg-slate-400 cursor-pointer object-cover"
+            @click="changeProfileImg"
+            ref="imageLoader"
+          />
+          <input
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            ref="image"
+            id="image"
+            name="image"
+            class="hidden bg-black"
+            @change="handleFiles()"
+          />
         </div>
-        <label for="text"></label>
-        <input type="text" v-model="inputData.bio" class="bg-blue-400" />
-        <br />
-        <input type="text" class="bg-blue-400" v-model="inputData.name" />
-        <button type="submit">제출하기</button>
-      </form>
-    </div>
+      </div>
+      <label for="text"></label>
+      <input type="text" v-model="inputData.bio" class="bg-blue-400" />
+      <br />
+      <input type="text" class="bg-blue-400" v-model="inputData.name" />
+      <button type="submit">제출하기</button>
+    </form>
   </section>
 </template>
 
