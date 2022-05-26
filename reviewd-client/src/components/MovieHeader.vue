@@ -127,6 +127,7 @@ export default {
     StarRating,
     ModalView,
   },
+  
   data() {
     return {
       isModalViewed: false,
@@ -143,10 +144,6 @@ export default {
   },
   computed: {
     ...mapGetters(["movieData", "myReview"]),
-    // average() {
-    //   const rate = (this.movieData.voteAverage, 1).toFixed(1);
-    //   return rate;
-    // },
   },
 };
 </script>

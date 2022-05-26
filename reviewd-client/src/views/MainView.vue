@@ -3,11 +3,11 @@
     class="max-w-container mx-auto pt-0 px-9 min-h-screen relative mt-20"
   >
     <article class="mt-10">
-      <h1 class="text-h3 font-semibold">MOVIE</h1>
-      <MainHeader :movieList="movieList" />
+      <h1 class="text-h3 font-semibold" >MOVIE</h1>
+      <MainHeader :movieList="SF" :order="1" />
       <HotReviews v-if="false" />
-      <MainHeader :movieList="movieList1" />
-      <MainHeader :movieList="movieList2" />
+      <MainHeader :movieList="top10" :order="2" />
+      <MainHeader :movieList="액션" :order="3" />
     </article>
   </section>
 </template>
@@ -26,9 +26,10 @@ export default {
   },
   data() {
     return {
-      movieList: [],
-      movieList1: [],
-      movieList2: [],
+      SF:{} ,
+      lately: {},
+      top10: {},
+      action: {}
     };
   },
   methods: {
@@ -38,16 +39,16 @@ export default {
       console.log(this.swiper.activeIndex); //현재 index값 얻기
     },
     setMovieList(response) {
-      this.movieList = response.data[0];
-      this.movieList2 = response.data[1];
-      this.movieList3 = response.data[2];
-      this.movieList, this.movieList2, this.movieList3;
+      console.log(response)
+      this.SF = response.data.SF
+      this.lately = response.data.lately
+      this.top10 = response.data.top10
+      this.액션 = response.data.액션
+    console.log(this.SF, this.lately, this.top10, this.액션)
     },
     async getMovieList() {
       try {
         const response = await MovieAPI.getMainMovieList();
-        console.log(response);
-
         this.setMovieList(response);
       } catch (err) {
         console.log(err);

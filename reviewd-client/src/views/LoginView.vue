@@ -16,9 +16,9 @@
       <div class="text-h5 ml-auto">
         <router-link :to="{ name: 'signup' }">
           <button
-            class="bg-gradient-to-tr to-second-red from-primary-red px-2 py-2 border rounded-md text-white font-semibold"
+            class="bg-primary-blue mt-3 px-6 py-3 rounded-xl text-white font-bold opacity-80 hover:opacity-100 transition-all duration-300"
           >
-            회원가입
+            회원가입 이동
           </button>
         </router-link>
       </div>
