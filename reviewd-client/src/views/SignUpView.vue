@@ -12,7 +12,16 @@
         >
           환상적인 리뷰의 세계로 들어가 볼까요?
         </h1>
-        <p class="text-p mt-5">REVIEWD를 실제로 경험해보세요.</p>
+        <div class="flex items-center text-p my-5">
+          <p class="mr-5 font-semibold">REVIEWD를 실제로 경험해보세요.</p>
+          <router-link :to="{ name: 'login' }">
+            <button
+              class="bg-primary-blue px-10 py-3 rounded-xl text-white font-bold opacity-80 hover:opacity-100 transition-all duration-300"
+            >
+              <p>로그인 하기</p>
+            </button>
+          </router-link>
+        </div>
       </article>
       <SignupEmail
         @check_valid_email="checkValidEmail"

@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen max-w-650 mx-auto">
     <div
-      class="h-full flex flex-col items-center justify-center max-w-480 mx-auto"
+      class="h-full flex flex-col items-center justify-center max-w-480 mx-auto relative"
     >
       <h1
         class="mt-10 flex flex-wrap text-center leading-normal text-h3 bg-gradient-to-r from-primary-blue via-second-blue to-third-blue bg-clip-text transparent text-transparent font-bold"
@@ -13,6 +13,15 @@
       >
         REVIEWD
       </h1>
+      <div class="text-h5 ml-auto">
+        <router-link :to="{ name: 'signup' }">
+          <button
+            class="bg-gradient-to-tr to-second-red from-primary-red px-2 py-2 border rounded-md text-white font-semibold"
+          >
+            회원가입
+          </button>
+        </router-link>
+      </div>
       <form class="w-full" @submit.prevent="login">
         <SignInput
           :type="emailComponent"
