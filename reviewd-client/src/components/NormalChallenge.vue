@@ -1,5 +1,5 @@
 <template>
-  <article class="w-full bg-fourth-blue px-6 py-5 rounded-2xl relative">
+  <article class="w-full bg-fourth-blue px-6 py-5 min-h-[420px] rounded-2xl relative">
     <div v-if="ready">
       <h3 class="text-h3 text-primary-blue font-semibold">
         {{ challengeMovieList.name }}
@@ -15,7 +15,7 @@
               ref="target"
               class="h-5 absolute top-0 left-0 w-70 overflow-hidden transition-all duration-1000 rounded-lg shadow-3xl bg-primary-blue"
               :style="{
-                width: `${challengeMovieList.progress}%`,
+                width: `${level}%`,
               }"
             ></div>
           </transition>
@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-      level: 50,
+      level: 78,
       show: false,
       ready: false,
     };
@@ -64,17 +64,16 @@ export default {
   watch: {
     challengeMovieList() {
       this.isReadyData();
+      this.toggleShow();
     },
   },
-  mounted() {
-    this.toggleShow();
-  },
+  mounted() {},
 };
 </script>
 
 <style>
 .show-enter-active {
-  animation: show-in 3s;
+  animation: show-in 10s;
 }
 @keyframes show-in {
   0% {

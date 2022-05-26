@@ -19,7 +19,7 @@
             />
           </div>
           <div class="relative w-1/2">
-            <h4 class="text-sm ellipsis-2 p-1">{{movie.movieTitle}}</h4>
+            <h4 class="text-sm ellipsis-2 p-1 font-semibold">{{movie.movieTitle}}</h4>
             <div class="text-star-yellow">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

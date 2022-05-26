@@ -1,5 +1,7 @@
 <template>
-  <article class="w-full bg-third-green px-6 py-5 rounded-2xl relative">
+  <article
+    class="w-full bg-third-green px-6 py-5 min-h-[350px] rounded-2xl relative"
+  >
     <div v-if="ready">
       <div
         v-if="challengeMovieList.completed"
@@ -26,7 +28,7 @@
               ref="target"
               class="h-5 absolute top-0 left-0 w-70 overflow-hidden transition-all duration-1000 rounded-lg shadow-3xl bg-primary-green"
               :style="{
-                width: `${challengeMovieList.progress}%`,
+                width: `${level}%`,
               }"
             ></div>
           </transition>
@@ -59,6 +61,7 @@ export default {
   },
   data() {
     return {
+      level: 80,
       show: false,
       ready: false,
     };
@@ -75,6 +78,7 @@ export default {
     challengeMovieList() {
       if (Object.keys(this.challengeMovieList).length > 0) {
         this.isReadyData();
+        this.toggleShow();
       }
     },
   },

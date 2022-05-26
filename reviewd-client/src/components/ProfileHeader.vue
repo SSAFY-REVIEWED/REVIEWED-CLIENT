@@ -68,7 +68,7 @@
               class="h-5 absolute top-0 left-0 w-70 overflow-hidden transition-all duration-1000 rounded-lg shadow-3xl"
               :style="{
                 backgroundColor: color,
-                width: `${this.userProfile.levelPercentage}%`,
+                width: `${userProfile.levelPercentage}%`,
               }"
             ></div>
           </transition>
@@ -198,7 +198,6 @@ export default {
   watch: {
     $route() {
       this.getPageNum();
-      console.log(this.userProfile);
     },
   },
   mounted() {
