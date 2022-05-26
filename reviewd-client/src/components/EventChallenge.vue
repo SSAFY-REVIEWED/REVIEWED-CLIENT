@@ -74,14 +74,12 @@ export default {
   watch: {
     challengeMovieList() {
       if (Object.keys(this.challengeMovieList).length > 0) {
-        console.log(Object.keys(this.challengeMovieList));
         this.isReadyData();
       }
     },
   },
   mounted() {
-    // this.isReadyData();
-    // this.toggleShow();
+    this.toggleShow();
   },
 };
 </script>
