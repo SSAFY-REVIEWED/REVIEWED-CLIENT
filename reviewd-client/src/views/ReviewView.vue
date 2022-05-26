@@ -1,5 +1,7 @@
 <template>
-  <section class="max-w-container pt-0 px-9 mt-36 bg-red-300 min-h-screen py-3">
+  <section
+    class="max-w-container mx-auto pt-0 px-9 min-h-screen relative mt-20"
+  >
     <ReviewDetail
       :review="review"
       @edit-user-review="editUserReview"
@@ -29,26 +31,7 @@ export default {
   data() {
     return {
       reviewId: null,
-      review: {
-        reviewId: 1,
-        userId: 1,
-        useName: "Chunsik",
-        userProfileImg:
-          "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-        rate: 8.7,
-        posterUrl:
-          "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-        likes: 76,
-        like: true,
-        movieTitle: "마더테레사",
-        reviewTitle: "",
-        replyCount: 72,
-        viewCount: 7777,
-        createdAt: "2020-01-05",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.",
-        spoiler: true,
-      },
+      review: {},
       commentList: [
         {
           commentId: 1,
@@ -204,8 +187,8 @@ export default {
   },
   created() {
     this.setReviewId();
-    // this.getTheReview()
-    // this.getTheCommentList()
+    this.getTheReview()
+    this.getTheCommentList()
   },
 };
 </script>

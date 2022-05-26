@@ -1,6 +1,9 @@
 import axios from "axios";
 
 const MovieAPI = {
+  async getMainMovieList() {
+    return await axios.get(MOVIE_URL.MAIN_MOVIE_LIST());
+  },
   async getMovieData(url) {
     return axios.get(MOVIE_URL.MOVIE(url));
   },
@@ -29,7 +32,7 @@ const MovieAPI = {
     return axios.delete(MOVIE_URL.REVIEW(reviewId));
   },
   async likeReview(reviewId, body) {
-    return axios.post(MOVIE_URL.REVIEW(reviewId), body);
+    return axios.post(MOVIE_URL.REVIEW_LIKE(reviewId), body);
   },
   async getReviewCommentList(reviewId) {
     return axios.get(MOVIE_URL.REVIEW_COMMENT_LIST(reviewId));
@@ -51,7 +54,7 @@ const MovieAPI = {
 };
 
 const MOVIE_URL = {
-  MAIN_MOVIE_LIST: "/main/",
+  MAIN_MOVIE_LIST: () => "/main/",
   MOVIE: (movieId) => `/movies/${movieId}/`,
   MOVIE_LIKE: (movieId) => `/movies/${movieId}/likes/`,
   MOVIE_RATE: (movieId) => `/movies/${movieId}/ratings/`,

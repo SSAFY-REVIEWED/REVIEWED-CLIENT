@@ -38,11 +38,6 @@ export default {
   computed: {
     ...mapGetters(["myReview", "reviewList", "movieData"]),
   },
-  watch: {
-    myReview() {
-      console.log(Object.keys(this.myReview));
-    },
-  },
 };
 </script>
 

@@ -4,19 +4,19 @@
       <div
         class="bg-white relative w-full h-0 overflow-hidden pb-183% rounded-lg shadow-md"
       >
-        <div class="absolute top-0 left-0 w-full h-full pb-150%">
-          <picture class="relative w-full h-0 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full">
+          <div class="relative w-full h-0 overflow-hidden pb-150%">
             <img
               loading="lazy"
-              src="../assets/images/posters/닥터스트레인지.jpeg"
+              :src="movie.posterUrl"
               :alt="`${movie.movieTitle} 포스터`"
               width="300"
               height="450"
-              class="w-full"
+              class="top-0 left-0 w-full h-full absolute"
             />
-          </picture>
+          </div>
           <div
-            class="flex flex-col items-start w-full relative h-0 pb-[100%] text-[1.5vw] md:text-[1vw] font-bold flex-auto"
+            class="flex flex-col items-start w-full relative h-0 pb-[100%] text-[1.5vw] md:text-p font-bold flex-auto"
           >
             <div class="absolute top-0 left-0 w-full h-full p-1.5">
               <p
@@ -24,7 +24,7 @@
               >
                 {{ movie.movieTitle }}
               </p>
-              <p>2022</p>
+              <p>{{ getYear }}</p>
               <div class="flex w-full justify-between justify-self-end">
                 <p class="text-star-yellow">
                   <svg
@@ -43,7 +43,7 @@
                 </p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  v-if="!like"
+                  v-if="movie.like"
                   class="h-5 w-5 text-primary-red"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -56,8 +56,8 @@
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  v-if="like"
-                  class="h-5 w-5"
+                  v-if="!movie.like"
+                  class="h-5 w-5 text-primary-red"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -90,6 +90,16 @@ export default {
     return {
       like: false,
     };
+  },
+  computed: {
+    getYear() {
+      let year = ''
+      if (this.movie.createdAt) {
+        year = this.movie.createdAt.substr(0, 4);
+        return year;
+      }
+      return year;
+    },
   },
 };
 </script>

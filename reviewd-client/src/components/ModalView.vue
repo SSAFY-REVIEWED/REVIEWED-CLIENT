@@ -67,6 +67,7 @@ export default {
     return {
       title: "",
       content: "",
+      reviewTitle: "",
       spoiler: false,
       reviewId: null,
     };
@@ -75,10 +76,9 @@ export default {
     ...mapActions(["createMovieReview", "editReview", "getMovieReviewList"]),
     async updateMovieReview() {
       const body = {
-        title: this.title,
         content: this.content,
         spoiler: this.spoiler,
-        reviewId: this.reviewId,
+        reviewTitle: "영화 짱짱",
       };
       if (Object.keys(this.review).length) {
         try {
@@ -92,16 +92,19 @@ export default {
       }
       try {
         await this.createMovieReview(body);
+        this.$emit("close-modal");
       } catch (err) {
         console.log(err);
       }
     },
+
     toggleSpoiler() {
       this.spoiler = !this.spoiler;
     },
+    
     setReviewData() {
       if (Object.keys(this.review).length) {
-        this.title = this.review.title;
+        this.title = this.review.movieTitle;
         this.content = this.review.content;
         this.spoiler = this.review.spoiler;
         this.reviewId = this.review.reviewId;

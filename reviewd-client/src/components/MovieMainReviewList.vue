@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full relative">
-    <h1>모든 리뷰</h1>
-    <div v-if="!reviewList.length">첫 리뷰를 남겨보세요 ☺️</div>
+  <div class="w-full relative my-5">
+    <h1 class="text-h4 font-semibold">모든 리뷰</h1>
+    <div class="my-5 text-h5 font-semibold" v-if="reviewList.length === 0">아직 다른 사람들이 남긴 리뷰가 없어요.  ☺️</div>
     <div v-else>
       <ReviewCard
         v-for="(review, index) in reviewList"
@@ -27,13 +27,13 @@ export default {
     ReviewCard,
   },
   computed: {
-    ...mapGetters(["reviewList", "reviewCount"]),
+    ...mapGetters(["reviewList", "reviewCount", 'movieData']),
   },
   methods: {
     goReviewPage() {
       this.$router.push({
         name: "reviewList",
-        params: { movieId: 355 },
+        params: { movieId: this.movieData.movieId },
         query: { query: "like" },
       });
     },

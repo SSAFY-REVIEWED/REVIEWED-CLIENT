@@ -1,6 +1,6 @@
 <template>
-  <div class="relative w-full">
-    <h1>기본 정보</h1>
+  <div class="relative w-full my-5">
+    <h1 class="text-h4 font-semibold py-3">기본 정보</h1>
     <hr />
     <div class="w-full mx-auto">
       <ul>
@@ -22,7 +22,7 @@
           <dt class="w-32">상영 시간</dt>
           <dd>{{ movieData.screenTime }} 분</dd>
         </dl>
-        <dl class="border-b-[1px] border-slate-200">
+        <dl class="border-b-[1px] border-slate-200 py-3">
           <dt class="py-3">내용</dt>
           <dd>{{ movieData.overview }}</dd>
         </dl>

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mt-60px">
+  <div class="relative mt-60px" v-if="Object.keys(movieData).length">
     <div
       class="relative w-full m-0 mx-auto h-0 pb-[59%] overflow-hidden bg-cover bg-center"
     >
@@ -26,8 +26,8 @@
             {{ movieData.releaseDate }} · {{ movieData.country[0].name }}
           </h2>
           <div class="flex items-center gap-6">
-            <div class="text-star-yellow text-h4 flex my-2">
-              <span class="">평점</span>
+            <div class="text-star-yellow text-h4 flex my-2 w-40">
+              <span>평점</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="text-star-yellow w-6 h6"
@@ -50,7 +50,7 @@
               </p>
             </div>
           </div>
-          <div>
+          <div class="flex gap-x-8">
             <div class="w-fit mt-2">
               <h3 class="text-h4 text-center">평가하기</h3>
               <star-rating
@@ -61,47 +61,47 @@
                 :fixed-points="1"
               ></star-rating>
             </div>
+            <article class="self-end flex gap-x-3">
+              <button
+                @click="toggleLikeMovie"
+                class="transition-all duration-500 flex button"
+                :class="{
+                  'text-red-600': movieData.like,
+                  'text-white': !movieData.like,
+                }"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 transition-transform duration-500 button--icon hover:scale-110"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  :class="{
+                    'rotate-180': !movieData.like,
+                    'rotate-0 ': movieData.like,
+                  }"
+                >
+                  <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                </svg>
+                <span>보고싶어요</span>
+              </button>
+              <button
+                class="transition-all duration-100 flex button"
+                @click="isModalViewed = true"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 button--icon transition-all duration-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+                  />
+                </svg>
+                <span>리뷰 작성</span>
+              </button>
+            </article>
           </div>
-        </article>
-        <article class="self-end flex gap-x-3">
-          <button
-            @click="toggleLikeMovie"
-            class="transition-all duration-500 flex button"
-            :class="{
-              'text-red-600': movieData.like,
-              'text-white': !movieData.like,
-            }"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 transition-transform duration-500 button--icon hover:scale-110"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              :class="{
-                'rotate-180': !movieData.like,
-                'rotate-0 ': movieData.like,
-              }"
-            >
-              <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
-            </svg>
-            <span>보고싶어요</span>
-          </button>
-          <button
-            class="transition-all duration-100 flex button"
-            @click="isModalViewed = true"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 button--icon transition-all duration-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-              />
-            </svg>
-            <span>리뷰 작성</span>
-          </button>
         </article>
       </div>
     </div>
@@ -129,7 +129,7 @@ export default {
   },
   data() {
     return {
-      isModalViewed: true,
+      isModalViewed: false,
     };
   },
   methods: {

@@ -22,7 +22,7 @@ export default {
     MovieMain,
   },
   methods: {
-    ...mapActions(["getMovieDetail"]),
+    ...mapActions(["getMovieDetail","getMovieReviewList"]),
     ...mapMutations(["setMovieId", "isDataReady"]),
   },
   computed: {
@@ -32,10 +32,11 @@ export default {
     this.setMovieId(this.$route.params);
   },
   // TODO: api 동기화 시 해제
-  // async mounted() {
-  //   await this.getMovieDetail(this.movieId);
-  //   this.isDataReady();
-  // },
+  async mounted() {
+    await this.getMovieDetail(this.movieId);
+    await this.getMovieReviewList(this.movieId)
+    this.isDataReady();
+  },
 };
 </script>
 

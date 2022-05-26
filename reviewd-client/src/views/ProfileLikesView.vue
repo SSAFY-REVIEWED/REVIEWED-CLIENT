@@ -125,6 +125,7 @@ export default {
           this.targetUserId,
           this.page
         );
+        console.log(response)
         this.setMovieList(response);
       } catch (err) {
         console.log(err);

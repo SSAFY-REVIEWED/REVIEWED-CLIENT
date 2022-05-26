@@ -198,6 +198,7 @@ export default {
   watch: {
     $route() {
       this.getPageNum();
+      console.log(this.userProfile);
     },
   },
   mounted() {
