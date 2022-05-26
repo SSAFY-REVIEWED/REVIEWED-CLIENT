@@ -51,6 +51,9 @@ const MovieAPI = {
     console.log(params);
     return axios.get(url, { params });
   },
+  async getChallenges() {
+    return axios.get(MOVIE_URL.CHALLENGE());
+  },
 };
 
 const MOVIE_URL = {
@@ -66,6 +69,16 @@ const MOVIE_URL = {
   REVIEW_COMMENT_LIST: (reviewId) => `/reviews/${reviewId}/comments/`,
   REVIEW_COMMENT: (reviewId, commentId) =>
     `/reviews/${reviewId}/comments/${commentId}/`,
+  CHALLENGE: () => "/challenges/",
 };
 
 export default MovieAPI;
+
+// 귀신 영화 5편: 250546 396422 521029 49018 1417
+
+// 포켓몬: 350499 382190 436931 494407 571891 571265 756403 9502 49444 140300
+
+
+
+
+ 

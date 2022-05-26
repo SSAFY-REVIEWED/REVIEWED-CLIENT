@@ -46,7 +46,7 @@ export default {
   },
   props: {
     movieList: {
-      type: Object,
+      type: Array,
     },
   },
   data() {

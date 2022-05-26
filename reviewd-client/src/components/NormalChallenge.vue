@@ -1,30 +1,19 @@
 <template>
-  <article class="w-full bg-third-green px-6 py-5 rounded-2xl relative">
+  <article class="w-full bg-fourth-blue px-6 py-5 rounded-2xl relative">
     <div v-if="ready">
-      <div
-        v-if="challengeMovieList.completed"
-        class="absolute w-full h-full bg-light-black opacity-50 right-0 bottom-0 top-0 left-0 rounded-2xl flex justify-start items-center z-20"
-      >
-        <p class="mx-auto text-white text-h3 font-semibold">미션 클리어</p>
-      </div>
-      <h3 class="text-h3 text-primary-green font-semibold">Event</h3>
-      <p class="text-h5 text-second-green">2주마다 주어지는 새로운 CHALLENGE</p>
-      <p class="text-h5 text-second-green mt-2">
-        EVENT CHALLENGE는 보상이
-        <span class="text-primary-green font-bold">2배!</span>
-      </p>
-      <h4 class="text-h4 text-primary-green font-bold my-3">
+      <h3 class="text-h3 text-primary-blue font-semibold">
         {{ challengeMovieList.name }}
-      </h4>
+      </h3>
+
       <div class="mt-3 flex flex-row">
-        <p class="text-h5 text-primary-green font-bold w-32">미션 달성률</p>
+        <p class="text-h5 text-primary-blue font-bold w-32">미션 달성률</p>
         <div class="relative w-full">
           <div class="w-full h-5 bg-gray-500 rounded-lg relative"></div>
           <transition name="show">
             <div
               v-if="show"
               ref="target"
-              class="h-5 absolute top-0 left-0 w-70 overflow-hidden transition-all duration-1000 rounded-lg shadow-3xl bg-primary-green"
+              class="h-5 absolute top-0 left-0 w-70 overflow-hidden transition-all duration-1000 rounded-lg shadow-3xl bg-primary-blue"
               :style="{
                 width: `${challengeMovieList.progress}%`,
               }"
@@ -36,8 +25,8 @@
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 mt-5 flex-wrap relative"
       >
         <ChallengePosterCard
-          v-for="(movie, index) in challengeMovieList.movie_list"
-          :key="index"
+          v-for="movie in challengeMovieList.movie_list"
+          :key="movie.movieTitle"
           :movie="movie"
         />
       </div>
@@ -48,7 +37,7 @@
 <script>
 import ChallengePosterCard from "@/components/ChallengePosterCard";
 export default {
-  name: "eventChallenge",
+  name: "normalChallenge",
   components: {
     ChallengePosterCard,
   },
@@ -59,6 +48,7 @@ export default {
   },
   data() {
     return {
+      level: 50,
       show: false,
       ready: false,
     };
@@ -73,20 +63,16 @@ export default {
   },
   watch: {
     challengeMovieList() {
-      if (Object.keys(this.challengeMovieList).length > 0) {
-        console.log(Object.keys(this.challengeMovieList));
-        this.isReadyData();
-      }
+      this.isReadyData();
     },
   },
   mounted() {
-    // this.isReadyData();
-    // this.toggleShow();
+    this.toggleShow();
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style>
 .show-enter-active {
   animation: show-in 3s;
 }

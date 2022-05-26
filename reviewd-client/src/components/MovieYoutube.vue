@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       youtubeList: [],
-      video: `https://www.youtube.com/embed/UiXdRvn8178`,
+      video: `https://www.youtube.com/embed/qmth-PGDD0Q`,
     };
   },
   // methods: {

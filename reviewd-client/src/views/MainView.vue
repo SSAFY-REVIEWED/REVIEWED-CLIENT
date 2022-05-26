@@ -4,10 +4,10 @@
   >
     <article class="mt-10">
       <h1 class="text-h3 font-semibold">MOVIE</h1>
-      <MainHeader :movieList="movieList[0]" />
+      <MainHeader :movieList="movieList" />
       <HotReviews v-if="false" />
-      <!-- <MainHeader :movieList="movieList[1]" />
-      <MainHeader :movieList="movieList[2]" /> -->
+      <MainHeader :movieList="movieList1" />
+      <MainHeader :movieList="movieList2" />
     </article>
   </section>
 </template>

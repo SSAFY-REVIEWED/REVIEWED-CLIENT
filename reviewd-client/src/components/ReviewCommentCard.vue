@@ -47,6 +47,7 @@
               type="submit"
               class="bg-second-green h-10 rounded-xl shadow-xl w-full text-white font-semibold"
             >
+            
               수정 완료
             </button>
           </div>
@@ -70,7 +71,7 @@ export default {
   },
   data() {
     return {
-      isEditing: true,
+      isEditing: false,
       content: "",
     };
   },
