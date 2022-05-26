@@ -32,7 +32,7 @@ const MovieAPI = {
     return axios.delete(MOVIE_URL.REVIEW(reviewId));
   },
   async likeReview(reviewId, body) {
-    return axios.post(MOVIE_URL.REVIEW(reviewId), body);
+    return axios.post(MOVIE_URL.REVIEW_LIKE(reviewId), body);
   },
   async getReviewCommentList(reviewId) {
     return axios.get(MOVIE_URL.REVIEW_COMMENT_LIST(reviewId));
@@ -44,11 +44,9 @@ const MovieAPI = {
     return axios.patch(MOVIE_URL.REVIEW_COMMENT(reviewId, commentId), body);
   },
   async deleteReviewComment(reviewId, body) {
-    console.log(body);
     return axios.delete(MOVIE_URL.REVIEW_COMMENT(reviewId, body));
   },
   async getYoutube(url, params) {
-    console.log(params);
     return axios.get(url, { params });
   },
   async getChallenges() {
@@ -78,7 +76,4 @@ export default MovieAPI;
 
 // 포켓몬: 350499 382190 436931 494407 571891 571265 756403 9502 49444 140300
 
-
 // 영이 들어가는 영화 : 4247 4248 4256 4257 23483 82633 614409 1271 11674 14161
-
- 

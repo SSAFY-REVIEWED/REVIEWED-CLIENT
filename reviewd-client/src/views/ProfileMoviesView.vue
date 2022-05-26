@@ -30,7 +30,7 @@
       />
     </article>
     <div
-      v-if="isLoading"
+      v-if="isLoading && hasMore"
       class="w-full h-full flex justify-center items-center"
     >
       <LoadingSpinner />
@@ -78,13 +78,13 @@ export default {
       this.isLoading = !this.isLoading;
     },
     async getTargetUserRatedMovieList() {
+      if (!this.hasMore) return;
       this.toggleLoading();
       try {
         const response = await ProfileAPI.getMovieList(
           this.targetUserId,
           this.page
         );
-        console.log(response);
         this.setMovieList(response);
       } catch (err) {
         console.log(err);

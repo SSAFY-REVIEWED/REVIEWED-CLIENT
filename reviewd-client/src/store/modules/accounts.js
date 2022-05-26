@@ -17,6 +17,10 @@ export default {
     profile: (state) => state.profile,
   },
   mutations: {
+    updateProfile: (state, profile) => {
+      state.profile = { ...state.profile, ...profile };
+      VueCookies.set("profile", state.profile);
+    },
     setLoggingIn: (state, $route) => {
       const name = $route.path;
       if (name === "/signup" || name === "/login" || name === "/survey") {
@@ -37,9 +41,7 @@ export default {
         ...state.profile,
         ...profile,
       };
-      console.log(state.profile, "profile'");
       VueCookies.set("profile", profile);
-      console.log(VueCookies.get("profile"), "뷰 쿠키 확인");
     },
     setLoggedIn: (state) => {
       state.isLoggedIn = true;
@@ -59,7 +61,6 @@ export default {
       commit("setLoggedIn");
       try {
         const response = await getData("USER_INFO");
-        console.log(response.data);
         commit("setProfile", response.data);
       } catch (err) {
         console.log(err);

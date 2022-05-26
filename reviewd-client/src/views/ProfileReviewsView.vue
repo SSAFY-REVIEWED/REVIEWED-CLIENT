@@ -81,7 +81,6 @@ export default {
           this.targetUserId,
           this.page
         );
-        console.log(response);
         this.setReviewList(response);
       } catch (err) {
         console.log(err);

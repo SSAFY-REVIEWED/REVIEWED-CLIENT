@@ -75,17 +75,22 @@ export default {
       this.page++;
       this.hasMore = response.data.hasMore;
     },
+    toggleLoading() {
+      this.isLoading = !this.isLoading;
+    },
     async getTargetUserLikedMovieList() {
       if (!this.hasMore) return;
+      this.toggleLoading();
       try {
         const response = await ProfileAPI.getMovieList(
           this.targetUserId,
           this.page
         );
-        console.log(response);
         this.setMovieList(response);
       } catch (err) {
         console.log(err);
+      } finally {
+        this.toggleLoading();
       }
     },
   },

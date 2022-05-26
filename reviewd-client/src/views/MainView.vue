@@ -41,7 +41,7 @@ export default {
       this.movieList = response.data[0];
       this.movieList2 = response.data[1];
       this.movieList3 = response.data[2];
-      console.log(this.movieList, this.movieList2, this.movieList3);
+      this.movieList, this.movieList2, this.movieList3;
     },
     async getMovieList() {
       try {

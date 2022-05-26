@@ -10,7 +10,7 @@ const Search_API = {
 };
 
 const SEARCH_URL = {
-  SEARCH: (query, type) => `/search?query=${query}&type=${type}/`,
+  SEARCH: (query, type) => `/search?query=${query}&type=${type}`,
   RANKING: () => "/ranking/",
 };
 
