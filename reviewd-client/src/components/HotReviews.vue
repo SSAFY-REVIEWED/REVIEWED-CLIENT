@@ -31,7 +31,7 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import PosterReviewCard from "@/components/PosterReviewCard";
 import "swiper/css/swiper.css";
-import { getData } from "@/api/index.js";
+import MovieAPI from "@/api/movie";
 
 export default {
   name: "ListItem",
@@ -72,7 +72,7 @@ export default {
   methods: {
     async getMovieList() {
       try {
-        const response = await getData("MAIN_MOVIES", this.page);
+        const response = await MovieAPI.getMainMovieList();
         console.log(response);
       } catch (err) {
         console.log(err);

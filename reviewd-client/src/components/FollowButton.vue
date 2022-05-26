@@ -2,6 +2,7 @@
   <div>
     <button
       class="w-[115px] h-[38px] bg-gradient-to-r from-primary-red to-second-red rounded-lg font-bold text-white"
+      v-if="false"
     >
       <div>
         <svg

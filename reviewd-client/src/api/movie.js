@@ -1,6 +1,9 @@
 import axios from "axios";
 
 const MovieAPI = {
+  async getMainMovieList() {
+    return await axios.get(MOVIE_URL.MAIN_MOVIE_LIST());
+  },
   async getMovieData(url) {
     return axios.get(MOVIE_URL.MOVIE(url));
   },
@@ -48,10 +51,13 @@ const MovieAPI = {
     console.log(params);
     return axios.get(url, { params });
   },
+  async getChallenges() {
+    return axios.get(MOVIE_URL.CHALLENGE());
+  },
 };
 
 const MOVIE_URL = {
-  MAIN_MOVIE_LIST: "/main/",
+  MAIN_MOVIE_LIST: () => "/main/",
   MOVIE: (movieId) => `/movies/${movieId}/`,
   MOVIE_LIKE: (movieId) => `/movies/${movieId}/likes/`,
   MOVIE_RATE: (movieId) => `/movies/${movieId}/ratings/`,
@@ -63,6 +69,16 @@ const MOVIE_URL = {
   REVIEW_COMMENT_LIST: (reviewId) => `/reviews/${reviewId}/comments/`,
   REVIEW_COMMENT: (reviewId, commentId) =>
     `/reviews/${reviewId}/comments/${commentId}/`,
+  CHALLENGE: () => "/challenges/",
 };
 
 export default MovieAPI;
+
+// 귀신 영화 5편: 250546 396422 521029 49018 1417
+
+// 포켓몬: 350499 382190 436931 494407 571891 571265 756403 9502 49444 140300
+
+
+// 영이 들어가는 영화 : 4247 4248 4256 4257 23483 82633 614409 1271 11674 14161
+
+ 

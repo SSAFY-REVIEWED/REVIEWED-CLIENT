@@ -1,6 +1,8 @@
 <template>
-  <section class="w-full relative">
+  <section class="w-full relative mt-5">
+    <h1 class="text-h4 font-bold">오늘도 리뷰를 작성해볼까요?</h1>
     <calendar-heatmap
+      class="mt-5"
       :values="reviewDateCountList"
       :end-date="today"
       :range-color="[
@@ -14,15 +16,16 @@
       :max="10"
       tooltip-unit="stars"
     />
-    <article class="relative flex justify-between">
-      <div class="w-1/3">
-        <h1>장르 분포</h1>
+    <article class="relative flex justify-between mt-5 sm:flex-row flex-col">
+      <div class="sm:w-1/3 w-full">
+        <h1 class="text-h4 font-bold">장르 분포</h1>
         <RadarChart
-          :movieGenreList="movieGenreList"
+          :genreList="genreList"
+          :reviewCountList="reviewCountList"
           :reviewGenreCountList="reviewGenreCountList"
         />
       </div>
-      <div class="w-1/2">
+      <div class="sm:w-1/2 w-full mt-10 sm:mt-0">
         <ul>
           <dl class="flex border-b-[1px] border-slate-200 py-3">
             <dt class="w-1/2">장르</dt>
@@ -33,8 +36,8 @@
             v-for="pair in reviewGenreCountList"
             :key="pair.genre"
           >
-            <dt class="w-1/2">#{{Object.keys(pair)[0]}}</dt>
-            <dd>{{Object.values(pair)[0]}}</dd>
+            <dt class="w-1/2">#{{ pair.genre }}</dt>
+            <dd>{{ pair.count }}</dd>
           </dl>
         </ul>
       </div>
@@ -61,6 +64,12 @@ export default {
       type: Array,
     },
     reviewGenreCountList: {
+      type: Array,
+    },
+    reviewCountList: {
+      type: Array,
+    },
+    genreList: {
       type: Array,
     },
     movieGenreList: {

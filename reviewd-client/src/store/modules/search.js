@@ -8,7 +8,6 @@ export default {
   mutations: {
     setKeyword(state, keyword) {
       state.searchKeyword = keyword;
-      console.log(state.searchKeyword);
     },
   },
   actions: {},

@@ -1,10 +1,10 @@
 <template>
   <article
-    class="w-full h-fit p-8 relative shadow-xl rounded-2xl bg-light-gray"
+    class="w-full h-fit p-8 relative shadow-xl rounded-2xl bg-light-gray my-10"
   >
     <div class="flex justify-between items-center">
-      <div class="flex">
-        <div class="overflow-hidden rounded-full w-8 h-8">
+      <div class="flex items-center">
+        <div class="overflow-hidden rounded-full w-11 h-11 mr-4">
           <img
             :src="review.userProfileImg"
             alt="userProfileImage"
@@ -13,9 +13,9 @@
             class="w-full h-full overflow-hidden"
           />
         </div>
-        <div>
-          <p>{{ review.userName }}</p>
-          <p>
+        <div class="flex flex-col items-center">
+          <p class="text-h5 font-bold">{{ review.userName }}</p>
+          <p class="text-star-yellow self-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5 inline"
@@ -32,7 +32,7 @@
       </div>
       <div class="flex relative">
         <button
-          class="border-r-2 border-light-black px-4"
+          class="border-r-2 border-light-black px-4 w-fit"
           v-if="profile.userId === review.userId"
           @click="isModalViewed = true"
         >
@@ -48,7 +48,7 @@
           >수정
         </button>
         <button
-          class="px-4"
+          class="px-4 w-fit"
           v-if="profile.userId === review.userId"
           @click="deleteMyReview"
         >
@@ -67,10 +67,10 @@
             /></svg
           >삭제
         </button>
-        <button class="px-4" @click="toggleLikes">
+        <button class="px-4 w-30 flex" @click="toggleLikes">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 inline"
+            class="h-5 w-5 inline text-primary-red mr-2"
             viewBox="0 0 20 20"
             fill="currentColor"
             v-if="this.review.like"
@@ -84,7 +84,7 @@
           <svg
             v-else
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 inline"
+            class="h-5 w-5 inline mr-2"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -96,12 +96,12 @@
               d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
             />
           </svg>
-          {{ review.likes }}
+          <p class="w-10 text-left">{{ review.likes }}</p>
         </button>
-        <div class="px-4">
+        <div class="px-4 w-30 flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 inline"
+            class="h-5 w-5 inline mr-2"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -111,9 +111,10 @@
             <path
               d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"
             /></svg
-          >{{ review.replyCount }}
+          >
+          <p class="w-10 text-left">{{ review.replyCount }}</p>
         </div>
-        <p class="pl-4">{{ review.createdAt }}</p>
+        <!-- <p class="pl-4">{{ review.createdAt }}</p> -->
       </div>
     </div>
     <div class="mt-5 relative">
@@ -190,6 +191,7 @@ export default {
   },
   computed: {
     ...mapGetters(["profile"]),
+    
   },
   mounted() {
     this.setSpoiler();

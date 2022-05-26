@@ -1,7 +1,9 @@
 <template>
-  <div class="min-h-screen relative max-w-container mx-auto pt-0 px-9">
+  <div class="max-w-container mx-auto">
     <MovieHeader />
-    <MovieMain />
+    <div class="min-h-screen relative max-w-container mx-auto pt-0 px-9">
+      <MovieMain />
+    </div>
   </div>
 </template>
 
@@ -20,7 +22,7 @@ export default {
     MovieMain,
   },
   methods: {
-    ...mapActions(["getMovieDetail"]),
+    ...mapActions(["getMovieDetail","getMovieReviewList"]),
     ...mapMutations(["setMovieId", "isDataReady"]),
   },
   computed: {
@@ -29,11 +31,12 @@ export default {
   created() {
     this.setMovieId(this.$route.params);
   },
-  //TODO: api 동기화 시 해제
-  // async mounted() {
-  //   await this.getMovieDetail(this.movieId);
-  //   this.isDataReady();
-  // },
+  // TODO: api 동기화 시 해제
+  async mounted() {
+    await this.getMovieDetail(this.movieId);
+    await this.getMovieReviewList(this.movieId)
+    this.isDataReady();
+  },
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <Navigation class="top-0" v-if="!isLoggingIn" />
-    <main class="mx-auto relative mt-[60px]" :class="{ 'mt-0': isLoggingIn }">
+    <main class="mx-auto relative" :class="{ 'mt-0': isLoggingIn }">
       <router-view />
     </main>
     <Footer v-if="!isLoggingIn" />

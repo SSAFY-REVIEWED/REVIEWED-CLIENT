@@ -24,7 +24,7 @@ export default {
       this.handleIntersect(entries[0]);
     }, options);
     if (!this.hasMore) {
-      this.observer.unobserve();
+      this.observer.disconnect();
       return;
     }
     this.observer.observe(this.$refs.trigger);

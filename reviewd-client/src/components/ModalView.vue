@@ -14,7 +14,10 @@
           </button>
           <article class="relative">
             <h1 class="h-5 w-3/4">{{ title }}</h1>
-            <form class="mt-5" @submit.prevent="updateMovieReview">
+            <form
+              class="mt-5 relative flex flex-col justify-between h-full"
+              @submit.prevent="updateMovieReview"
+            >
               <textarea
                 class="w-full rounded-xl shadow-inner-input p-5 focus:outline-none resize-none"
                 name="review"
@@ -27,7 +30,7 @@
               >
               </textarea>
               <button
-                class="relative float-right top-10 ml-auto right-0 bg-third-blue"
+                class="left-0 top-0 mt-5 ml-auto right-0 bg-third-blue w-24 h-10 rounded-lg text-white hover:bg-primary-blue w-fit"
                 type="submit"
                 @click="updateMovieReview"
               >
@@ -35,7 +38,7 @@
               </button>
             </form>
           </article>
-          <div class="relative w-1/2">
+          <div class="absolute left-0 -bottom-2 right-0 mt-5 w-fit">
             <SpoilerTooltipButton
               :spoiler="spoiler"
               @toggle-spoiler="toggleSpoiler"
@@ -64,6 +67,7 @@ export default {
     return {
       title: "",
       content: "",
+      reviewTitle: "",
       spoiler: false,
       reviewId: null,
     };
@@ -72,10 +76,9 @@ export default {
     ...mapActions(["createMovieReview", "editReview", "getMovieReviewList"]),
     async updateMovieReview() {
       const body = {
-        title: this.title,
         content: this.content,
         spoiler: this.spoiler,
-        reviewId: this.reviewId,
+        reviewTitle: "영화 짱짱",
       };
       if (Object.keys(this.review).length) {
         try {
@@ -89,16 +92,19 @@ export default {
       }
       try {
         await this.createMovieReview(body);
+        this.$emit("close-modal");
       } catch (err) {
         console.log(err);
       }
     },
+
     toggleSpoiler() {
       this.spoiler = !this.spoiler;
     },
+    
     setReviewData() {
       if (Object.keys(this.review).length) {
-        this.title = this.review.title;
+        this.title = this.review.movieTitle;
         this.content = this.review.content;
         this.spoiler = this.review.spoiler;
         this.reviewId = this.review.reviewId;

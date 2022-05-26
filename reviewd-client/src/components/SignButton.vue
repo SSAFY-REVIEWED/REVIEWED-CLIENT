@@ -7,7 +7,8 @@
       :disabled="!progress"
       ref="signupButton"
     >
-      REVIEWD 시작하기
+      <span v-if="state === 'login'">REVIEWD 시작하기</span>
+      <span v-if="state === 'edit'">수정하기</span>
     </button>
   </div>
 </template>
@@ -18,6 +19,9 @@ export default {
   props: {
     progress: {
       type: Boolean,
+    },
+    state: {
+      type: String,
     },
   },
   methods: {},

@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen max-w-container mx-auto pt-0 px-9">
+  <section class="min-h-screen max-w-container mx-auto pt-0 px-9 mt-36">
     <div>
       <h1>범죄 도시의 모든 리뷰</h1>
       <div @click="changeQuery" class="flex gap-x-7">

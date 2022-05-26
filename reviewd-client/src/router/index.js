@@ -56,7 +56,7 @@ const routes = [
     component: SurveyView,
     meta: {
       title: "Survey",
-      authorized: false,
+      authorized: true,
     },
   },
   {
@@ -65,7 +65,7 @@ const routes = [
     component: MainView,
     meta: {
       title: "Home",
-      authorized: false,
+      authorized: true,
     },
   },
   {
@@ -74,7 +74,7 @@ const routes = [
     component: ChallengeView,
     meta: {
       title: "Challenge",
-      authorized: false,
+      authorized: true,
     },
   },
   {
@@ -83,7 +83,7 @@ const routes = [
     component: RankerView,
     meta: {
       title: "Rank",
-      authorized: false,
+      authorized: true,
     },
   },
   {
@@ -92,7 +92,7 @@ const routes = [
     component: MovieView,
     meta: {
       title: "Movie",
-      authorized: false,
+      authorized: true,
     },
   },
   {
@@ -101,7 +101,7 @@ const routes = [
     component: MovieReviewListView,
     meta: {
       title: "Reviews",
-      authorized: false,
+      authorized: true,
     },
   },
   {
@@ -110,7 +110,7 @@ const routes = [
     component: ReviewView,
     meta: {
       title: "Review",
-      authorized: false,
+      authorized: true,
     },
   },
   {
@@ -119,7 +119,7 @@ const routes = [
     component: ProfileView,
     meta: {
       title: "Profile",
-      authorized: false,
+      authorized: true,
     },
     children: [
       {
@@ -127,26 +127,46 @@ const routes = [
         name: "history",
         alias: [""],
         component: ProfileHistoryView,
+        meta: {
+          title: "History",
+          authorized: true,
+        },
       },
       {
         path: "likes",
         name: "likes",
         component: ProfileLikesView,
+        meta: {
+          title: "Likes",
+          authorized: true,
+        },
       },
       {
         path: "movies",
         name: "movies",
         component: ProfileMoviesView,
+        meta: {
+          title: "Movies",
+          authorized: true,
+        },
       },
       {
         path: "reviews",
         name: "reviews",
         component: ProfileReviewsView,
+        meta: {
+          title: "Reviews",
+          authorized: true,
+        },
       },
       {
         path: "settings",
         name: "settings",
         component: ProfileSettingsView,
+        meta: {
+          title: "Settings",
+          authorized: true,
+        },
       },
     ],
   },
@@ -156,7 +176,7 @@ const routes = [
     component: SearchView,
     meta: {
       title: "Search",
-      authorized: false,
+      authorized: true,
     },
   },
 ];

@@ -1,6 +1,6 @@
 <template>
-  <div class="relative w-full">
-    <h1>공식 예고편</h1>
+  <div class="relative w-full my-5">
+    <h2 class="text-h4 font-semibold my-5">공식 예고편</h2>
     <iframe
       :src="video"
       frameborder="0"
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       youtubeList: [],
-      video: `https://www.youtube.com/embed/UiXdRvn8178`,
+      video: `https://www.youtube.com/embed/qmth-PGDD0Q`,
     };
   },
   // methods: {

@@ -8,7 +8,7 @@ axios.interceptors.request.use(
   (config) => {
     const token = VueCookies.get("accessToken");
     //TODO: 삭제하기
-    console.log(token);
+    // console.log(token);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

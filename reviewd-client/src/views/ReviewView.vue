@@ -1,18 +1,20 @@
 <template>
-  <div class="max-w-container pt-0 px-9 mt-20 bg-red-300 min-h-screen py-3">
+  <section class="max-w-[1000px] mx-auto pt-0 px-9 min-h-screen relative mt-20">
     <ReviewDetail
+      v-if="Object.keys(review).length"
       :review="review"
       @edit-user-review="editUserReview"
       @toggle-likes="toggleLikes"
       @delete-review="deleteUserReview"
     />
     <ReviewComment
+      v-if="Object.keys(review).length"
       :commentList="commentList"
       @create-comment="createComment"
       @edit-comment="editComment"
       @delete-comment="deleteComment"
     />
-  </div>
+  </section>
 </template>
 
 <script>
@@ -29,78 +31,8 @@ export default {
   data() {
     return {
       reviewId: null,
-      review: {
-        reviewId: 1,
-        userId: 1,
-        useName: "Chunsik",
-        userProfileImg:
-          "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-        rate: 8.7,
-        posterUrl:
-          "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-        likes: 76,
-        like: true,
-        movieTitle: "마더테레사",
-        reviewTitle: "",
-        replyCount: 72,
-        viewCount: 7777,
-        createdAt: "2020-01-05",
-        content:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fuga rem mollitia optio, libero officia accusamus? Magnam, aliquam architecto blanditiis alias suscipit, delectus nisi sequi ipsam recusandae quod distinctio odio.",
-        spoiler: true,
-      },
-      commentList: [
-        {
-          commentId: 1,
-          userId: 1,
-          userName: "춘식",
-          userProfileImg:
-            "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus non at labore explicabo eligendi voluptatum, sapiente accusamus. Similique, sit rerum consectetur cupiditate amet fuga quisquam ullam. Saepe obcaecati dolore ipsum!",
-          createdAt: "2020-10-12",
-        },
-        {
-          commentId: 2,
-          userId: 2,
-          userName: "춘식",
-          userProfileImg:
-            "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus non at labore explicabo eligendi voluptatum, sapiente accusamus. Similique, sit rerum consectetur cupiditate amet fuga quisquam ullam. Saepe obcaecati dolore ipsum!",
-          createdAt: "2020-10-12",
-        },
-        {
-          commentId: 3,
-          userId: 3,
-          userName: "춘식",
-          userProfileImg:
-            "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus non at labore explicabo eligendi voluptatum, sapiente accusamus. Similique, sit rerum consectetur cupiditate amet fuga quisquam ullam. Saepe obcaecati dolore ipsum!",
-          createdAt: "2020-10-12",
-        },
-        {
-          commentId: 4,
-          userId: 4,
-          userName: "춘식",
-          userProfileImg:
-            "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus non at labore explicabo eligendi voluptatum, sapiente accusamus. Similique, sit rerum consectetur cupiditate amet fuga quisquam ullam. Saepe obcaecati dolore ipsum!",
-          createdAt: "2020-10-12",
-        },
-        {
-          commentId: 5,
-          userId: 5,
-          userName: "춘식",
-          userProfileImg:
-            "https://image.tmdb.org/t/p/w500/2R8smeSDkPx6TKIRveKPXi0JVI6.jpg",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus non at labore explicabo eligendi voluptatum, sapiente accusamus. Similique, sit rerum consectetur cupiditate amet fuga quisquam ullam. Saepe obcaecati dolore ipsum!",
-          createdAt: "2020-10-12",
-        },
-      ],
+      review: {},
+      commentList: [],
     };
   },
   methods: {
@@ -109,10 +41,14 @@ export default {
       this.reviewId = reviewId;
       console.log(this.reviewId);
     },
+    setReview(review) {
+      this.review = review;
+    },
     async getTheReview() {
       try {
         const response = await MovieAPI.getReview(this.reviewId);
-        this.review = { ...this.review, ...response.data.review };
+        const { review } = response.data;
+        this.setReview(review);
       } catch (err) {
         console.log(err);
       }
@@ -139,6 +75,7 @@ export default {
         await MovieAPI.likeReview(this.review.reviewId, {
           like: !this.review.like,
         });
+        this.review.like = !this.review.like;
         if (this.review.like) {
           this.review.likes++;
           return;
@@ -158,6 +95,7 @@ export default {
         const response = await MovieAPI.createReviewComment(this.reviewId, {
           content,
         });
+        console.log(response, "코멘트");
         this.setCommentList(response.data);
       } catch (err) {
         console.log(err);
@@ -193,7 +131,7 @@ export default {
         if (confirm("댓글을 삭제하시겠어요?")) {
           const response = await MovieAPI.deleteReviewComment(
             this.review.reviewId,
-            { commentId: id }
+            id
           );
           this.setCommentList(response.data);
         }
@@ -204,8 +142,10 @@ export default {
   },
   created() {
     this.setReviewId();
-    // this.getTheReview()
-    // this.getTheCommentList()
+  },
+  mounted() {
+    this.getTheReview();
+    this.getTheCommentList();
   },
 };
 </script>

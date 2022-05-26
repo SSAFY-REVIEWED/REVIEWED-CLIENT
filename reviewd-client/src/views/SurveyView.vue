@@ -1,11 +1,11 @@
 <template>
-  <section class="min-h-screen mx-auto max-w-container pt-0 px-9 mt-20">
+  <section class="min-h-screen mx-auto max-w-container pt-0 px-9">
     <article
       class="min-h-screen flex flex-col justify-center items-center"
       v-if="isLoading"
     >
-      <h1 class="text-h1 font-bold">
-        {{ name }}JAEHO 님의 취향을 분석하고 있습니다.
+      <h1 class="text-h3 md:text-h2 lg:text-h1 font-bold text-center leading-1">
+        {{ name }} 님의 취향을 분석하고 있습니다.
       </h1>
       <LoadingSpinner />
     </article>
@@ -64,13 +64,13 @@
 <script>
 import { mapMutations } from "vuex";
 import { postData } from "@/api/index";
-import {LoadingSpinner} from '@/components/LoadingSpinner'
+import LoadingSpinner from "@/components/LoadingSpinner";
 import VueCookies from "vue-cookies";
 
 export default {
   name: "surveyView",
   components: {
-    LoadingSpinner
+    LoadingSpinner,
   },
   data() {
     return {
@@ -96,7 +96,7 @@ export default {
       ],
       preferenceGenreList: [],
       isLoading: false,
-      name: VueCookies.get("name"),
+      name: VueCookies.get("profile").name,
     };
   },
   methods: {
@@ -117,10 +117,12 @@ export default {
     async onSubmitSurvey() {
       try {
         this.setLoading();
+        setTimeout(() => {
+          this.$router.push({ name: "main" });
+        }, 3000);
         const response = await postData("SURVEY", this.preferenceGenreList);
         //TODO: 삭제하기
-        console.log(response)
-        this.$router.push({ name: "main" });
+        console.log(response);
         // TODO: Error handling
       } catch (err) {
         console.log(err);

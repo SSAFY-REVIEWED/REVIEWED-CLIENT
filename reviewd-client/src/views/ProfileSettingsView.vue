@@ -1,10 +1,10 @@
 <template>
-  <section
-    class="max-w-container mx-auto pt-0 px-9 h-full relative min-h-[50vh] flex flex-col items-center justify-center"
-  >
-    <form @submit.prevent="onSubmitFormData">
-      <div>
-        <div class="w-44 h-44 overflow-hidden rounded-full shadow-3xl">
+  <section class="min-h-[40vh] max-w-650 mx-auto mt-10">
+    <div
+      class="h-full flex flex-col items-center justify-center max-w-480 mx-auto"
+    >
+      <form @submit.prevent="onSubmitFormData" class="w-full">
+        <div class="w-44 h-44 overflow-hidden rounded-full shadow-3xl mx-auto">
           <img
             :src="userProfile.profileImg"
             loading="lazy"
@@ -25,23 +25,73 @@
             @change="handleFiles()"
           />
         </div>
-      </div>
-      <label for="text"></label>
-      <input type="text" v-model="inputData.bio" class="bg-blue-400" />
-      <br />
-      <input type="text" class="bg-blue-400" v-model="inputData.name" />
-      <button type="submit">제출하기</button>
-    </form>
+
+        <div
+          class="mt-10 bg-white w-full shadow-sign-input h-15 rounded-lg flex px-4 items-center relative"
+        >
+          <label for="한줄 소개">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-pencil-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"
+              /></svg
+          ></label>
+          <input
+            type="text"
+            id="한줄 소개"
+            name="한줄 소개"
+            class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white"
+          />
+        </div>
+        <div
+          class="mt-10 bg-white w-full shadow-sign-input h-15 rounded-lg flex px-4 items-center relative"
+        >
+          <label for="이름">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-pencil-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"
+              /></svg
+          ></label>
+          <input
+            type="text"
+            id="이름"
+            name="이름"
+            class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white"
+          />
+        </div>
+        <SignButton :state="state" :progress="isCompleted" />
+      </form>
+    </div>
   </section>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import ProfileAPI from "@/api/profile";
+import SignButton from "@/components/SignButton";
+
 export default {
   name: "profileSettingsView",
+  components: {
+    SignButton,
+  },
   data() {
     return {
+      state: "edit",
+      isCompleted: false,
       targetUserId: null,
       inputData: {
         profileImg: "",
@@ -75,7 +125,6 @@ export default {
       formData.append("bio", this.inputData.bio);
       formData.append("name", this.inputData.name);
       formData.append("profileImg", this.inputData.profileImg);
-      console.log(formData);
       const response = await ProfileAPI.updateProfile(
         this.targetUserId,
         formData
@@ -85,6 +134,8 @@ export default {
     setTargetUserId() {
       this.targetUserId = this.$route.params.userId;
     },
+    setInputBio() {},
+    setInputName() {},
   },
   computed: {
     ...mapGetters(["userProfile"]),

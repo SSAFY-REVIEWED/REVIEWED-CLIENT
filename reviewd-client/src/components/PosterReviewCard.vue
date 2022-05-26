@@ -18,6 +18,7 @@
                 class="w-full h-full"
               />
             </picture>
+            
           </div>
           <div class="px-5 py-3 relative h-full w-0 overflow-hidden pr-[60%]">
             <div

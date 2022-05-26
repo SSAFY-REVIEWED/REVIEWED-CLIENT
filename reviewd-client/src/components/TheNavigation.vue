@@ -2,7 +2,7 @@
   <header class="max-w-screen h-15 bg-white fixed mx-auto right-0 left-0 z-50">
     <nav class="max-w-container mx-auto h-15 px-9 flex">
       <div>
-        <router-link :to="{ name: 'home' }">
+        <router-link :to="{ name: 'main' }">
           <div
             class="items-center bg-gradient-to-r from-primary-red to-second-red bg-clip-text transparent text-transparent font-bold text-logo tracking-tighter"
           >

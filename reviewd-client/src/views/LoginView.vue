@@ -3,7 +3,16 @@
     <div
       class="h-full flex flex-col items-center justify-center max-w-480 mx-auto"
     >
-      <h1>새로운 리뷰의 시작 <span> REVIEWD</span></h1>
+      <h1
+        class="mt-10 flex flex-wrap text-center leading-normal text-h3 bg-gradient-to-r from-primary-blue via-second-blue to-third-blue bg-clip-text transparent text-transparent font-bold"
+      >
+        새로운 리뷰의 시작
+      </h1>
+      <h1
+        class="items-center bg-gradient-to-r from-primary-red to-second-red bg-clip-text transparent text-transparent font-bold text-h2 tracking-tighter"
+      >
+        REVIEWD
+      </h1>
       <form class="w-full" @submit.prevent="login">
         <SignInput
           :type="emailComponent"
@@ -15,7 +24,7 @@
           :value="password"
           @set-sign-value="setSignValue"
         />
-        <SignButton :progress="isCompleted" />
+        <SignButton :progress="isCompleted" :state="state" />
         <GoogleLogin />
       </form>
     </div>
@@ -44,6 +53,7 @@ export default {
       email: "",
       password: "",
       isCompleted: false,
+      state: "login",
     };
   },
   methods: {
@@ -69,7 +79,9 @@ export default {
         this.setToken(response.data);
         try {
           await this.getUser();
-          this.$toast.success(`리뷰쓰기 좋은 날 이에요 ${this.profile.name}님😀`);
+          this.$toast.success(
+            `리뷰쓰기 좋은 날 이에요 ${this.profile.name}님😀`
+          );
           this.$router.push({ name: "main" });
         } catch (err) {
           console.log(err);
@@ -85,8 +97,8 @@ export default {
       VueCookies.set("refreshToken", token.refresh, "7d");
     },
   },
-  computed:{
-    ...mapGetters(['profile'])
+  computed: {
+    ...mapGetters(["profile"]),
   },
   created() {
     this.setLoggingIn(this.$route);

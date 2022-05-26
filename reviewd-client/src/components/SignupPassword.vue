@@ -66,8 +66,10 @@
           />
           <span class="floating-label text-primary-gray">비밀번호</span>
           <p
-            class="absolute text-sm left-0 top-16 text-primary-blue validate-info opacity-0"
-            :class="{ 'text-primary-red': !isValidPassword }"
+            class="absolute text-sm left-0 top-16 validate-info"
+            :class="{
+              'text-primary-red opacity-100': !isValidPassword,
+            }"
           >
             {{ passwordValidationMessage }}
           </p>
@@ -104,8 +106,10 @@
           />
           <span class="floating-label text-primary-gray">비밀번호 확인</span>
           <p
-            class="absolute text-sm left-0 top-16 text-primary-red validate-info opacity-0"
-            :class="{ 'text-primary-red': !isValidPassword }"
+            class="absolute text-sm left-0 top-16 validate-info"
+            :class="{
+              'text-primary-red opacity-100': !isMatchedPassword,
+            }"
           >
             {{ passwordCheckValidationMessage }}
           </p>
@@ -142,14 +146,17 @@
           />
           <span class="floating-label text-primary-gray">이름</span>
           <p
-            class="absolute text-sm left-0 top-16 text-primary-blue validate-info opacity-0"
-            :class="{ 'text-primary-red': !isValidName }"
+            class="absolute text-sm left-0 top-16 validate-info"
+            :class="{
+              'text-primary-red opacity-100': !isValidName,
+              'opacity-0 text-primary-blue ': isValidName,
+            }"
           >
             {{ nameValidationMessage }}
           </p>
         </div>
         <button
-          class="mt-8 h-12 w-full bg-gradient-to-r from-primary-blue via-second-blue to-third-blue font-bold text-white rounded-lg opacity-30"
+          class="mt-8 h-12 w-full bg-gradient-to-r from-primary-blue via-second-blue to-third-blue font-bold text-white rounded-lg"
           :disabled="
             !name ||
             !password ||
@@ -168,6 +175,14 @@
               isValidPassword &&
               isMatchedPassword &&
               isValidName,
+            'opacity-30':
+              !name ||
+              !password ||
+              !email ||
+              !passwordCheck ||
+              !isValidPassword ||
+              !isMatchedPassword ||
+              !isValidName,
           }"
           ref="signupButton"
         >
@@ -202,7 +217,7 @@ export default {
   },
   data() {
     return {
-      passwordValidationMessage: PASSWORD_VALIDATION_MESSAGE["PASSWORD_RULE"],
+      passwordValidationMessage: "",
       passwordCheckValidationMessage: "",
       nameValidationMessage: NAME_VALIDATION_MESSAGE["INVALID_NAME"],
       isValidPassword: true,
@@ -241,7 +256,7 @@ export default {
         PASSWORD_VALIDATION_MESSAGE["NOT_MATCHED_PASSWORD"];
     },
     validateName(e) {
-      const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,}$/;
+      const regex = /^[|가-힣|a-z|A-Z|]{2,}$/;
       if (!regex.test(e.target.value)) {
         this.isValidName = false;
         (this.nameValidationMessage = NAME_VALIDATION_MESSAGE["INVALID_NAME"]),
