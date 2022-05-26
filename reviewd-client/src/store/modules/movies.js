@@ -20,11 +20,9 @@ export default {
   mutations: {
     setMovieData(state, movieData) {
       state.movieData = { ...state.movieData, ...movieData };
-      console.log(state.movieData);
     },
     setMyReview(state, review) {
       state.myReview = review;
-      console.log(state.myReview);
     },
     setReviewList(state, reviewList) {
       state.reviewList = [...reviewList];
@@ -75,7 +73,6 @@ export default {
       try {
         const response = await MovieAPI.rateMovie(state.movieId, body);
         const { voteAverage } = response.data;
-        console.log(response.data);
         commit("setMovieData", { voteAverage, body });
       } catch (err) {
         console.log(err);
@@ -84,7 +81,6 @@ export default {
     async getMovieReviewList({ commit }, movieId) {
       try {
         const response = await MovieAPI.getMovieReviewList(movieId);
-        console.log(response, '리뷰 리스트')
         if (response.data.review) {
           const { review } = response.data;
           commit("setMyReview", review);
@@ -101,7 +97,6 @@ export default {
       try {
         const response = await MovieAPI.createMovieReview(state.movieId, body);
         const { review } = response.data;
-        console.log(response,"삭생성")
         commit("setMyReview", review);
       } catch (err) {
         console.log(err);

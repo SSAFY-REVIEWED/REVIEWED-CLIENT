@@ -121,7 +121,9 @@ export default {
         setTimeout(() => {
           this.$router.push({ name: "main" });
         }, 3000);
-        const response = await postData("SURVEY", this.preferenceGenreList);
+        const response = await postData("SURVEY", {
+          preferenceGenreList: this.preferenceGenreList,
+        });
         //TODO: 삭제하기
         console.log(response);
       } catch (err) {
