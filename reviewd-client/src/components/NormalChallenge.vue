@@ -1,6 +1,14 @@
 <template>
-  <article class="w-full bg-fourth-blue px-6 py-5 min-h-[420px] rounded-2xl relative">
+  <article
+    class="w-full bg-fourth-blue px-6 py-5 min-h-[420px] rounded-2xl relative"
+  >
     <div v-if="ready">
+      <div
+        v-if="challengeMovieList.progress === 100"
+        class="absolute w-full h-full bg-light-black opacity-50 right-0 bottom-0 top-0 left-0 rounded-2xl flex justify-start items-center z-20"
+      >
+        <p class="mx-auto text-white text-h3 font-semibold">미션 클리어</p>
+      </div>
       <h3 class="text-h3 text-primary-blue font-semibold">
         {{ challengeMovieList.name }}
       </h3>
@@ -15,7 +23,7 @@
               ref="target"
               class="h-5 absolute top-0 left-0 w-70 overflow-hidden transition-all duration-1000 rounded-lg shadow-3xl bg-primary-blue"
               :style="{
-                width: `${level}%`,
+                width: `${challengeMovieList.progress}%`,
               }"
             ></div>
           </transition>
@@ -45,6 +53,9 @@ export default {
     challengeMovieList: {
       type: Object,
     },
+    index: {
+      type: Number,
+    },
   },
   data() {
     return {
@@ -61,19 +72,19 @@ export default {
       this.ready = true;
     },
   },
-  watch: {
-    challengeMovieList() {
-      this.isReadyData();
+
+  mounted() {
+    this.isReadyData();
+    setTimeout(() => {
       this.toggleShow();
-    },
+    }, 500 * this.index);
   },
-  mounted() {},
 };
 </script>
 
 <style>
 .show-enter-active {
-  animation: show-in 10s;
+  animation: show-in 3s;
 }
 @keyframes show-in {
   0% {

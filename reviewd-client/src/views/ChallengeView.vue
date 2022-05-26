@@ -2,12 +2,9 @@
   <div class="max-w-container mx-auto pt-0 px-9 min-h-screen my-20">
     <h1 class="text-h3 font-bold">CHALLENGE</h1>
     <h2 class="text-h4 mb-9">영화 리뷰에 새로운 도전을 해보세요</h2>
-    <EventChallenge :challengeMovieList="challengeList[1]" />
-    <div class="mt-10">
-      <NormalChallenge :challengeMovieList="challengeList[0]" />
-    </div>
-    <div class="mt-10">
-      <NormalChallenge :challengeMovieList="challengeList[2]" />
+    <EventChallenge :challengeMovieList="eventChallengeList[0]" />
+    <div class="mt-10" v-for="(challenge, index) in challengeList" :key="index">
+      <NormalChallenge :challengeMovieList="challenge" :index="index + 1" />
     </div>
   </div>
 </template>
@@ -26,18 +23,21 @@ export default {
   data() {
     return {
       challengeList: [],
+      eventChallengeList: [],
       ready: false,
     };
   },
   methods: {
     setChallengeList(response) {
       this.challengeList = response.data.challenges;
+      this.eventChallengeList = response.data.event;
     },
 
     async getChallengeList() {
       try {
         const response = await MovieAPI.getChallenges();
         this.setChallengeList(response);
+        console.log(response);
       } catch (err) {
         console.log(err);
       }

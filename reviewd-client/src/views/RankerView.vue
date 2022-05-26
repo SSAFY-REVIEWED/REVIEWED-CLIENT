@@ -108,6 +108,7 @@ export default {
       FourRankerList: [],
       tenRankerList: [],
       rankerList: [],
+      ready: false
     };
   },
   methods: {
@@ -137,8 +138,8 @@ export default {
       }
     },
   },
-  mounted() {
-    this.getRankerList();
+  async mounted() {
+    await this.getRankerList();
   },
 };
 </script>

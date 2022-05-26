@@ -4,7 +4,7 @@
   >
     <div v-if="ready">
       <div
-        v-if="challengeMovieList.completed"
+        v-if="challengeMovieList.progress === 100"
         class="absolute w-full h-full bg-light-black opacity-50 right-0 bottom-0 top-0 left-0 rounded-2xl flex justify-start items-center z-20"
       >
         <p class="mx-auto text-white text-h3 font-semibold">미션 클리어</p>
@@ -18,6 +18,7 @@
       <h4 class="text-h4 text-primary-green font-bold my-3">
         {{ challengeMovieList.name }}
       </h4>
+
       <div class="mt-3 flex flex-row">
         <p class="text-h5 text-primary-green font-bold w-32">미션 달성률</p>
         <div class="relative w-full">
@@ -28,7 +29,7 @@
               ref="target"
               class="h-5 absolute top-0 left-0 w-70 overflow-hidden transition-all duration-1000 rounded-lg shadow-3xl bg-primary-green"
               :style="{
-                width: `${level}%`,
+                width: `${challengeMovieList.progress}%`,
               }"
             ></div>
           </transition>
@@ -78,12 +79,13 @@ export default {
     challengeMovieList() {
       if (Object.keys(this.challengeMovieList).length > 0) {
         this.isReadyData();
-        this.toggleShow();
       }
     },
   },
   mounted() {
-    this.toggleShow();
+    setTimeout(() => {
+      this.toggleShow();
+    }, 100);
   },
 };
 </script>
