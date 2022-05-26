@@ -4,7 +4,7 @@
       {{ userProfile.name }}님이 보고싶어하는 영화 목록
     </h1>
     <article
-      v-if="!movieList.length && !hasMore"
+      v-if="!likesList.length && !hasMore"
       class="w-full h-[20vh] flex flex-col justify-center items-center relative"
     >
       <svg
@@ -21,22 +21,17 @@
       </svg>
       <p class="text-h5">아직 보고싶은 영화가 없어요.</p>
     </article>
-    <article v-if="movieList.length">
-      <ReviewCard
-        v-for="movie in movieList"
-        :key="movie.movieId"
-        :movie="movie"
-      />
-    </article>
-    <article v-if="movieList.length" class="grid grid-cols-4 gap-4">
+
+    <article v-if="likesList.length" class="grid grid-cols-4 gap-4">
       <MainPosterCard
-        v-for="movie in movieList"
+        v-for="movie in likesList"
         :key="movie.movieId"
         :movie="movie"
+        :myLikes="true"
       />
     </article>
     <div
-      v-if="isLoading"
+      v-if="isLoading && hasMore"
       class="w-full h-full flex justify-center items-center"
     >
       <LoadingSpinner />
@@ -65,48 +60,10 @@ export default {
   data() {
     return {
       targetUserId: null,
-      // movieList: [
-      //   {
-      //     movieId: 2,
-      //     movieTitle: "혼돈",
-      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-      //     rate: 7.7,
-      //   },
-      //   {
-      //     movieId: 3,
-      //     movieTitle: "혼돈",
-      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-      //     rate: 7.7,
-      //   },
-      //   {
-      //     movieId: 4,
-      //     movieTitle: "혼돈",
-      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-      //     rate: 7.7,
-      //   },
-      //   {
-      //     movieId: 5,
-      //     movieTitle: "혼돈",
-      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-      //     rate: 7.7,
-      //   },
-      //   {
-      //     movieId: 6,
-      //     movieTitle: "혼돈",
-      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-      //     rate: 7.7,
-      //   },
-      //   {
-      //     movieId: 7,
-      //     movieTitle: "혼돈",
-      //     posterUrl: "../assets/images/posters/닥터스트레인지.jpeg",
-      //     rate: 7.7,
-      //   },
-      // ],
-      movieList: [],
+      likesList: [],
       hasMore: true,
       page: 1,
-      isLoading: false,
+      isLoading: true,
     };
   },
   methods: {
@@ -114,7 +71,7 @@ export default {
       this.targetUserId = this.$route.params.userId;
     },
     setMovieList(response) {
-      this.likesList = response.data.movies;
+      this.likesList = [...this.likesList, ...response.data.movies];
       this.page++;
       this.hasMore = response.data.hasMore;
     },
@@ -125,7 +82,7 @@ export default {
           this.targetUserId,
           this.page
         );
-        console.log(response)
+        console.log(response);
         this.setMovieList(response);
       } catch (err) {
         console.log(err);
@@ -135,7 +92,6 @@ export default {
   computed: { ...mapGetters(["userProfile"]) },
   created() {
     this.setTargetUserId();
-    this.getTargetUserLikedMovieList();
   },
 };
 </script>

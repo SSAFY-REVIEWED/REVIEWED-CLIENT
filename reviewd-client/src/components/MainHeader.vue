@@ -1,10 +1,12 @@
 <template>
   <div class="w-full relative mb-6">
-    <h1 class="text-h3 font-semibold">MOVIE</h1>
-    <h2 class="text-h4 text-light-black">{{profile.name}}님을 위한 강력 추천 영화</h2>
+    <h2 class="text-h4 text-light-black">{{ movieList.name }}</h2>
     <div class="relative mt-6">
       <swiper class="swiper px-16 bg-white shadow-none" :options="swiperOption">
-        <swiper-slide v-for="movie in movieList" :key="movie.title" class="py-1"
+        <swiper-slide
+          v-for="movie in movieList.movieList"
+          :key="movie.title"
+          class="py-1"
           ><MainPosterCard :movie="movie"
         /></swiper-slide>
       </swiper>
@@ -44,7 +46,7 @@ export default {
   },
   props: {
     movieList: {
-      type: Array,
+      type: Object,
     },
   },
   data() {
@@ -95,13 +97,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['profile']),
+    ...mapGetters(["profile"]),
     swiper() {
       return this.$refs.mySwiper.$swiper;
     },
   },
 
-  mounted() {},
+  mounted() {
+    console.log(this.movieList);
+  },
 };
 </script>
 

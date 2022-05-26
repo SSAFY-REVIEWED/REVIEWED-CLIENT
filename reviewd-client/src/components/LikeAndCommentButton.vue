@@ -1,9 +1,9 @@
 <template>
-  <div class="flex">
-    <button class="px-4" @click="toggleLikes">
+  <div class="flex mb-3">
+    <button class="px-4 w-20" @click="toggleLikes">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5 inline"
+        class="h-5 w-5 inline text-primary-red"
         viewBox="0 0 20 20"
         fill="currentColor"
         v-if="this.review.like"
@@ -31,7 +31,7 @@
       </svg>
       {{ review.likes }}
     </button>
-    <div class="px-4">
+    <div class="px-4 w-20">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-5 w-5 inline"

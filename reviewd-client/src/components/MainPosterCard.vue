@@ -43,7 +43,7 @@
                 </p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  v-if="movie.like"
+                  v-if="movie.like || myLikes"
                   class="h-5 w-5 text-primary-red"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -56,7 +56,7 @@
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  v-if="!movie.like"
+                  v-else
                   class="h-5 w-5 text-primary-red"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -85,6 +85,9 @@ export default {
     movie: {
       type: Object,
     },
+    myLikes: {
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -93,7 +96,7 @@ export default {
   },
   computed: {
     getYear() {
-      let year = ''
+      let year = "";
       if (this.movie.createdAt) {
         year = this.movie.createdAt.substr(0, 4);
         return year;

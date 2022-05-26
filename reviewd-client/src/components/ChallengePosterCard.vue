@@ -2,6 +2,7 @@
   <div class="w-full relative">
     <router-link :to="{ name: 'home' }">
       <div
+      v-if="!done2"
         class="w-full h-full absolute bg-light-black opacity-70 z-10 rounded-xl flex justify-center items-center text-white font-extrabold"
       >리뷰 완료</div>
       <div
@@ -42,6 +43,11 @@
 <script>
 export default {
   name: "challengePosterCard",
+  props: {
+    done2: {
+      type: Boolean
+    }
+  },
   data() {
     return {
       done: true,

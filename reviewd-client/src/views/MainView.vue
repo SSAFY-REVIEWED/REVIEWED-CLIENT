@@ -3,8 +3,11 @@
     class="max-w-container mx-auto pt-0 px-9 min-h-screen relative mt-20"
   >
     <article class="mt-10">
-      <MainHeader v-if="movieList.length" :movieList="movieList" />
+      <h1 class="text-h3 font-semibold">MOVIE</h1>
+      <MainHeader :movieList="movieList[0]" />
       <HotReviews v-if="false" />
+      <!-- <MainHeader :movieList="movieList[1]" />
+      <MainHeader :movieList="movieList[2]" /> -->
     </article>
   </section>
 </template>
@@ -24,6 +27,8 @@ export default {
   data() {
     return {
       movieList: [],
+      movieList1: [],
+      movieList2: [],
     };
   },
   methods: {
@@ -32,15 +37,18 @@ export default {
     slideChangeTransitionStart() {
       console.log(this.swiper.activeIndex); //현재 index값 얻기
     },
-    setMovieList(movieList) {
-      this.movieList = movieList;
+    setMovieList(response) {
+      this.movieList = response.data[0];
+      this.movieList2 = response.data[1];
+      this.movieList3 = response.data[2];
+      console.log(this.movieList, this.movieList2, this.movieList3);
     },
     async getMovieList() {
       try {
         const response = await MovieAPI.getMainMovieList();
-        console.log(response)
+        console.log(response);
 
-        this.setMovieList(response.data);
+        this.setMovieList(response);
       } catch (err) {
         console.log(err);
       }

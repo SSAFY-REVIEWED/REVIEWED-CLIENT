@@ -32,7 +32,7 @@ const MovieAPI = {
     return axios.delete(MOVIE_URL.REVIEW(reviewId));
   },
   async likeReview(reviewId, body) {
-    return axios.post(MOVIE_URL.REVIEW_LIKE(reviewId), body);
+    return axios.post(MOVIE_URL.REVIEW(reviewId), body);
   },
   async getReviewCommentList(reviewId) {
     return axios.get(MOVIE_URL.REVIEW_COMMENT_LIST(reviewId));

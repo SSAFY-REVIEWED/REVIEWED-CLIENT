@@ -6,14 +6,16 @@
         name="review"
         id=""
         cols="30"
-        rows="6"
+        rows="4"
         v-model="content"
-        required
         autofocus
         placeholder="댓글을 입력하세요."
       >
       </textarea>
-      <button class="relative w-52 ml-auto bg-third-blue block" type="submit">
+      <button
+        class="relative w-40 ml-auto bg-gradient-to-r from-primary-red to-second-red h-10 block text-white font-semibold rounded-xl shadow-xl"
+        type="submit"
+      >
         댓글 등록
       </button>
     </form>
@@ -30,7 +32,12 @@ export default {
   },
   methods: {
     createComment() {
+      if (this.content.trim().length < 1) {
+        this.$toast.error("댓글은 한 글자 이상 입력해주세요.");
+        return;
+      }
       this.$emit("create-comment", this.content);
+      this.content = "";
     },
   },
 };
