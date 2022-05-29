@@ -68,7 +68,7 @@ export default {
         const response = await ProfileAPI.getHistory(this.targetUserId);
         this.reviewDateCountList = response.data.reviewDateCountList;
         this.reviewGenreCountList = response.data.reviewGenreCountList;
-        // this.challengeList = response.data.Challenges;
+        this.challengeList = response.data.Challenges;
         this.setReviewList();
       } catch (err) {
         console.log(err);
