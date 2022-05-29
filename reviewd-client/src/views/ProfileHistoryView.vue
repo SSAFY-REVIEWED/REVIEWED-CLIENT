@@ -54,14 +54,7 @@ export default {
         "SF",
         "미스터리",
       ],
-      challengeList: [
-        "열심히 헀지만 잘 졌삼",
-        "열심히 헀지만 잘 졌삼",
-        "열심히 헀지만 잘 졌삼",
-        "열심히 헀지만 잘 졌삼",
-        "열심히 헀지만 잘 졌삼",
-        
-      ],
+      challengeList: [],
       genreList: [],
       reviewCountList: [],
     };

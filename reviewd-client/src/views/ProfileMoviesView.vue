@@ -58,11 +58,11 @@ export default {
   },
   data() {
     return {
-      isLoading: false,
       targetUserId: null,
       movieList: [],
       hasMore: true,
       page: 1,
+      isLoading: true,
     };
   },
   methods: {
@@ -70,7 +70,7 @@ export default {
       this.targetUserId = this.$route.params.userId;
     },
     setMovieList(response) {
-      this.movieList = response.data.movies;
+      this.movieList = [...this.movieList, ...response.data.movies];
       this.page++;
       this.hasMore = response.data.hasMore;
     },
@@ -96,7 +96,6 @@ export default {
   computed: { ...mapGetters(["userProfile"]) },
   created() {
     this.setTargetUserId();
-    this.getTargetUserRatedMovieList();
   },
 };
 </script>
