@@ -1,15 +1,17 @@
 <template>
   <section class="max-w-container mx-auto pt-0 px-9 mt-36">
     <div>
-      <ProfileHeader :userId="targetUserId" />
+      <div>
+        <ProfileHeader :userId="targetUserId" />
+      </div>
+      <router-view></router-view>
     </div>
-    <router-view></router-view>
   </section>
 </template>
 
 <script>
 import ProfileHeader from "@/components/ProfileHeader";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "profileView",
   components: {
@@ -27,7 +29,10 @@ export default {
       this.targetUserId = +params;
     },
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["userProfile"]),
+  },
+  watch: {},
   created() {
     this.getTargetUserId();
   },

@@ -46,6 +46,8 @@
             type="text"
             id="한줄 소개"
             name="한줄 소개"
+            v-model="inputData.bio"
+            placeholder="한줄 소개"
             class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white"
           />
         </div>
@@ -69,25 +71,32 @@
             type="text"
             id="이름"
             name="이름"
+            v-model="inputData.name"
             class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white"
           />
         </div>
-        <SignButton :state="state" :progress="isCompleted" />
+        <div class="w-full">
+          <button
+            type="submit"
+            class="mt-8 h-12 w-full bg-gradient-to-r from-primary-blue via-second-blue to-third-blue font-bold text-white rounded-lg transition-all duration-200 ease opacity-100"
+            ref="signupButton"
+          >
+            수정하기
+          </button>
+        </div>
       </form>
     </div>
   </section>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import ProfileAPI from "@/api/profile";
-import SignButton from "@/components/SignButton";
+import { NAME_VALIDATION_MESSAGE } from "@/utils/const.js";
 
 export default {
   name: "profileSettingsView",
-  components: {
-    SignButton,
-  },
+  components: {},
   data() {
     return {
       state: "edit",
@@ -101,8 +110,17 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["updateProfile", "setUserProfile"]),
     changeProfileImg() {
       this.$refs.image.click();
+    },
+    validateName(name) {
+      const regex = /^[|가-힣|a-z|A-Z|]{2,}$/;
+      if (!regex.test(name)) {
+        this.$toast.error(NAME_VALIDATION_MESSAGE["INVALID_NAME"]);
+        return false;
+      }
+      return true;
     },
     handleFiles() {
       const image = this.$refs.image.files[0];
@@ -122,14 +140,22 @@ export default {
     },
     async onSubmitFormData() {
       const formData = new FormData();
+      if (!this.validateName(this.inputData.name)) return;
       formData.append("bio", this.inputData.bio);
       formData.append("name", this.inputData.name);
       formData.append("profileImg", this.inputData.profileImg);
-      const response = await ProfileAPI.updateProfile(
-        this.targetUserId,
-        formData
-      );
-      console.log(response);
+      try {
+        const response = await ProfileAPI.updateProfile(
+          this.targetUserId,
+          formData
+        );
+        this.$toast.success("정보 변경 성공");
+        this.updateProfile(response.data);
+        this.setUserProfile(response.data);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
     },
     setTargetUserId() {
       this.targetUserId = this.$route.params.userId;

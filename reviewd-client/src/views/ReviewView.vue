@@ -95,17 +95,14 @@ export default {
         const response = await MovieAPI.createReviewComment(this.reviewId, {
           content,
         });
-        console.log(response, "코멘트");
         this.setCommentList(response.data);
       } catch (err) {
         console.log(err);
       }
     },
     async deleteUserReview(reviewId) {
-      console.log(reviewId);
       await this.$emit("delete-content", reviewId);
       if (confirm("리뷰를 정말로 삭제하실건가요?")) {
-        console.log(reviewId);
         try {
           await MovieAPI.deleteReview(reviewId);
           this.$router.go(-1);

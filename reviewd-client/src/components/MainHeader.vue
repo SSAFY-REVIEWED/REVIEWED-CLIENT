@@ -27,6 +27,8 @@
         ></div>
       </div>
     </div>
+    
+
   </div>
 </template>
 
@@ -46,7 +48,10 @@ export default {
   },
   props: {
     movieList: {
-      type: Array,
+      type: Object,
+    },
+    order: {
+      type: Number,
     },
   },
   data() {
@@ -72,8 +77,8 @@ export default {
           },
         },
         navigation: {
-          nextEl: ".header__button--next",
-          prevEl: ".header__button--prev",
+          nextEl: ".swiper__button--next",
+          prevEl: ".swiper__button--prev",
         },
         autoplay: {
           delay: 4000,

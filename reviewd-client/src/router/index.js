@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import VueCookies from "vue-cookies";
 import getNewAccessToken from "@/api/refresh";
-import HomeView from "@/views/HomeView";
+// import HomeView from "@/views/HomeView";
 import SignUpView from "@/views/SignUpView";
 import LoginView from "@/views/LoginView";
 import SurveyView from "@/views/SurveyView";
@@ -19,6 +19,7 @@ import ProfileMoviesView from "@/views/ProfileMoviesView";
 import ProfileReviewsView from "@/views/ProfileReviewsView";
 import ProfileSettingsView from "@/views/ProfileSettingsView";
 import SearchView from "@/views/SearchView";
+import NotFound from "@/views/NotFound";
 
 Vue.use(VueRouter);
 
@@ -26,7 +27,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: SignUpView,
     meta: {
       title: "Home",
       authorized: false,
@@ -178,6 +179,15 @@ const routes = [
       title: "Search",
       authorized: true,
     },
+  },
+  {
+    path: "/404",
+    name: "notFound",
+    component: NotFound,
+  },
+  {
+    path: "*",
+    redirect: "/404",
   },
 ];
 

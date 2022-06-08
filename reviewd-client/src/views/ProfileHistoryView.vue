@@ -54,14 +54,7 @@ export default {
         "SF",
         "미스터리",
       ],
-      challengeList: [
-        "열심히 헀지만 잘 졌삼",
-        "열심히 헀지만 잘 졌삼",
-        "열심히 헀지만 잘 졌삼",
-        "열심히 헀지만 잘 졌삼",
-        "열심히 헀지만 잘 졌삼",
-        
-      ],
+      challengeList: [],
       genreList: [],
       reviewCountList: [],
     };
@@ -75,7 +68,7 @@ export default {
         const response = await ProfileAPI.getHistory(this.targetUserId);
         this.reviewDateCountList = response.data.reviewDateCountList;
         this.reviewGenreCountList = response.data.reviewGenreCountList;
-        // this.challengeList = response.data.Challenges;
+        this.challengeList = response.data.Challenges;
         this.setReviewList();
       } catch (err) {
         console.log(err);

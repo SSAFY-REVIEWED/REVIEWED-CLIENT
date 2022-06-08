@@ -3,9 +3,19 @@
     class="w-full min-h-[384px] relative flex flex-col md:flex-row p-10 bg-light-gray rounded-t-xl"
     v-if="userProfile"
   >
+    <ModalFollow
+      v-if="modalOpen"
+      @close-modal="toggleModal"
+      :followList="followList"
+      :userId="profile.userId"
+      :targetId="userId"
+      :state="state"
+      @delete-follow="deleteFollower"
+    />
     <div class="w-full md:w-1/3 flex justify-center items-center">
       <div class="w-44 h-44 overflow-hidden rounded-full shadow-3xl">
         <img
+          v-if="userProfile.profileImg"
           :src="userProfile.profileImg"
           loading="lazy"
           :alt="`${userProfile.name}이미지`"
@@ -24,14 +34,18 @@
           class="flex flex-col md:flex-row items-center w-full md:w-2/3 justify-between"
         >
           <h1 class="text-h3 font-semibold">{{ userProfile.name }}</h1>
-          <FollowButton v-if="profile.userId === userId" />
+          <FollowButton
+            v-if="profile.userId !== userId"
+            :follow="follow"
+            @toggle-follow="toggleFollow"
+          />
         </div>
         <div class="flex gap-x-6 items-start mt-5">
           <p class="w-fit min-x-[100px]">{{ userProfile.reviewCount }} 리뷰</p>
-          <button class="w-20">
+          <button class="w-20" @click.stop="getFollowerList">
             {{ userProfile.followedCount }} <span>팔로워</span>
           </button>
-          <button class="w-20">
+          <button class="w-20" @click.stop="getFollowList">
             {{ userProfile.followingCount }} <span>팔로우</span>
           </button>
         </div>
@@ -51,6 +65,7 @@
           </p>
           <div class="w-10 h-10 rounded-full overflow-hidden">
             <img
+              v-if="userProfile.levelImg"
               :src="userProfile.levelImg"
               :alt="`${userProfile.level} 레벨 이미지`"
               width="50"
@@ -135,11 +150,14 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import FollowButton from "@/components/FollowButton";
+import ProfileAPI from "@/api/profile";
+import ModalFollow from "@/components/ModalFollow";
 
 export default {
   name: "profileHeader",
   components: {
     FollowButton,
+    ModalFollow,
   },
   props: {
     userId: {
@@ -151,6 +169,10 @@ export default {
       show: false,
       like: false,
       pageName: "",
+      follow: false,
+      modalOpen: false,
+      followList: [],
+      state: null,
     };
   },
   methods: {
@@ -158,14 +180,61 @@ export default {
     toggleShow() {
       this.show = true;
     },
+    setState(state) {
+      this.state = state;
+    },
+    async setFollowStatus() {
+      this.follow = this.userProfile.follow;
+    },
     async toggleFollow() {
       await this.toggleUserFollow({
         myUserId: this.profile.userId,
         targetUserId: this.userId,
       });
+      this.follow = !this.follow;
     },
     getPageNum() {
       this.pageName = this.$route.name;
+    },
+    async getFollowerList() {
+      try {
+        const response = await ProfileAPI.getFollowers(this.userId);
+        this.setFollowList(response.data);
+        this.setState("팔로워");
+        this.toggleModal();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getFollowList() {
+      try {
+        const response = await ProfileAPI.getFollowings(this.userId);
+        this.setFollowList(response.data);
+        this.setState("팔로우");
+        this.toggleModal();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    closeModal() {
+      this.modalOpen = !this.modalOpen;
+    },
+    toggleModal() {
+      this.modalOpen = !this.modalOpen;
+    },
+    setFollowList(list) {
+      this.followList = list;
+    },
+    async deleteFollower(targetId, index) {
+      console.log(targetId, index);
+      try {
+        await ProfileAPI.deleteFollower(this.profile.userId, targetId);
+        console.log(this.followList);
+        this.followList = this.followList.splice(index, 1);
+        console.log(this.followList);
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   computed: {
@@ -199,10 +268,15 @@ export default {
     $route() {
       this.getPageNum();
     },
+    userProfile() {
+      this.setFollowStatus();
+    },
   },
-  mounted() {
+
+  async mounted() {
     this.toggleShow();
     this.getPageNum();
+    await this.setFollowStatus();
   },
 };
 </script>

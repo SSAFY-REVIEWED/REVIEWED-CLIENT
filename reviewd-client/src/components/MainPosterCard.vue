@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full" v-if="ready">
     <router-link :to="{ name: 'movie', params: { movieId: movie.movieId } }">
       <div
         class="bg-white relative w-full h-0 overflow-hidden pb-183% rounded-lg shadow-md"
@@ -92,7 +92,13 @@ export default {
   data() {
     return {
       like: false,
+      ready: false,
     };
+  },
+  methods: {
+    isReadyData() {
+      this.ready = true;
+    },
   },
   computed: {
     getYear() {
@@ -103,6 +109,9 @@ export default {
       }
       return year;
     },
+  },
+  mounted() {
+    this.isReadyData();
   },
 };
 </script>

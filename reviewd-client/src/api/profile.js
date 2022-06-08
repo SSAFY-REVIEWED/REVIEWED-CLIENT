@@ -29,7 +29,7 @@ const ProfileAPI = {
   async getFollowers(userId) {
     return axios.get(PROFILE_URL.FOLLOWERS(userId));
   },
-  async deleteFollowers(userId, targetId) {
+  async deleteFollower(userId, targetId) {
     return axios.delete(PROFILE_URL.DELETE_FOLLOWER(userId, targetId));
   },
   async toggleFollow(userId, target, body) {

@@ -5,7 +5,7 @@
     <div v-if="ready">
       <div
         v-if="challengeMovieList.progress === 100"
-        class="absolute w-full h-full bg-light-black opacity-50 right-0 bottom-0 top-0 left-0 rounded-2xl flex justify-start items-center z-20"
+        class="absolute w-full h-full bg-light-black opacity-50 right-0 bottom-0 top-0 left-0 rounded-2xl flex justify-start items-center z-20 animate-pulse"
       >
         <p class="mx-auto text-white text-h3 font-semibold">미션 클리어</p>
       </div>

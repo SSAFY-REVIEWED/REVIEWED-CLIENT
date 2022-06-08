@@ -19,7 +19,7 @@
           >
         </button>
         <button
-          class="px-4"
+          class="px-4 h-14"
           :class="{ 'border-b-2 border-black': type === 'users' }"
         >
           <router-link :to="{ name: 'search', query: { query, type: 'users' } }"
@@ -28,16 +28,25 @@
         </button>
       </div>
       <article
-        v-if="type === 'movies'"
+        v-if="type === 'movies' && searchData.length > 0"
         class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-10"
       >
-        <MainPosterCard v-for="num in 6" :key="num" />
+        <MainPosterCard
+          v-for="movie in searchData"
+          :key="movie.movieId"
+          :movie="movie"
+        />
       </article>
       <article
-        v-if="type === 'users'"
+        v-if="type === 'users' && searchData.length > 0"
         class="grid grid-cols-1 md:grid-cols-2 w-full gap-5 mt-10"
       >
-        <SearchUserCard v-for="num in 6" :key="num" class="w-full" />
+        <SearchUserCard
+          v-for="user in searchData"
+          :key="user.userId"
+          :user="user"
+          class="w-full"
+        />
       </article>
       <article class="flex flex-col h-[80vh] justify-center items-center">
         <LoadingSpinner v-if="isLoading" />
@@ -101,21 +110,23 @@ export default {
     setSearchData(searchData) {
       this.searchData = searchData;
     },
+    initializeSearchData() {
+      this.searchData = [];
+    },
     toggleLoading() {
       this.isLoading = !this.isLoading;
     },
     async getSearchKeywordData() {
+      this.initializeSearchData();
       this.toggleLoading();
       try {
         const response = await SearchAPI.getSearchData(this.query, this.type);
-        const { searchData } = response.data;
-        this.setSearchData(searchData);
+        this.setSearchData(response.data);
       } catch (err) {
         console.log(err);
-      }
-      setTimeout(() => {
+      } finally {
         this.toggleLoading();
-      }, 1000);
+      }
     },
   },
   computed: {
@@ -129,7 +140,6 @@ export default {
   },
   created() {
     this.getQuery();
-    this.isLoading = false;
     this.setKeyword(this.query);
     this.getSearchKeywordData();
   },

@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div @click="toggleFollow">
     <button
       class="w-[115px] h-[38px] bg-gradient-to-r from-primary-red to-second-red rounded-lg font-bold text-white"
-      v-if="false"
+      v-if="!follow"
+      type="button"
     >
       <div>
         <svg
@@ -19,6 +20,8 @@
     </button>
     <button
       class="w-[115px] h-[38px] bg-gradient-to-r from-slate-400 to-slate-300 rounded-lg font-bold text-white"
+      v-else
+      type="button"
     >
       <div>
         <svg
@@ -38,7 +41,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    follow: {
+      type: Boolean,
+    },
+  },
+  methods: {
+    toggleFollow() {
+      this.$emit("toggle-follow");
+    },
+  },
+};
 </script>
 
 <style></style>

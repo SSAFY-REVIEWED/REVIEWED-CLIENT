@@ -59,16 +59,13 @@ export default {
     setParams() {
       const params = this.$route.params.movieId;
       this.params = params;
-      console.log(this.params);
     },
     setQuery() {
       const { query } = this.$route.query;
       this.query = query;
-      console.log(this.query);
     },
     initializePage() {
       this.page = 1;
-      console.log(this.page);
     },
     changeQuery(e) {
       const { value } = e.target;
@@ -99,8 +96,6 @@ export default {
         this.dataList = [...this.dataList, ...this.reviewList];
         this.isFetching = false;
       }, 1000);
-
-      console.log(this.dataList);
     },
     setDataList() {},
   },

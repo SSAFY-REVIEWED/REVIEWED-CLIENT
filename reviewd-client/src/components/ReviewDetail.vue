@@ -73,10 +73,24 @@
           @toggle-spoiler="toggleSpoiler"
           :spoiler="spoiler"
         />
-        <button type="submit" class="bg-blue-500" @click="editUserReview">
-          수정하기
-        </button>
-        <button class="bg-red-500" @click="cancelEdit">수정취소</button>
+        <div class="flex gap-x-5">
+          <div class="right-0 relative w-20 ml-auto">
+            <button
+              @click="cancelEdit"
+              class="bg-second-blue h-10 rounded-xl shadow-xl w-full text-white font-semibold"
+            >
+              수정 취소
+            </button>
+          </div>
+          <div class="right-0 relative w-20">
+            <button
+              type="submit"
+              class="bg-second-green h-10 rounded-xl shadow-xl w-full text-white font-semibold"
+            >
+              수정 완료
+            </button>
+          </div>
+        </div>
       </form>
     </article>
     <div class="mt-10">

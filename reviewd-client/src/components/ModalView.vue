@@ -30,7 +30,7 @@
               >
               </textarea>
               <button
-                class="left-0 top-0 mt-5 ml-auto right-0 bg-third-blue w-24 h-10 rounded-lg text-white hover:bg-primary-blue w-fit"
+                class="left-0 top-0 mt-5 ml-auto right-0 bg-third-blue w-24 h-10 rounded-lg text-white hover:bg-primary-blue "
                 type="submit"
                 @click="updateMovieReview"
               >
