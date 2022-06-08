@@ -4,7 +4,7 @@
       class="w-full h-12 align-middle flex items-center bg-slate-300 overflow-visible"
     >
       <div class="text-h5 max-w-container mx-auto w-full px-9">
-        <div class="w-full">"{{ searchKeyword }}"의 검색 결과</div>
+        <div class="w-full">"{{ query }}"의 검색 결과</div>
       </div>
     </div>
     <div class="max-w-container mx-auto pt-0 px-9">
@@ -134,6 +134,7 @@ export default {
   },
   watch: {
     $route() {
+      console.log(this.$route);
       this.getQuery();
       this.getSearchKeywordData();
     },
