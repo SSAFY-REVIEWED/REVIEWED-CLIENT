@@ -37,7 +37,6 @@ export default {
       try {
         const response = await MovieAPI.getChallenges();
         this.setChallengeList(response);
-        console.log(response);
       } catch (err) {
         console.log(err);
       }
