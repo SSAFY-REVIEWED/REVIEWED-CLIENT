@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-container mx-auto pt-0 px-9 mt-36">
+  <section class="max-w-container mx-auto pt-0 px-9 my-36">
     <div>
       <div>
         <ProfileHeader :userId="targetUserId" />

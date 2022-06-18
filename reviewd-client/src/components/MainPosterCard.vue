@@ -40,7 +40,9 @@
                   <span>{{
                     movie.voteAverage
                       ? movie.voteAverage.toFixed(1)
-                      : movie.rate.toFixed(1)
+                      : movie.rate
+                      ? movie.rate.toFixed(1)
+                      : ""
                   }}</span>
                 </p>
                 <svg

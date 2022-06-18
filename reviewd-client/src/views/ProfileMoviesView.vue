@@ -71,7 +71,6 @@ export default {
     },
     setMovieList(response) {
       this.movieList = [...this.movieList, ...response.data.movies];
-      console.log(this.movieList);
       this.page++;
       this.hasMore = response.data.hasMore;
     },
