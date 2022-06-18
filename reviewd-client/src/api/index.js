@@ -39,7 +39,6 @@ export const getData = async(url, query) => {
 };
 
 export const postData = async(url, body) => {
-    console.log(body);
     const res = await axios.post(ACCOUNTS_URL[url], body);
     return res;
 };

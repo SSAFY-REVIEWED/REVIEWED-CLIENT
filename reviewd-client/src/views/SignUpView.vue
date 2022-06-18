@@ -102,7 +102,6 @@ export default {
       this.setToken(data);
       try {
         await this.getUser();
-        await this.$router.push({ name: "survey" });
       } catch (err) {
         console.log(err);
       }
@@ -124,7 +123,6 @@ export default {
       };
       try {
         await this.signUp("SIGNUP", body);
-        this.$router.push({ name: "survey" });
       } catch (err) {
         console.log(err);
       }
