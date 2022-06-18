@@ -47,7 +47,12 @@
         id="buttonDiv"
         class="bg-white w-full mt-10 shadow-sign-input h-15 rounded-lg flex px-4 items-center relative text-primary-gray hover:bg-slate-50 transition-all duration-200 ease"
       >
-        <img  loading="lazy" src="../assets/images/google.png" width="25" height="25" />
+        <img
+          loading="lazy"
+          src="../assets/images/google.png"
+          width="25"
+          height="25"
+        />
         <span class="ml-4">Google 계정으로 회원가입 하기</span>
       </button>
     </div>
@@ -79,13 +84,13 @@ export default {
   methods: {
     ...mapMutations(["setUserProfile"]),
     async handleCredentialResponse(response) {
-      console.log(response);
-      console.log("Encoded JWT ID token: " + response.credential);
+      console.log(response.credential);
       try {
         const res = await postData("GOOGLE_LOGIN", {
           credential: response.credential,
         });
-        console.log(res);
+        console.log(res, "res");
+        await this.$emit("get_user_info", res.data);
       } catch (err) {
         console.log(err);
       }
