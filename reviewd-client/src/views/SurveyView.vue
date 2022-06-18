@@ -115,17 +115,15 @@ export default {
       this.isLoading = !this.isLoading;
     },
     async onSubmitSurvey() {
-      console.log("선호도 조사", this.preferenceGenreList);
       try {
         this.setLoading();
         setTimeout(() => {
           this.$router.push({ name: "main" });
         }, 3000);
-        const response = await postData("SURVEY", {
-          preferenceGenreList: this.preferenceGenreList,
-        });
-        //TODO: 삭제하기
-        console.log(response);
+        const body = {
+          preferenceGenreList: JSON.stringify(this.preferenceGenreList),
+        };
+        await postData("SURVEY", body);
       } catch (err) {
         console.log(err);
       }

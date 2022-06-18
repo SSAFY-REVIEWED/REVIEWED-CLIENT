@@ -25,9 +25,9 @@
             type="email"
             id="email"
             name="email"
-            class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white"
+            class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white placeholder:text-transparent"
             required
-            placeholder=" "
+            placeholder="이메일을 입력해주세요."
             @input="onValidateDebounce"
           />
           <span class="floating-label text-primary-gray"
@@ -46,14 +46,16 @@
       <button
         id="buttonDiv"
         class="bg-white w-full mt-10 shadow-sign-input h-15 rounded-lg flex px-4 items-center relative text-primary-gray hover:bg-slate-50 transition-all duration-200 ease"
+        ref="buttonDiv"
       >
-        <img
+        <!-- <img
           loading="lazy"
           src="../assets/images/google.png"
           width="25"
           height="25"
+          alt="google-login"
         />
-        <span class="ml-4">Google 계정으로 회원가입 하기</span>
+        <span class="ml-4">Google 계정으로 회원가입 하기</span> -->
       </button>
     </div>
   </article>
@@ -150,13 +152,10 @@ export default {
         "132131584079-0kes0ifpft82ms5mthj4g7ihar4emvo1.apps.googleusercontent.com",
       callback: this.handleCredentialResponse,
     });
-    await google.accounts.id.renderButton(
-      document.getElementById("buttonDiv"),
-      {
-        theme: "outline",
-        size: "large",
-      }
-    );
+    await google.accounts.id.renderButton(this.$refs.buttonDiv, {
+      theme: "outline",
+      size: "large",
+    });
   },
 };
 </script>
