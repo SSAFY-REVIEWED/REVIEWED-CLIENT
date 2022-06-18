@@ -38,13 +38,15 @@ export default {
                 userId: data.userId,
                 survey: data.survey,
             };
-            if (!Object.keys(profile.survey).length) {
-                router.push({ name: "survey" });
-            }
             state.profile = {
                 ...state.profile,
                 ...profile,
             };
+            if (!profile.survey) {
+                router.push({ name: "survey" });
+            } else {
+                router.push({ name: "main" });
+            }
             VueCookies.set("profile", profile);
         },
         setLoggedIn: (state) => {

@@ -27,7 +27,6 @@
         @check_valid_email="checkValidEmail"
         @set_email="setEmail"
         @was_email_validated="checkCheckingEmail"
-        @get_user_info="getUserInfo"
         v-if="isCheckingEmail"
         :email="email"
         :isValidEmail="isValidEmail"
