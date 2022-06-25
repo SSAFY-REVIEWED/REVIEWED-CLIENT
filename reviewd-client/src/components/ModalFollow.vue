@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="relative">
     <transition-group name="modal" class="modal">
       <div class="overlay" key="modal"></div>
       <div class="modal-card rounded-xl" key="2">
-        <div class="relative w-full">
+        <div class="relative w-full h-full overflow-hidden">
           <button
             class="absolute right-0 w-7 h-7 m-3 bg-slate-100 rounded-full z-10"
             @click="$emit('close-modal')"
@@ -15,38 +15,42 @@
           <div class="border-b-2 h-12 flex justify-center items-center">
             <h1 class="text-h5 font-normal">{{ state }}</h1>
           </div>
-          <div
-            v-for="(user, index) in followList"
-            :key="user.userId"
-            class="flex items-center justify-between px-8 py-2"
-          >
-            <div class="flex items-center">
-              <router-link
-                :to="{ name: 'history', params: { userId: user.userId } }"
-                class="flex items-center"
-              >
-                <div class="w-11 h-11 rounded-full overflow-hidden mr-2">
-                  <img
-                    :src="user.profileImg"
-                    :alt="`$user.name} 프로필 이미지`"
-                    width="50"
-                    height="50"
-                    class="w-full h-full"
-                  />
-                </div>
-                <div>
-                  <p>{{ user.name }}</p>
-                </div>
-              </router-link>
-            </div>
-            <div>
-              <button
+          <div class="overflow-auto h-full w-full">
+            <div
+              v-for="(user, index) in followList"
+              :key="user.userId"
+              class="flex items-center justify-between px-8 py-2 w-full"
+            >
+              <div class="flex items-center w-full">
+                <router-link
+                  :to="{ name: 'history', params: { userId: user.userId } }"
+                  class="flex items-center w-full"
+                >
+                  <div class="w-11 h-11 rounded-full overflow-hidden mr-2">
+                    <img
+                      :src="user.profileImg"
+                      :alt="`$user.name} 프로필 이미지`"
+                      width="50"
+                      height="50"
+                      class="w-full h-full"
+                    />
+                  </div>
+                  <div>
+                    <p>{{ user.name }}</p>
+                  </div>
+                </router-link>
+              </div>
+              <div
                 v-if="userId === targetId && state === '팔로워'"
-                class="border-[2px] border-gray-200 rounded-md px-2 py-1"
-                @click="deleteFollower(user.userId, index)"
+                class="w-20"
               >
-                삭제
-              </button>
+                <button
+                  class="border-[2px] border-gray-200 rounded-md px-2 py-1 w-full"
+                  @click="deleteFollower(user.userId, index)"
+                >
+                  삭제
+                </button>
+              </div>
             </div>
           </div>
         </div>

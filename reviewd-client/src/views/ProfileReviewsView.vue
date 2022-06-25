@@ -23,9 +23,10 @@
     </article>
     <article v-if="reviewList.length">
       <ReviewCard
-        v-for="review in reviewList"
+        v-for="(review, index) in reviewList"
         :key="review.reviewId"
         :review="review"
+        :index="index"
       />
     </article>
     <div
