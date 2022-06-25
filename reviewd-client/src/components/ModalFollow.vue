@@ -15,30 +15,28 @@
           <div class="border-b-2 h-12 flex justify-center items-center">
             <h1 class="text-h5 font-normal">{{ state }}</h1>
           </div>
-          <div class="overflow-auto h-full w-full">
+          <div class="overflow-auto h-[85%] w-full">
             <div
               v-for="(user, index) in followList"
               :key="user.userId"
               class="flex items-center justify-between px-8 py-2 w-full"
             >
-              <div class="flex items-center w-full">
-                <router-link
-                  :to="{ name: 'history', params: { userId: user.userId } }"
-                  class="flex items-center w-full"
-                >
-                  <div class="w-11 h-11 rounded-full overflow-hidden mr-2">
-                    <img
-                      :src="user.profileImg"
-                      :alt="`$user.name} 프로필 이미지`"
-                      width="50"
-                      height="50"
-                      class="w-full h-full"
-                    />
-                  </div>
-                  <div>
-                    <p>{{ user.name }}</p>
-                  </div>
-                </router-link>
+              <div
+                class="flex items-center w-full cursor-pointer"
+                @click="moveTargetUserProfile(user)"
+              >
+                <div class="w-11 h-11 rounded-full overflow-hidden mr-2">
+                  <img
+                    :src="user.profileImg"
+                    :alt="`$user.name} 프로필 이미지`"
+                    width="50"
+                    height="50"
+                    class="w-full h-full"
+                  />
+                </div>
+                <div>
+                  <p>{{ user.name }}</p>
+                </div>
               </div>
               <div
                 v-if="userId === targetId && state === '팔로워'"
@@ -85,6 +83,13 @@ export default {
       if (confirm("해당 유저를 삭제하시겠습니까? ")) {
         this.$emit("delete-follow", userId, index);
       }
+    },
+    moveTargetUserProfile(user) {
+      this.$router.push({
+        name: "history",
+        params: { userId: user.userId },
+      });
+      this.$emit("close-modal");
     },
   },
   mounted() {},

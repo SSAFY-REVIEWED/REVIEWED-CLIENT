@@ -29,10 +29,9 @@ export default {
     },
     async toggleUserFollow({ commit, state }, { myUserId, targetUserId }) {
       try {
-        const response = await ProfileAPI.toggleFollow(myUserId, targetUserId, {
+        await ProfileAPI.toggleFollow(myUserId, targetUserId, {
           follow: !state.userProfile.follow,
         });
-        console.log(response);
         commit("setUserFollow");
       } catch (err) {
         console.log(err);
