@@ -202,7 +202,9 @@ export default {
         query: { query: this.keyword, type: "movies" },
       });
     },
-    
+    setSearchedKeyword() {
+      this.searchedKeyword = this.keyword;
+    },
     setRouterName() {
       this.routerName = this.$router.name;
     },
