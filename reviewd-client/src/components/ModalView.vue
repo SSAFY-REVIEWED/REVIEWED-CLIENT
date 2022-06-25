@@ -30,9 +30,8 @@
               >
               </textarea>
               <button
-                class="left-0 top-0 mt-5 ml-auto right-0 bg-third-blue w-24 h-10 rounded-lg text-white hover:bg-primary-blue "
+                class="left-0 top-0 mt-5 ml-auto right-0 bg-third-blue w-24 h-10 rounded-lg text-white hover:bg-primary-blue"
                 type="submit"
-                @click="updateMovieReview"
               >
                 작성
               </button>
@@ -101,7 +100,7 @@ export default {
     toggleSpoiler() {
       this.spoiler = !this.spoiler;
     },
-    
+
     setReviewData() {
       if (Object.keys(this.review).length) {
         this.title = this.review.movieTitle;

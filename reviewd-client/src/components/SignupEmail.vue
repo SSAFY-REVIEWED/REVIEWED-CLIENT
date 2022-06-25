@@ -25,9 +25,9 @@
             type="email"
             id="email"
             name="email"
-            class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white"
+            class="w-full px-3 h-3/4 py-0 items-baseline leading-7 focus:outline-none inputText bg-white placeholder:text-transparent"
             required
-            placeholder=" "
+            placeholder="이메일을 입력해주세요."
             @input="onValidateDebounce"
           />
           <span class="floating-label text-primary-gray"
@@ -42,14 +42,7 @@
           계속
         </button>
       </form>
-
-      <button
-        id="buttonDiv"
-        class="bg-white w-full mt-10 shadow-sign-input h-15 rounded-lg flex px-4 items-center relative text-primary-gray hover:bg-slate-50 transition-all duration-200 ease"
-      >
-        <img  loading="lazy" src="../assets/images/google.png" width="25" height="25" />
-        <span class="ml-4">Google 계정으로 회원가입 하기</span>
-      </button>
+      <GoogleLogin />
     </div>
   </article>
 </template>
@@ -59,8 +52,8 @@
 <script>
 import { EMAIL_VALIDATION_MESSAGE } from "@/utils/const.js";
 import _ from "lodash";
-import { postData, getData } from "@/api/index";
-import { mapMutations } from "vuex";
+import { postData } from "@/api/index";
+import GoogleLogin from "@/components/GoogleLogin";
 
 export default {
   name: "signupEmail",
@@ -73,23 +66,13 @@ export default {
       type: Boolean,
     },
   },
+  components: {
+    GoogleLogin,
+  },
   data() {
     return {};
   },
   methods: {
-    ...mapMutations(["setUserProfile"]),
-    async handleCredentialResponse(response) {
-      console.log(response);
-      console.log("Encoded JWT ID token: " + response.credential);
-      try {
-        const res = await postData("GOOGLE_LOGIN", {
-          credential: response.credential,
-        });
-        console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    },
     onSubmit() {
       return;
     },
@@ -138,20 +121,6 @@ export default {
     wasEmailValidated() {
       this.$emit("was_email_validated");
     },
-  },
-  async mounted() {
-    await google.accounts.id.initialize({
-      client_id:
-        "132131584079-0kes0ifpft82ms5mthj4g7ihar4emvo1.apps.googleusercontent.com",
-      callback: this.handleCredentialResponse,
-    });
-    await google.accounts.id.renderButton(
-      document.getElementById("buttonDiv"),
-      {
-        theme: "outline",
-        size: "large",
-      }
-    );
   },
 };
 </script>

@@ -110,8 +110,8 @@
             />
             <path
               d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"
-            /></svg
-          >
+            />
+          </svg>
           <p class="w-10 text-left">{{ review.replyCount }}</p>
         </div>
         <!-- <p class="pl-4">{{ review.createdAt }}</p> -->
@@ -121,13 +121,16 @@
       <button
         class="absolute w-full h-full font-bold z-40"
         @click="toggleSpoiler"
-        v-if="spoiler"
+        v-if="spoiler && profile.userId !== review.userId"
       >
         <p>스포일러가 포함된 리뷰입니다.</p>
         <p>리뷰 보기</p>
       </button>
 
-      <p :class="{ 'blur-sm': spoiler }" class="ellipsis-3">
+      <p
+        :class="{ 'blur-sm': spoiler && profile.userId !== review.userId }"
+        class="ellipsis-3"
+      >
         {{ review.content }}
       </p>
       <router-link
@@ -191,7 +194,6 @@ export default {
   },
   computed: {
     ...mapGetters(["profile"]),
-    
   },
   mounted() {
     this.setSpoiler();

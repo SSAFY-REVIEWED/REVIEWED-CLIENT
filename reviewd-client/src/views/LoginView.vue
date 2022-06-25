@@ -91,7 +91,6 @@ export default {
           this.$toast.success(
             `리뷰쓰기 좋은 날 이에요 ${this.profile.name}님😀`
           );
-          this.$router.push({ name: "main" });
         } catch (err) {
           console.log(err);
         }

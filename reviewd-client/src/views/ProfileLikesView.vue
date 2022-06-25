@@ -82,7 +82,7 @@ export default {
       if (!this.hasMore) return;
       this.toggleLoading();
       try {
-        const response = await ProfileAPI.getMovieList(
+        const response = await ProfileAPI.getLikesList(
           this.targetUserId,
           this.page
         );

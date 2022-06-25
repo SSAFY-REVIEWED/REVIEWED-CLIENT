@@ -93,16 +93,22 @@ export default {
     setName(name) {
       this.name = name;
     },
+    setToken(data) {
+      VueCookies.set("accessToken", data.access, "2h");
+      VueCookies.set("refreshToken", data.refresh, "7d");
+    },
+    async getUserInfo(data) {
+      this.setToken(data);
+      try {
+        await this.getUser();
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async signUp(url, body) {
       try {
         const response = await postData(url, body);
-        VueCookies.set("accessToken", response.data.access, "2h");
-        VueCookies.set("refreshToken", response.data.refresh, "7d");
-        try {
-          await this.getUser();
-        } catch (err) {
-          console.log(err);
-        }
+        await this.getUserInfo(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -116,7 +122,6 @@ export default {
       };
       try {
         await this.signUp("SIGNUP", body);
-        this.$router.push({ name: "survey" });
       } catch (err) {
         console.log(err);
       }
