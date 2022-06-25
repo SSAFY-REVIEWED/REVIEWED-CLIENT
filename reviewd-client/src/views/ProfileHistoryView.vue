@@ -85,7 +85,13 @@ export default {
       this.reviewCountList = reviews;
     },
   },
-  computed: {},
+  watch: {
+    $route() {
+      if (this.userId === this.$route.params.userId) return;
+      this.setUserId();
+      this.getUserHistory();
+    },
+  },
   created() {
     this.setUserId();
     this.getUserHistory();

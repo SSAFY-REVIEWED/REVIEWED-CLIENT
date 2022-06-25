@@ -32,7 +32,13 @@ export default {
   computed: {
     ...mapGetters(["userProfile"]),
   },
-  watch: {},
+  watch: {
+    $route() {
+      if (this.targetUserId === this.$route.params.userId) return;
+      this.getTargetUserId();
+      this.getUserProfile(this.targetUserId);
+    },
+  },
   created() {
     this.getTargetUserId();
   },

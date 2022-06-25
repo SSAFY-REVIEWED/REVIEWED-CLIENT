@@ -134,7 +134,6 @@ export default {
   },
   watch: {
     $route() {
-      console.log(this.$route);
       this.getQuery();
       this.getSearchKeywordData();
     },
@@ -144,9 +143,6 @@ export default {
     this.setKeyword(this.query);
     this.getSearchKeywordData();
   },
-  // mounted() {
-  //
-  // },
 };
 </script>
 

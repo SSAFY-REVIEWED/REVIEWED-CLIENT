@@ -176,6 +176,7 @@ export default {
       keyword: "",
       routerName: "",
       isMoreOneLetter: false,
+      searchedKeyword: "",
     };
   },
   methods: {
@@ -192,12 +193,17 @@ export default {
       this.$router.push({ name: "home" });
     },
     search() {
+      if (this.keyword === this.searchedKeyword) return;
       this.validateMoreOneLetter();
       if (!this.isMoreOneLetter) return;
+      this.setSearchedKeyword();
       this.$router.push({
         name: "search",
         query: { query: this.keyword, type: "movies" },
       });
+    },
+    setSearchedKeyword() {
+      this.searchedKeyword = this.keyword;
     },
     setRouterName() {
       this.routerName = this.$router.name;
@@ -217,10 +223,14 @@ export default {
   },
   watch: {
     searchKeyword() {
+      if (this.keyword === this.searchKeyword) return;
       this.keyword = this.searchKeyword;
     },
     $route() {
-      if (this.$route.name === "search") return;
+      if (this.$route.name === "search") {
+        this.keyword = this.$route.query.query;
+        return;
+      }
       this.setKeyword("");
       this.keyword = "";
     },
