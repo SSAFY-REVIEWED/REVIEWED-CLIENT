@@ -227,7 +227,10 @@ export default {
       this.keyword = this.searchKeyword;
     },
     $route() {
-      if (this.$route.name === "search") return;
+      if (this.$route.name === "search") {
+        this.keyword = this.$route.query.query;
+        return;
+      }
       this.setKeyword("");
       this.keyword = "";
     },
